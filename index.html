@@ -59,6 +59,12 @@
   .build-card-num { font-size: 11px; color: var(--text3); background: var(--bg4); padding: 1px 7px; border-radius: 99px; }
   .build-card-spec { font-size: 11px; color: var(--text3); margin-bottom: 5px; }
   .build-card-desc { font-size: 12px; color: var(--text2); line-height: 1.5; }
+  .build-card-sw { display: flex; flex-direction: column; gap: 3px; margin-top: 7px; font-size: 11px; line-height: 1.45; }
+  .build-card-sw span { display: block; }
+  .build-card-sw .sw-label { font-weight: 600; }
+  .build-card-sw .sw-str .sw-label { color: var(--teal); }
+  .build-card-sw .sw-wk .sw-label { color: var(--coral); }
+  .build-card-sw .sw-str, .build-card-sw .sw-wk { color: var(--text3); }
   .build-card-gear { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 7px; }
   .gear-pill { font-size: 11px; padding: 1px 7px; border-radius: 99px; background: var(--bg4); color: var(--text3); border: 0.5px solid var(--border); }
 
@@ -177,9 +183,10 @@
             <span class="badge b-blue build-card-name">1. Striker + Overdogs/Equalizer</span>
             <span class="build-card-num">Gunner</span>
           </div>
-          <div class="build-card-desc">Four Striker pieces + Overdogs gloves + Equalizer chest. St Elmo's Engine primary. The fastest-building Striker stack variant — Overdogs synergises with stacks for enormous sustained crit damage. Great for all Heroic content.</div>
-          <div class="build-card-gear">
-            <span class="gear-pill">St Elmo's Engine</span><span class="gear-pill">Striker Set ×4</span><span class="gear-pill">Overdogs</span><span class="gear-pill">Equalizer chest</span>
+          <div class="build-card-desc">The fastest Striker stack variant — Overdogs gloves synergise with stacks for enormous sustained crit damage. Primary choice for all Heroic content and the go-to DPS meta in 2026.</div>
+          <div class="build-card-sw">
+            <span class="sw-str"><span class="sw-label">Strength:</span> Fastest stack building, top-tier sustained DPS</span>
+            <span class="sw-wk"><span class="sw-label">Weakness:</span> Needs sustained fire — stacks drop fast if you stop shooting</span>
           </div>
         </div>
 
@@ -188,9 +195,10 @@
             <span class="badge b-blue build-card-name">2. St Elmo's Striker + Memento</span>
             <span class="build-card-num">Gunner</span>
           </div>
-          <div class="build-card-desc">Striker Set ×4, Memento backpack replacing one Striker piece, Ceska/Grupo/Fenris chest with Obliterate, GR9 LMG secondary. Best build for Legendary Strongholds and Summit — Memento's Kill Confirmed stacks amplify the already massive Striker damage.</div>
-          <div class="build-card-gear">
-            <span class="gear-pill">St Elmo's Engine</span><span class="gear-pill">Striker Set ×4</span><span class="gear-pill">Memento</span><span class="gear-pill">GR9 LMG (Frenzy)</span>
+          <div class="build-card-desc">The Legendary specialist — Memento's Kill Confirmed stacks amplify Striker damage to absurd levels. Best build for Legendary Strongholds and Summit when you can maintain aggressive kills.</div>
+          <div class="build-card-sw">
+            <span class="sw-str"><span class="sw-label">Strength:</span> Massive snowball damage — gets stronger with every kill</span>
+            <span class="sw-wk"><span class="sw-label">Weakness:</span> Must pick up trophies from kills, forcing aggressive positioning</span>
           </div>
         </div>
 
@@ -199,9 +207,10 @@
             <span class="badge b-coral build-card-name">3. Heartbreaker PvE</span>
             <span class="build-card-num">Technician</span>
           </div>
-          <div class="build-card-desc">Full Heartbreaker set (5 pieces) + Contractor's Gloves + Fox's Prayer kneepads. AR primary with Flatline, ACS-12 shotgun secondary to build stacks. Linked Laser Pointer from Technician spec. Incredible synergy for Countdown, Summit, and Heroic/Legendary missions.</div>
-          <div class="build-card-gear">
-            <span class="gear-pill">Carbine 7 / Police M4</span><span class="gear-pill">ACS-12 (Flatline)</span><span class="gear-pill">Heartbreaker ×5</span><span class="gear-pill">Contractor's Gloves</span>
+          <div class="build-card-desc">The tanky DPS build — Heartbreaker's blue cores give survivability while Flatline + Linked Laser Pointer deliver incredible damage. Excellent for Countdown, Summit, and group Heroic/Legendary content.</div>
+          <div class="build-card-sw">
+            <span class="sw-str"><span class="sw-label">Strength:</span> High damage AND survivability — hard to die with blue cores</span>
+            <span class="sw-wk"><span class="sw-label">Weakness:</span> Needs shotgun swap to build stacks, clunky weapon cycling</span>
           </div>
         </div>
 
@@ -210,9 +219,10 @@
             <span class="badge b-blue build-card-name">4. Assault Rifle PvE</span>
             <span class="build-card-num">Gunner</span>
           </div>
-          <div class="build-card-desc">St Elmo's Engine + Coyote's Mask + Ceska/Grupo chest (Obliterate) + backpack (Vigilance) + Contractor's Gloves + Palisade holster + Fox's Prayer kneepads. Flexible brand-mix build — easier to gear than set builds and still extremely potent.</div>
-          <div class="build-card-gear">
-            <span class="gear-pill">St Elmo's Engine</span><span class="gear-pill">Coyote's Mask</span><span class="gear-pill">Ceska/Grupo chest</span><span class="gear-pill">Contractor's Gloves</span>
+          <div class="build-card-desc">The flexible all-rounder — brand-mix build using best-in-slot named items instead of gear sets. Easier to gear than set builds and still extremely potent for all Heroic PvE content.</div>
+          <div class="build-card-sw">
+            <span class="sw-str"><span class="sw-label">Strength:</span> Easy to farm — no set bonus dependency, swap pieces freely</span>
+            <span class="sw-wk"><span class="sw-label">Weakness:</span> Lower damage ceiling than full set builds at max optimization</span>
           </div>
         </div>
 
@@ -221,9 +231,10 @@
             <span class="badge b-coral build-card-name">5. Kingbreaker Spotter</span>
             <span class="build-card-num">Technician</span>
           </div>
-          <div class="build-card-desc">Kingbreaker exotic AR (Spotter talent) + Heartbreaker Set ×4 + Closer chest + ACS-12 (Flatline) secondary + Fox's Prayer kneepads. Spotter/Flatline/Heartbreaker synergy creates exceptional damage output and survivability — one of the strongest builds in the game.</div>
-          <div class="build-card-gear">
-            <span class="gear-pill">Kingbreaker</span><span class="gear-pill">ACS-12 (Flatline)</span><span class="gear-pill">Heartbreaker ×4</span><span class="gear-pill">Closer chest</span>
+          <div class="build-card-desc">One of the strongest builds in the game — the triple synergy between Spotter, Flatline, and Heartbreaker stacks creates exceptional damage with blue-core survivability. A top pick for all end-game PvE.</div>
+          <div class="build-card-sw">
+            <span class="sw-str"><span class="sw-label">Strength:</span> Triple talent synergy — incredible damage + tanky blue cores</span>
+            <span class="sw-wk"><span class="sw-label">Weakness:</span> Requires Technician's Linked Laser Pointer and a specific exotic AR</span>
           </div>
         </div>
 
@@ -232,9 +243,10 @@
             <span class="badge b-amber build-card-name">6. Pestilence LMG</span>
             <span class="build-card-num">Gunner</span>
           </div>
-          <div class="build-card-desc">Pestilence exotic LMG + Coyote's Mask + Ceska/Grupo chest (Obliterate) + backpack (Vigilance/Composure) + Contractor's Gloves + Palisade holster + Fox's Prayer kneepads. Plague spreading on kills — devastating in groups of enemies.</div>
-          <div class="build-card-gear">
-            <span class="gear-pill">Pestilence</span><span class="gear-pill">Coyote's Mask</span><span class="gear-pill">Ceska/Grupo chest</span><span class="gear-pill">Fox's Prayer</span>
+          <div class="build-card-desc">The plague spreader — enemies dying while infected spread damage to nearby targets, creating chain reactions across entire groups. A versatile brand-mix DPS build for Heroic and group content.</div>
+          <div class="build-card-sw">
+            <span class="sw-str"><span class="sw-label">Strength:</span> Plague spreading devastates clustered enemies, great AoE</span>
+            <span class="sw-wk"><span class="sw-label">Weakness:</span> First Pestilence drop requires Dark Zone farming</span>
           </div>
         </div>
 
@@ -243,9 +255,10 @@
             <span class="badge b-amber build-card-name">7. Negotiator's Pestilence</span>
             <span class="build-card-num">Gunner</span>
           </div>
-          <div class="build-card-desc">Pestilence + Negotiator's Dilemma Set ×4 (Mask, Gloves, Holster, Kneepads) + Ceska/Grupo chest (Obliterate) + backpack (Composure/Vigilance). Negotiator's marks + Pestilence plague = chain explosions. Best for Legendary content where enemies cluster.</div>
-          <div class="build-card-gear">
-            <span class="gear-pill">Pestilence</span><span class="gear-pill">Negotiator's ×4</span><span class="gear-pill">Ceska/Grupo chest</span><span class="gear-pill">Ceska/Grupo backpack</span>
+          <div class="build-card-desc">The chain reaction build — Negotiator's marks + Pestilence plague = explosive chain kills. Best for Legendary content where enemies cluster tightly. One of the top DPS builds for coordinated group play.</div>
+          <div class="build-card-sw">
+            <span class="sw-str"><span class="sw-label">Strength:</span> Chain explosions wipe entire groups — dominant in Legendary</span>
+            <span class="sw-wk"><span class="sw-label">Weakness:</span> Glass cannon with all red cores, requires careful cover play</span>
           </div>
         </div>
 
@@ -254,9 +267,10 @@
             <span class="badge b-purple build-card-name">8. SMG Speed Farm</span>
             <span class="build-card-num">Gunner</span>
           </div>
-          <div class="build-card-desc">Chatterbox + Shield Splinterer + Hunter's Fury Set ×4 (Mask, Gloves, Holster, Kneepads) + Memento backpack + Palisade chest (Intimidate). Best speed farm build for Heroic Control Points, Missions, and The Summit — insane close-range DPS with near-infinite ammo loop.</div>
-          <div class="build-card-gear">
-            <span class="gear-pill">Chatterbox</span><span class="gear-pill">Shield Splinterer</span><span class="gear-pill">Hunter's Fury ×4</span><span class="gear-pill">Memento</span>
+          <div class="build-card-desc">The fastest clear-speed build — Hunter's Fury rewards rapid close-range kills while Chatterbox provides near-infinite ammo. Best speed farm for Heroic Control Points, Missions, and Summit.</div>
+          <div class="build-card-sw">
+            <span class="sw-str"><span class="sw-label">Strength:</span> Insane close-range DPS, near-infinite ammo, fastest clears</span>
+            <span class="sw-wk"><span class="sw-label">Weakness:</span> Close range only — very fragile at distance or vs. snipers</span>
           </div>
         </div>
 
@@ -265,9 +279,10 @@
             <span class="badge b-pink build-card-name">+ Skill Build (Refactor)</span>
             <span class="build-card-num">Technician</span>
           </div>
-          <div class="build-card-desc">Capacitor + Refactor Set ×4 + Force Multiplier/Hana-U pieces. Technician spec gives a Red Core item slot while keeping 6 skill tiers. Striker Drone + Assault Turret do the damage. Three variants: Force Multiplier, Tech Support, and Ninja (with NinjaBike backpack). Strongest build on Legendary difficulty.</div>
-          <div class="build-card-gear">
-            <span class="gear-pill">Capacitor</span><span class="gear-pill">Refactor Set ×4</span><span class="gear-pill">Striker Drone</span><span class="gear-pill">Assault Turret</span>
+          <div class="build-card-desc">Arguably the strongest Legendary build — skills do the damage while you stay safe in cover. Technician's passive allows a Red Core slot while keeping 6 skill tiers. Multiple variants: Force Multiplier, Tech Support, and Ninja.</div>
+          <div class="build-card-sw">
+            <span class="sw-str"><span class="sw-label">Strength:</span> Safest Legendary build — cover-based, skills do the work</span>
+            <span class="sw-wk"><span class="sw-label">Weakness:</span> Weak personal gun DPS, relies entirely on skill uptime</span>
           </div>
         </div>
 
@@ -276,9 +291,10 @@
             <span class="badge b-teal build-card-name">+ SHD/XP Farm (Hotshot)</span>
             <span class="build-card-num">Sharpshooter</span>
           </div>
-          <div class="build-card-desc">Model 700 or White Death marksman rifle with Headhunter/Determined + Chainkiller chest (Perfect Headhunter) + Hotshot brand ×4 (Mask, Gloves, Holster, Kneepads) + Airaldi backpack. One-shots enemies from any range. From the 3rd kill onward with Determined, ammo is free — clear entire Control Points in seconds for massive XP.</div>
-          <div class="build-card-gear">
-            <span class="gear-pill">Model 700 / White Death</span><span class="gear-pill">Chainkiller chest</span><span class="gear-pill">Hotshot ×4</span><span class="gear-pill">Airaldi backpack</span>
+          <div class="build-card-desc">The XP grinder — one-shots enemies from any range and from the 3rd kill onward ammo is free. Clears entire Heroic Control Points in seconds for massive SHD Watch leveling, especially during XP events.</div>
+          <div class="build-card-sw">
+            <span class="sw-str"><span class="sw-label">Strength:</span> One-shot kills + free ammo = fastest SHD leveling in the game</span>
+            <span class="sw-wk"><span class="sw-label">Weakness:</span> Headshot-reliant, low survivability — miss and you're exposed</span>
           </div>
         </div>
 
