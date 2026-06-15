@@ -2,7 +2,7 @@
  
 A self-contained HTML tracker for farming the best PvE DPS builds in The Division 2 (2026 meta), including SHD Watch and seasonal leveling builds.
  
-**Live site:** `https://Kyzael.github.io/TD2_FarmList`
+**Live site:** https://Kyzael.github.io/TD2_FarmList
  
 ## What's included
  
