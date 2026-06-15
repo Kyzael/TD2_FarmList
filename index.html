@@ -16,7 +16,6 @@
     --text2: #9090a0;
     --text3: #5a5a6a;
     --accent: #f4a942;
-    --accent2: #c97d1c;
     --blue: #4a9edd;
     --blue-bg: rgba(74,158,221,0.12);
     --coral: #e07055;
@@ -27,8 +26,8 @@
     --purple-bg: rgba(144,112,221,0.12);
     --teal: #3dbf90;
     --teal-bg: rgba(61,191,144,0.12);
-    --green: #5db855;
-    --green-bg: rgba(93,184,85,0.12);
+    --pink: #d060a0;
+    --pink-bg: rgba(208,96,160,0.12);
     --red-dot: #d85a30;
     --amber-dot: #ba7517;
     --green-dot: #639922;
@@ -37,11 +36,9 @@
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; font-size: 15px; line-height: 1.6; }
-
   a { color: var(--accent); text-decoration: none; }
   a:hover { text-decoration: underline; }
-
-  .page { max-width: 900px; margin: 0 auto; padding: 2rem 1rem 4rem; }
+  .page { max-width: 960px; margin: 0 auto; padding: 2rem 1rem 4rem; }
 
   /* Header */
   .site-header { border-bottom: 0.5px solid var(--border2); padding-bottom: 1.5rem; margin-bottom: 1.75rem; }
@@ -49,13 +46,32 @@
   .site-header h1 span { color: var(--accent); }
   .site-header p { font-size: 13px; color: var(--text2); margin-top: 4px; }
 
+  /* Build reference panel */
+  .builds-panel { margin-bottom: 1.75rem; }
+  .builds-panel-toggle { display: flex; align-items: center; gap: 8px; cursor: pointer; user-select: none; margin-bottom: 0.75rem; }
+  .builds-panel-toggle h2 { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text3); }
+  .builds-panel-toggle .toggle-arrow { font-size: 14px; color: var(--text3); transition: transform 0.15s; }
+  .builds-panel-toggle .toggle-arrow.open { transform: rotate(180deg); }
+  .builds-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 10px; }
+  .build-card { background: var(--bg2); border: 0.5px solid var(--border); border-radius: var(--radius-lg); padding: 0.875rem 1rem; }
+  .build-card-header { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+  .build-card-name { font-size: 13px; font-weight: 600; color: var(--text); }
+  .build-card-num { font-size: 11px; color: var(--text3); background: var(--bg4); padding: 1px 7px; border-radius: 99px; }
+  .build-card-spec { font-size: 11px; color: var(--text3); margin-bottom: 5px; }
+  .build-card-desc { font-size: 12px; color: var(--text2); line-height: 1.5; }
+  .build-card-gear { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 7px; }
+  .gear-pill { font-size: 11px; padding: 1px 7px; border-radius: 99px; background: var(--bg4); color: var(--text3); border: 0.5px solid var(--border); }
+
   /* Important notes */
   .notes-box { background: rgba(244,169,66,0.08); border: 0.5px solid rgba(244,169,66,0.3); border-radius: var(--radius-lg); padding: 1rem 1.25rem; margin-bottom: 1.75rem; }
-  .notes-box h2 { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); margin-bottom: 0.75rem; }
-  .notes-box ul { list-style: none; display: flex; flex-direction: column; gap: 7px; }
-  .notes-box li { font-size: 13px; color: var(--text2); padding-left: 1.1rem; position: relative; }
-  .notes-box li::before { content: '›'; position: absolute; left: 0; color: var(--accent); }
-  .notes-box li strong { color: var(--text); }
+  .notes-box-toggle { display: flex; align-items: center; gap: 8px; cursor: pointer; user-select: none; }
+  .notes-box-toggle h2 { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--accent); }
+  .notes-box-toggle .toggle-arrow { font-size: 14px; color: var(--accent); transition: transform 0.15s; }
+  .notes-box-toggle .toggle-arrow.open { transform: rotate(180deg); }
+  .notes-list { list-style: none; display: flex; flex-direction: column; gap: 7px; margin-top: 0.75rem; }
+  .notes-list li { font-size: 13px; color: var(--text2); padding-left: 1.1rem; position: relative; }
+  .notes-list li::before { content: '›'; position: absolute; left: 0; color: var(--accent); }
+  .notes-list li strong { color: var(--text); }
 
   /* Stats bar */
   .stats-bar { display: flex; gap: 16px; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; }
@@ -69,16 +85,14 @@
   /* Controls */
   .controls { display: flex; flex-direction: column; gap: 10px; margin-bottom: 1.5rem; }
   .control-row { display: flex; gap: 6px; flex-wrap: wrap; align-items: center; }
-  .control-label { font-size: 12px; color: var(--text3); min-width: 60px; }
-
+  .control-label { font-size: 12px; color: var(--text3); min-width: 60px; flex-shrink: 0; }
   .chip { font-size: 12px; padding: 4px 12px; border: 0.5px solid var(--border2); border-radius: 99px; cursor: pointer; background: transparent; color: var(--text2); transition: all 0.1s; white-space: nowrap; }
-  .chip:hover { border-color: var(--border2); background: var(--bg3); }
+  .chip:hover { background: var(--bg3); }
   .chip.active { background: rgba(244,169,66,0.15); border-color: rgba(244,169,66,0.5); color: var(--accent); }
-
   .search-wrap { position: relative; }
   .search-wrap input { background: var(--bg3); border: 0.5px solid var(--border); border-radius: var(--radius); padding: 6px 12px 6px 30px; font-size: 13px; color: var(--text); width: 220px; outline: none; }
   .search-wrap input:focus { border-color: var(--border2); }
-  .search-icon { position: absolute; left: 9px; top: 50%; transform: translateY(-50%); color: var(--text3); font-size: 14px; }
+  .search-icon { position: absolute; left: 9px; top: 50%; transform: translateY(-50%); color: var(--text3); font-size: 14px; pointer-events: none; }
 
   /* Section */
   .section { margin-bottom: 1.75rem; }
@@ -88,7 +102,6 @@
   .task-card { background: var(--bg2); border: 0.5px solid var(--border); border-radius: var(--radius-lg); margin-bottom: 6px; overflow: hidden; transition: border-color 0.12s; }
   .task-card:hover { border-color: var(--border2); }
   .task-card.done { opacity: 0.42; }
-
   .task-summary { display: flex; gap: 10px; align-items: flex-start; padding: 0.875rem 1rem; cursor: pointer; user-select: none; }
   .task-checkbox { width: 18px; height: 18px; border-radius: 4px; border: 0.5px solid var(--border2); flex-shrink: 0; margin-top: 1px; display: flex; align-items: center; justify-content: center; transition: all 0.1s; }
   .task-checkbox.checked { background: var(--accent); border-color: var(--accent); }
@@ -97,7 +110,6 @@
   .task-name { font-size: 14px; font-weight: 500; color: var(--text); margin-bottom: 4px; line-height: 1.4; }
   .task-card.done .task-name { text-decoration: line-through; color: var(--text3); }
   .task-badges { display: flex; flex-wrap: wrap; gap: 4px; }
-
   .task-expand-btn { background: none; border: none; color: var(--text3); cursor: pointer; padding: 0 4px; font-size: 18px; line-height: 1; transition: color 0.1s, transform 0.15s; flex-shrink: 0; margin-top: 2px; }
   .task-expand-btn:hover { color: var(--text2); }
   .task-expand-btn.open { transform: rotate(180deg); color: var(--accent); }
@@ -110,39 +122,36 @@
   .task-detail { display: none; border-top: 0.5px solid var(--border); padding: 0.875rem 1rem 1rem 2.5rem; }
   .task-detail.open { display: block; }
   .task-detail p { font-size: 13px; color: var(--text2); line-height: 1.65; margin-bottom: 0.75rem; }
-  .task-detail .detail-section { margin-bottom: 0.9rem; }
-  .task-detail .detail-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em; color: var(--text3); margin-bottom: 0.35rem; }
-  .task-detail .links { display: flex; flex-wrap: wrap; gap: 6px; }
+  .detail-section { margin-bottom: 0.9rem; }
+  .detail-label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.07em; color: var(--text3); margin-bottom: 0.35rem; }
+  .links { display: flex; flex-wrap: wrap; gap: 6px; }
   .wiki-link { font-size: 12px; padding: 3px 10px; background: var(--bg3); border: 0.5px solid var(--border2); border-radius: 99px; color: var(--accent); transition: background 0.1s; }
   .wiki-link:hover { background: var(--bg4); text-decoration: none; }
   .wiki-link::before { content: '↗ '; font-size: 10px; }
-  .steps { list-style: none; display: flex; flex-direction: column; gap: 5px; }
-  .steps li { font-size: 13px; color: var(--text2); padding-left: 1.4rem; position: relative; }
-  .steps li::before { content: counter(step); counter-increment: step; position: absolute; left: 0; width: 18px; height: 18px; border-radius: 50%; background: var(--bg4); border: 0.5px solid var(--border2); display: flex; align-items: center; justify-content: center; font-size: 10px; color: var(--text3); top: 1px; }
-  .steps { counter-reset: step; }
+  .steps { list-style: none; display: flex; flex-direction: column; gap: 5px; counter-reset: step; }
+  .steps li { font-size: 13px; color: var(--text2); padding-left: 1.6rem; position: relative; counter-increment: step; }
+  .steps li::before { content: counter(step); position: absolute; left: 0; width: 18px; height: 18px; border-radius: 50%; background: var(--bg4); border: 0.5px solid var(--border2); display: flex; align-items: center; justify-content: center; font-size: 10px; color: var(--text3); top: 1px; }
 
   /* Badges */
   .badge { font-size: 11px; padding: 2px 8px; border-radius: 99px; white-space: nowrap; font-weight: 500; }
-  .b-blue { background: var(--blue-bg); color: var(--blue); }
-  .b-coral { background: var(--coral-bg); color: var(--coral); }
-  .b-amber { background: var(--amber-bg); color: var(--amber); }
+  .b-blue   { background: var(--blue-bg);   color: var(--blue);   }
+  .b-coral  { background: var(--coral-bg);  color: var(--coral);  }
+  .b-amber  { background: var(--amber-bg);  color: var(--amber);  }
   .b-purple { background: var(--purple-bg); color: var(--purple); }
-  .b-teal { background: var(--teal-bg); color: var(--teal); }
-  .b-green { background: var(--green-bg); color: var(--green); }
-  .b-gray { background: var(--bg4); color: var(--text2); }
+  .b-teal   { background: var(--teal-bg);   color: var(--teal);   }
+  .b-pink   { background: var(--pink-bg);   color: var(--pink);   }
 
   /* Legend */
   .legend { display: flex; gap: 16px; font-size: 12px; color: var(--text3); margin-bottom: 1.25rem; flex-wrap: wrap; }
   .legend-item { display: flex; align-items: center; gap: 5px; }
-
   .empty { text-align: center; padding: 2.5rem 0; color: var(--text3); font-size: 14px; }
   .reset-btn { font-size: 12px; padding: 4px 12px; background: transparent; border: 0.5px solid var(--border2); border-radius: 99px; color: var(--text3); cursor: pointer; }
-  .reset-btn:hover { color: var(--text2); border-color: var(--border2); background: var(--bg3); }
+  .reset-btn:hover { color: var(--text2); background: var(--bg3); }
 
   @media (max-width: 600px) {
-    .controls { gap: 8px; }
     .search-wrap input { width: 100%; }
     .stats-bar { flex-direction: column; align-items: flex-start; gap: 8px; }
+    .builds-grid { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -154,20 +163,151 @@
     <p>Best PvE DPS builds · SHD Watch &amp; seasonal leveling · 2026 meta · Organized by activity &amp; build</p>
   </header>
 
-  <div class="notes-box">
-    <h2>⚠ Important notes before you farm</h2>
-    <ul>
-      <li><strong>Targeted loot is king.</strong> Set it to the desired gear slot in Countdown (Heroic+) or The Summit — named enemies all drop that slot type. Switch targets freely after each drop.</li>
-      <li><strong>Eagle Bearer is raid-locked.</strong> It only drops from the Operation Dark Hours final chest (weekly reset) or rare DZ extracts. Targeted loot does NOT work for it.</li>
-      <li><strong>Pestilence requires the Dark Zone.</strong> It drops from named DZ bosses only. Extract contaminated loot. It enters the general loot pool after your first drop.</li>
-      <li><strong>Chatterbox must be crafted first.</strong> Farm Hyena Faction Crates across DC for the three components and blueprint (Bank HQ mission vault). After crafting, it joins the normal exotic pool.</li>
-      <li><strong>St Elmo's Engine is shared</strong> across Striker, AR, and SHD builds — getting a god roll early has outsized value. It's a very common drop from AR targeted loot in Countdown.</li>
-      <li><strong>SHD/XP: stack directives.</strong> Each directive adds +25% XP. During 5× XP events, loop Classified Assignment missions for 100–130 SHD levels/hour. Outside events, Heroic Control Points + 4-5 directives is the meta.</li>
-      <li><strong>Tinkering Station is everywhere.</strong> Press M anywhere to open it. Recalibrate talents and attributes, optimize item level, then raise Proficiency/Expertise.</li>
-      <li><strong>Exotic Caches.</strong> Completing Countdown runs earns Countdown Requisition — spend it on Exotic Caches to fill gaps without farming a specific slot.</li>
-    </ul>
+  <!-- Build reference panel -->
+  <div class="builds-panel">
+    <div class="builds-panel-toggle" onclick="toggleSection('builds-grid-wrap','builds-arrow')">
+      <h2>Build reference — best PvE DPS builds 2026</h2>
+      <span class="toggle-arrow open" id="builds-arrow">&#8964;</span>
+    </div>
+    <div id="builds-grid-wrap">
+      <div class="builds-grid">
+
+        <div class="build-card">
+          <div class="build-card-header">
+            <span class="badge b-blue build-card-name">1. Striker + Overdogs/Equalizer</span>
+            <span class="build-card-num">Gunner</span>
+          </div>
+          <div class="build-card-desc">Four Striker pieces + Overdogs gloves + Equalizer chest. St Elmo's Engine primary. The fastest-building Striker stack variant — Overdogs synergises with stacks for enormous sustained crit damage. Great for all Heroic content.</div>
+          <div class="build-card-gear">
+            <span class="gear-pill">St Elmo's Engine</span><span class="gear-pill">Striker Set ×4</span><span class="gear-pill">Overdogs</span><span class="gear-pill">Equalizer chest</span>
+          </div>
+        </div>
+
+        <div class="build-card">
+          <div class="build-card-header">
+            <span class="badge b-blue build-card-name">2. St Elmo's Striker + Memento</span>
+            <span class="build-card-num">Gunner</span>
+          </div>
+          <div class="build-card-desc">Striker Set ×4, Memento backpack replacing one Striker piece, Ceska/Grupo/Fenris chest with Obliterate, GR9 LMG secondary. Best build for Legendary Strongholds and Summit — Memento's Kill Confirmed stacks amplify the already massive Striker damage.</div>
+          <div class="build-card-gear">
+            <span class="gear-pill">St Elmo's Engine</span><span class="gear-pill">Striker Set ×4</span><span class="gear-pill">Memento</span><span class="gear-pill">GR9 LMG (Frenzy)</span>
+          </div>
+        </div>
+
+        <div class="build-card">
+          <div class="build-card-header">
+            <span class="badge b-coral build-card-name">3. Heartbreaker PvE</span>
+            <span class="build-card-num">Technician</span>
+          </div>
+          <div class="build-card-desc">Full Heartbreaker set (5 pieces) + Contractor's Gloves + Fox's Prayer kneepads. AR primary with Flatline, ACS-12 shotgun secondary to build stacks. Linked Laser Pointer from Technician spec. Incredible synergy for Countdown, Summit, and Heroic/Legendary missions.</div>
+          <div class="build-card-gear">
+            <span class="gear-pill">Carbine 7 / Police M4</span><span class="gear-pill">ACS-12 (Flatline)</span><span class="gear-pill">Heartbreaker ×5</span><span class="gear-pill">Contractor's Gloves</span>
+          </div>
+        </div>
+
+        <div class="build-card">
+          <div class="build-card-header">
+            <span class="badge b-blue build-card-name">4. Assault Rifle PvE</span>
+            <span class="build-card-num">Gunner</span>
+          </div>
+          <div class="build-card-desc">St Elmo's Engine + Coyote's Mask + Ceska/Grupo chest (Obliterate) + backpack (Vigilance) + Contractor's Gloves + Palisade holster + Fox's Prayer kneepads. Flexible brand-mix build — easier to gear than set builds and still extremely potent.</div>
+          <div class="build-card-gear">
+            <span class="gear-pill">St Elmo's Engine</span><span class="gear-pill">Coyote's Mask</span><span class="gear-pill">Ceska/Grupo chest</span><span class="gear-pill">Contractor's Gloves</span>
+          </div>
+        </div>
+
+        <div class="build-card">
+          <div class="build-card-header">
+            <span class="badge b-coral build-card-name">5. Kingbreaker Spotter</span>
+            <span class="build-card-num">Technician</span>
+          </div>
+          <div class="build-card-desc">Kingbreaker exotic AR (Spotter talent) + Heartbreaker Set ×4 + Closer chest + ACS-12 (Flatline) secondary + Fox's Prayer kneepads. Spotter/Flatline/Heartbreaker synergy creates exceptional damage output and survivability — one of the strongest builds in the game.</div>
+          <div class="build-card-gear">
+            <span class="gear-pill">Kingbreaker</span><span class="gear-pill">ACS-12 (Flatline)</span><span class="gear-pill">Heartbreaker ×4</span><span class="gear-pill">Closer chest</span>
+          </div>
+        </div>
+
+        <div class="build-card">
+          <div class="build-card-header">
+            <span class="badge b-amber build-card-name">6. Pestilence LMG</span>
+            <span class="build-card-num">Gunner</span>
+          </div>
+          <div class="build-card-desc">Pestilence exotic LMG + Coyote's Mask + Ceska/Grupo chest (Obliterate) + backpack (Vigilance/Composure) + Contractor's Gloves + Palisade holster + Fox's Prayer kneepads. Plague spreading on kills — devastating in groups of enemies.</div>
+          <div class="build-card-gear">
+            <span class="gear-pill">Pestilence</span><span class="gear-pill">Coyote's Mask</span><span class="gear-pill">Ceska/Grupo chest</span><span class="gear-pill">Fox's Prayer</span>
+          </div>
+        </div>
+
+        <div class="build-card">
+          <div class="build-card-header">
+            <span class="badge b-amber build-card-name">7. Negotiator's Pestilence</span>
+            <span class="build-card-num">Gunner</span>
+          </div>
+          <div class="build-card-desc">Pestilence + Negotiator's Dilemma Set ×4 (Mask, Gloves, Holster, Kneepads) + Ceska/Grupo chest (Obliterate) + backpack (Composure/Vigilance). Negotiator's marks + Pestilence plague = chain explosions. Best for Legendary content where enemies cluster.</div>
+          <div class="build-card-gear">
+            <span class="gear-pill">Pestilence</span><span class="gear-pill">Negotiator's ×4</span><span class="gear-pill">Ceska/Grupo chest</span><span class="gear-pill">Ceska/Grupo backpack</span>
+          </div>
+        </div>
+
+        <div class="build-card">
+          <div class="build-card-header">
+            <span class="badge b-purple build-card-name">8. SMG Speed Farm</span>
+            <span class="build-card-num">Gunner</span>
+          </div>
+          <div class="build-card-desc">Chatterbox + Shield Splinterer + Hunter's Fury Set ×4 (Mask, Gloves, Holster, Kneepads) + Memento backpack + Palisade chest (Intimidate). Best speed farm build for Heroic Control Points, Missions, and The Summit — insane close-range DPS with near-infinite ammo loop.</div>
+          <div class="build-card-gear">
+            <span class="gear-pill">Chatterbox</span><span class="gear-pill">Shield Splinterer</span><span class="gear-pill">Hunter's Fury ×4</span><span class="gear-pill">Memento</span>
+          </div>
+        </div>
+
+        <div class="build-card">
+          <div class="build-card-header">
+            <span class="badge b-pink build-card-name">+ Skill Build (Refactor)</span>
+            <span class="build-card-num">Technician</span>
+          </div>
+          <div class="build-card-desc">Capacitor + Refactor Set ×4 + Force Multiplier/Hana-U pieces. Technician spec gives a Red Core item slot while keeping 6 skill tiers. Striker Drone + Assault Turret do the damage. Three variants: Force Multiplier, Tech Support, and Ninja (with NinjaBike backpack). Strongest build on Legendary difficulty.</div>
+          <div class="build-card-gear">
+            <span class="gear-pill">Capacitor</span><span class="gear-pill">Refactor Set ×4</span><span class="gear-pill">Striker Drone</span><span class="gear-pill">Assault Turret</span>
+          </div>
+        </div>
+
+        <div class="build-card">
+          <div class="build-card-header">
+            <span class="badge b-teal build-card-name">+ SHD/XP Farm (Hotshot)</span>
+            <span class="build-card-num">Sharpshooter</span>
+          </div>
+          <div class="build-card-desc">Model 700 or White Death marksman rifle with Headhunter/Determined + Chainkiller chest (Perfect Headhunter) + Hotshot brand ×4 (Mask, Gloves, Holster, Kneepads) + Airaldi backpack. One-shots enemies from any range. From the 3rd kill onward with Determined, ammo is free — clear entire Control Points in seconds for massive XP.</div>
+          <div class="build-card-gear">
+            <span class="gear-pill">Model 700 / White Death</span><span class="gear-pill">Chainkiller chest</span><span class="gear-pill">Hotshot ×4</span><span class="gear-pill">Airaldi backpack</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
   </div>
 
+  <!-- Important notes -->
+  <div class="notes-box">
+    <div class="notes-box-toggle" onclick="toggleSection('notes-list-wrap','notes-arrow')">
+      <h2>Important notes before you farm</h2>
+      <span class="toggle-arrow open" id="notes-arrow">&#8964;</span>
+    </div>
+    <div id="notes-list-wrap">
+      <ul class="notes-list">
+        <li><strong>Targeted loot is king.</strong> Set it to the desired gear slot in Countdown (Heroic+) or The Summit — named enemies all drop that slot type. Switch targets freely after each drop.</li>
+        <li><strong>Eagle Bearer is raid-locked.</strong> It only drops from the Operation Dark Hours final chest (weekly reset) or rare DZ extracts. Targeted loot does NOT work for it.</li>
+        <li><strong>Pestilence requires the Dark Zone.</strong> It drops from named DZ bosses only. Extract contaminated loot. It enters the general loot pool after your first drop.</li>
+        <li><strong>Chatterbox must be crafted first.</strong> Farm Hyena Faction Crates across DC for three components and the blueprint (Bank HQ mission vault). After crafting, it joins the normal exotic pool.</li>
+        <li><strong>St Elmo's Engine is shared</strong> across Striker, AR, and SHD builds — getting a god roll early has outsized value. It's a very common AR-targeted-loot drop in Countdown.</li>
+        <li><strong>SMG Speed Farm uses Hunter's Fury, not Striker Set.</strong> Striker stacks need sustained fire which suits AR/LMG builds. Hunter's Fury rewards fast kills at close range — perfect for Chatterbox.</li>
+        <li><strong>SHD/XP: stack directives.</strong> Each directive adds +25% XP. During 5× XP events, loop Classified Assignments for 100–130 SHD levels/hour. Outside events, Heroic Control Points + 4-5 directives is the meta.</li>
+        <li><strong>Tinkering Station is everywhere.</strong> Press M anywhere to open it. Recalibrate talents/attributes, optimize item level, then raise Proficiency/Expertise.</li>
+        <li><strong>Exotic Caches.</strong> Completing Countdown earns Countdown Requisition — spend it on Exotic Caches to fill gaps without targeting a specific slot.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Stats -->
   <div class="stats-bar">
     <div class="stat-chip"><strong id="done-count">0</strong> / <strong id="total-count">0</strong> tasks done</div>
     <div class="progress-wrap">
@@ -177,33 +317,37 @@
     <button class="reset-btn" onclick="resetAll()">Reset progress</button>
   </div>
 
+  <!-- Controls -->
   <div class="controls">
     <div class="control-row">
       <span class="control-label">Activity</span>
-      <button class="chip active" data-act="all" onclick="setActivity('all',this)">All</button>
-      <button class="chip" data-act="countdown" onclick="setActivity('countdown',this)">Countdown</button>
-      <button class="chip" data-act="summit" onclick="setActivity('summit',this)">The Summit</button>
-      <button class="chip" data-act="raid" onclick="setActivity('raid',this)">Raid (ODH)</button>
-      <button class="chip" data-act="dz" onclick="setActivity('dz',this)">Dark Zone</button>
-      <button class="chip" data-act="exotic_quest" onclick="setActivity('exotic_quest',this)">Exotic quests</button>
-      <button class="chip" data-act="open_world" onclick="setActivity('open_world',this)">Open world</button>
-      <button class="chip" data-act="season" onclick="setActivity('season',this)">Season</button>
+      <button class="chip active" data-act="all"          onclick="setAct('all',this)">All</button>
+      <button class="chip"        data-act="countdown"    onclick="setAct('countdown',this)">Countdown</button>
+      <button class="chip"        data-act="summit"       onclick="setAct('summit',this)">The Summit</button>
+      <button class="chip"        data-act="raid"         onclick="setAct('raid',this)">Raid (ODH)</button>
+      <button class="chip"        data-act="dz"           onclick="setAct('dz',this)">Dark Zone</button>
+      <button class="chip"        data-act="exotic_quest" onclick="setAct('exotic_quest',this)">Exotic quests</button>
+      <button class="chip"        data-act="open_world"   onclick="setAct('open_world',this)">Open world</button>
+      <button class="chip"        data-act="season"       onclick="setAct('season',this)">Season</button>
     </div>
     <div class="control-row">
       <span class="control-label">Build</span>
-      <button class="chip active" data-build="all" onclick="setBuild('all',this)">All builds</button>
-      <button class="chip" data-build="striker" onclick="setBuild('striker',this)">Striker DPS</button>
-      <button class="chip" data-build="heartbreaker" onclick="setBuild('heartbreaker',this)">Heartbreaker</button>
-      <button class="chip" data-build="ar" onclick="setBuild('ar',this)">AR DPS</button>
-      <button class="chip" data-build="pestilence" onclick="setBuild('pestilence',this)">Pestilence LMG</button>
-      <button class="chip" data-build="smg" onclick="setBuild('smg',this)">SMG Speed</button>
-      <button class="chip" data-build="shd" onclick="setBuild('shd',this)">SHD/XP Farm</button>
+      <button class="chip active" data-build="all"           onclick="setBuild('all',this)">All builds</button>
+      <button class="chip"        data-build="striker"       onclick="setBuild('striker',this)">Striker DPS</button>
+      <button class="chip"        data-build="heartbreaker"  onclick="setBuild('heartbreaker',this)">Heartbreaker</button>
+      <button class="chip"        data-build="kingbreaker"   onclick="setBuild('kingbreaker',this)">Kingbreaker</button>
+      <button class="chip"        data-build="ar"            onclick="setBuild('ar',this)">AR DPS</button>
+      <button class="chip"        data-build="pestilence"    onclick="setBuild('pestilence',this)">Pestilence LMG</button>
+      <button class="chip"        data-build="neg_pest"      onclick="setBuild('neg_pest',this)">Nego. Pestilence</button>
+      <button class="chip"        data-build="smg"           onclick="setBuild('smg',this)">SMG Speed</button>
+      <button class="chip"        data-build="skill"         onclick="setBuild('skill',this)">Skill Build</button>
+      <button class="chip"        data-build="shd"           onclick="setBuild('shd',this)">SHD/XP Farm</button>
     </div>
     <div class="control-row">
       <span class="control-label">Status</span>
-      <button class="chip active" data-status="all" onclick="setStatus('all',this)">All</button>
-      <button class="chip" data-status="todo" onclick="setStatus('todo',this)">To do</button>
-      <button class="chip" data-status="done" onclick="setStatus('done',this)">Done</button>
+      <button class="chip active" data-status="all"  onclick="setStatus('all',this)">All</button>
+      <button class="chip"        data-status="todo" onclick="setStatus('todo',this)">To do</button>
+      <button class="chip"        data-status="done" onclick="setStatus('done',this)">Done</button>
       <div class="search-wrap">
         <span class="search-icon">⌕</span>
         <input type="text" id="search-input" placeholder="Search tasks…" oninput="render()">
@@ -220,511 +364,517 @@
   <div id="content"></div>
 
 </div>
-
 <script>
-const ACTIVITY_LABELS = {
-  countdown: 'Countdown (primary loot farm)',
-  summit: 'The Summit',
-  raid: 'Raid — Operation Dark Hours',
-  dz: 'Dark Zone',
+const ACT_LABELS = {
+  countdown:    'Countdown (primary loot farm)',
+  summit:       'The Summit',
+  raid:         'Raid — Operation Dark Hours',
+  dz:           'Dark Zone',
   exotic_quest: 'Exotic crafting quests',
-  open_world: 'Open world & general',
-  season: 'Season pass & manhunt',
+  open_world:   'Open world & general',
+  season:       'Season pass & manhunt',
 };
+const ACT_ORDER = ['countdown','summit','raid','dz','exotic_quest','open_world','season'];
 
-const ACTIVITY_ORDER = ['countdown','summit','raid','dz','exotic_quest','open_world','season'];
-
+// builds: array of build IDs this task is relevant to
+// badges: [{label, cls}]
 const TASKS = [
   {
-    id: 1, name: "Farm St Elmo's Engine (exotic AR)", activity: 'countdown', priority: 'high',
-    builds: ['striker','ar','shd'],
-    badges: [{label:"Striker DPS",cls:"b-blue"},{label:"AR DPS",cls:"b-blue"},{label:"SHD/XP Build",cls:"b-teal"}],
-    desc: "Set targeted loot → Assault Rifle in Countdown or The Summit. Very common drop — one of the easiest exotics to get. Also purchasable from Exotic Caches with Countdown Requisition. Shared across three major builds so getting a god roll (Crit Chance, Crit Damage attributes + right talent) early pays off enormously.",
-    steps: ["In Countdown menu, set Targeted Loot to 'Assault Rifle'","Run Heroic difficulty (or higher) — complete the mission normally","Named enemies all drop AR loot; St Elmo's can drop from any","Alternatively: farm Countdown Requisition → buy Exotic Caches"],
-    links: [
-      {label:"St Elmo's Engine — Wiki", url:"https://thedivision.fandom.com/wiki/St._Elmo%27s_Engine"},
-      {label:"Countdown — Wiki", url:"https://thedivision.fandom.com/wiki/Countdown"},
-      {label:"Exotic Caches — Wiki", url:"https://thedivision.fandom.com/wiki/Exotic_Cache"},
+    id:1, name:"Farm St Elmo's Engine (exotic AR)", activity:'countdown', priority:'high',
+    builds:['striker','ar','shd'],
+    badges:[{label:"Striker DPS",cls:"b-blue"},{label:"AR DPS",cls:"b-blue"},{label:"SHD/XP Build",cls:"b-teal"}],
+    desc:"Set targeted loot → Assault Rifle in Countdown or The Summit. One of the most common exotic drops — often multiple copies drop in a single Countdown session. Shared across Striker, AR DPS, and SHD farm builds, so a god roll (Crit Chance + Crit Damage attributes) is worth chasing early.",
+    steps:["In Countdown menu, set Targeted Loot → Assault Rifle","Run Heroic difficulty (or higher)","St Elmo's can drop from any named enemy kill","Alt: farm Countdown Requisition → buy Exotic Caches"],
+    links:[
+      {label:"St Elmo's Engine — Wiki",url:"https://thedivision.fandom.com/wiki/St._Elmo%27s_Engine"},
+      {label:"Countdown — Wiki",url:"https://thedivision.fandom.com/wiki/Countdown"},
+      {label:"Exotic Caches — Wiki",url:"https://thedivision.fandom.com/wiki/Exotic_Cache"},
     ]
   },
   {
-    id: 2, name: "Farm Memento (exotic backpack)", activity: 'countdown', priority: 'high',
-    builds: ['striker','smg'],
-    badges: [{label:"Striker DPS",cls:"b-blue"},{label:"SMG Speed Farm",cls:"b-purple"}],
-    desc: "The best exotic backpack in the game. Kill Confirmed talent: killing enemies drops trophies — collecting them grants +1% weapon damage, +0.1% armor regen, and +1% skill efficiency per trophy for 300 seconds (up to 30 stacks). Also grants short-term burst buffs. Targeted loot in Countdown on Heroic+ is the fastest farm method.",
-    steps: ["Set Targeted Loot → Backpack in Countdown", "Run Heroic (or Legendary for better drop rates)", "Also available from The Summit boss floors with Backpack targeted loot", "Farm Countdown Requisition and buy Exotic Caches as backup method"],
-    links: [
-      {label:"Memento — Wiki", url:"https://thedivision.fandom.com/wiki/Memento"},
-      {label:"Countdown — Wiki", url:"https://thedivision.fandom.com/wiki/Countdown"},
+    id:2, name:"Farm Memento (exotic backpack)", activity:'countdown', priority:'high',
+    builds:['striker','smg'],
+    badges:[{label:"Striker DPS",cls:"b-blue"},{label:"SMG Speed Farm",cls:"b-purple"}],
+    desc:"Kill Confirmed talent: killing enemies drops trophies. Collecting trophies grants +1% weapon damage, +0.1% armor regen, +1% skill efficiency per trophy for 300 s (up to 30 stacks), plus short-term burst buffs. Used in both Striker Legendary and SMG Speed Farm builds.",
+    steps:["Set Targeted Loot → Backpack in Countdown","Run Heroic+ (Legendary boss floors give better odds)","Also farms well from The Summit with Backpack targeted loot","Alt: Exotic Caches with Countdown Requisition"],
+    links:[
+      {label:"Memento — Wiki",url:"https://thedivision.fandom.com/wiki/Memento"},
+      {label:"Countdown — Wiki",url:"https://thedivision.fandom.com/wiki/Countdown"},
     ]
   },
   {
-    id: 3, name: "Farm Coyote's Mask (exotic mask)", activity: 'countdown', priority: 'high',
-    builds: ['ar','pestilence'],
-    badges: [{label:"AR DPS",cls:"b-blue"},{label:"Pestilence LMG",cls:"b-amber"}],
-    desc: "Pack Instincts talent: grants crit buffs based on range to last target hit — close (<15m) = +25% crit damage; far (25m+) = +25% crit chance; mid (15–25m) = +10% to both. Effectively a three-in-one crit booster that works for every weapon class. Jefferson Trade Center SHD mission is a notable targeted source alongside Countdown/Summit.",
-    steps: ["Set Targeted Loot → Mask in Countdown or The Summit", "Notable open world farm: Jefferson Trade Center SHD mission", "Also drops from Legendary Missions and Exotic Caches"],
-    links: [
-      {label:"Coyote's Mask — Wiki", url:"https://thedivision.fandom.com/wiki/Coyote%27s_Mask"},
-      {label:"Jefferson Trade Center — Wiki", url:"https://thedivision.fandom.com/wiki/Jefferson_Trade_Center"},
+    id:3, name:"Farm Coyote's Mask (exotic mask)", activity:'countdown', priority:'high',
+    builds:['ar','pestilence'],
+    badges:[{label:"AR DPS",cls:"b-blue"},{label:"Pestilence LMG",cls:"b-amber"}],
+    desc:"Pack Instincts talent: crit buff based on range to last target — close (<15 m) = +25% crit damage; far (25 m+) = +25% crit chance; mid = +10% both. A universal crit booster for any weapon class. Jefferson Trade Center SHD mission is a notable targeted source.",
+    steps:["Set Targeted Loot → Mask in Countdown or The Summit","Notable open world farm: Jefferson Trade Center SHD mission","Also drops from Legendary Missions and Exotic Caches"],
+    links:[
+      {label:"Coyote's Mask — Wiki",url:"https://thedivision.fandom.com/wiki/Coyote%27s_Mask"},
+      {label:"Jefferson Trade Center — Wiki",url:"https://thedivision.fandom.com/wiki/Jefferson_Trade_Center"},
     ]
   },
   {
-    id: 4, name: "Farm Pestilence (exotic LMG)", activity: 'dz', priority: 'high',
-    builds: ['pestilence'],
-    badges: [{label:"Pestilence LMG",cls:"b-amber"}],
-    desc: "Pestilence infects targets hit with plague stacks; enemies that die while infected spread the plague. Combined with Coyote's Mask and Negotiator's or Ceska/Grupo brand pieces it creates incredible sustained DPS. The DZ is the primary source — it drops from named Dark Zone bosses only. After your first drop it enters the general exotic pool.",
-    steps: ["Enter any Dark Zone (South/East/West) on Heroic difficulty", "Hunt and kill named (yellow health bar) boss enemies", "Collect contaminated loot and extract it safely", "After first drop: use Countdown/Summit with LMG targeted loot or Exotic Caches"],
-    links: [
-      {label:"Pestilence — Wiki", url:"https://thedivision.fandom.com/wiki/Pestilence"},
-      {label:"Dark Zone — Wiki", url:"https://thedivision.fandom.com/wiki/Dark_Zone_(The_Division_2)"},
+    id:4, name:"Farm Pestilence (exotic LMG)", activity:'dz', priority:'high',
+    builds:['pestilence','neg_pest'],
+    badges:[{label:"Pestilence LMG",cls:"b-amber"},{label:"Nego. Pestilence",cls:"b-amber"}],
+    desc:"Pestilence infects targets; enemies that die while infected spread the plague to nearby enemies. Combined with Negotiator's Dilemma or Coyote's Mask, it creates chain reactions across entire groups. Primary source: named Dark Zone boss drops only. After first drop it enters the general exotic pool.",
+    steps:["Enter any Dark Zone (South/East/West) on Heroic difficulty","Hunt and kill named (yellow health bar) bosses","Collect contaminated loot and safely extract it","After first drop: Countdown/Summit LMG targeted loot, or Exotic Caches"],
+    links:[
+      {label:"Pestilence — Wiki",url:"https://thedivision.fandom.com/wiki/Pestilence"},
+      {label:"Dark Zone — Wiki",url:"https://thedivision.fandom.com/wiki/Dark_Zone_(The_Division_2)"},
     ]
   },
   {
-    id: 5, name: "Farm Eagle Bearer (exotic AR) — weekly", activity: 'raid', priority: 'high',
-    builds: ['striker'],
-    badges: [{label:"Striker DPS",cls:"b-blue"}],
-    desc: "Eagle's Strike talent: the weapon gains accuracy the longer you hold the trigger, functioning like an AR/LMG hybrid at range. Best raid-exclusive weapon for Striker assault rifle DPS builds. IMPORTANT: targeted loot does NOT apply. The only reliable source is the weekly Operation Dark Hours final chest (resets every Tuesday). Also a very rare DZ extract.",
-    steps: ["Join or organize an 8-player Operation Dark Hours raid group (LFG on Reddit/Discord)", "Complete the raid — final reward chest resets weekly", "Can also drop from Dark Zone extracts (very rare)", "Check weekly XP events for limited-time cache inclusions"],
-    links: [
-      {label:"Eagle Bearer — Wiki", url:"https://thedivision.fandom.com/wiki/Eagle_Bearer"},
-      {label:"Operation Dark Hours — Wiki", url:"https://thedivision.fandom.com/wiki/Operation_Dark_Hours"},
+    id:5, name:"Farm Eagle Bearer (exotic AR) — weekly", activity:'raid', priority:'high',
+    builds:['striker'],
+    badges:[{label:"Striker DPS",cls:"b-blue"}],
+    desc:"Eagle's Strike talent makes the weapon more accurate the longer you fire — functions like an AR/LMG hybrid. Best raid-exclusive AR for Striker DPS builds. IMPORTANT: targeted loot does NOT apply. Only reliable source is the weekly Operation Dark Hours final chest (resets Tuesdays). Also a very rare DZ extract.",
+    steps:["Join or organise an 8-player Operation Dark Hours group (LFG on Reddit/Discord)","Complete the raid — final chest resets weekly","Alt rare source: Dark Zone extract","Watch for limited-time event caches that may include Eagle Bearer"],
+    links:[
+      {label:"Eagle Bearer — Wiki",url:"https://thedivision.fandom.com/wiki/Eagle_Bearer"},
+      {label:"Operation Dark Hours — Wiki",url:"https://thedivision.fandom.com/wiki/Operation_Dark_Hours"},
     ]
   },
   {
-    id: 6, name: "Farm Striker Set pieces (4–6 pieces)", activity: 'countdown', priority: 'high',
-    builds: ['striker','smg'],
-    badges: [{label:"Striker DPS",cls:"b-blue"},{label:"SMG Speed Farm",cls:"b-purple"}],
-    desc: "Striker stacks build with each bullet hit, massively amplifying weapon damage. You need: Mask, Backpack (or Memento), Gloves, Holster, Kneepads — all Red Core with Crit Chance and/or Crit Damage rolls. Aim for 60% Crit Chance total before stacking Crit Damage. Specialization: Gunner.",
-    steps: ["Set Targeted Loot → Striker's Battlegear in Countdown or Summit", "Run Heroic+ with a 4-person group for loot sharing", "Prioritize: Mask, Gloves, Holster, Kneepads with Red Core + Crit CC/CD", "Recalibrate wrong secondary attributes at Tinkering Station (press M)"],
-    links: [
-      {label:"Striker's Battlegear — Wiki", url:"https://thedivision.fandom.com/wiki/Striker%27s_Battlegear"},
-      {label:"Countdown — Wiki", url:"https://thedivision.fandom.com/wiki/Countdown"},
+    id:6, name:"Farm Striker Set pieces (4 pieces)", activity:'countdown', priority:'high',
+    builds:['striker'],
+    badges:[{label:"Striker DPS",cls:"b-blue"}],
+    desc:"Striker stacks build with each bullet hit and massively amplify weapon damage. Need 4 pieces: Mask, Gloves, Holster, Kneepads — all Red Core with Crit Chance/Damage rolls. The 5th (Backpack or Chest) slot is filled by Memento or Equalizer/Overdogs depending on the build variant. Aim for 60% total Crit Chance. Specialization: Gunner.",
+    steps:["Set Targeted Loot → Striker's Battlegear in Countdown or Summit","Run Heroic+ in a 4-player group with loot sharing","Prioritise: Mask, Gloves, Holster, Kneepads (Red Core + Crit CC/CD)","Recalibrate wrong secondary attributes at Tinkering Station (press M)"],
+    links:[
+      {label:"Striker's Battlegear — Wiki",url:"https://thedivision.fandom.com/wiki/Striker%27s_Battlegear"},
+      {label:"Countdown — Wiki",url:"https://thedivision.fandom.com/wiki/Countdown"},
     ]
   },
   {
-    id: 7, name: "Farm Heartbreaker Set pieces (4–5 pieces)", activity: 'countdown', priority: 'high',
-    builds: ['heartbreaker'],
-    badges: [{label:"Heartbreaker DPS",cls:"b-coral"}],
-    desc: "Heartbreaker stacks are built by hitting multiple enemies quickly (shotgun secondary helps). Synergy with Flatline talent and Linked Laser Pointer is exceptional. Need: Mask, Backpack, Chest, Gloves, Holster — Blue Core with Crit Chance/Damage. Kneepads slot can be Fox's Prayer for flexibility. Specialization: Technician.",
-    steps: ["Set Targeted Loot → Heartbreaker in Countdown or Summit", "Need 4 pieces minimum; 5-piece is optimal for full set bonus", "Look for Blue Core + Crit Chance or Crit Damage secondary stats", "Recalibrate at Tinkering Station if crit stats are missing"],
-    links: [
-      {label:"Heartbreaker — Wiki", url:"https://thedivision.fandom.com/wiki/Heartbreaker"},
+    id:7, name:"Farm Heartbreaker Set pieces (4–5 pieces)", activity:'countdown', priority:'high',
+    builds:['heartbreaker','kingbreaker'],
+    badges:[{label:"Heartbreaker DPS",cls:"b-coral"},{label:"Kingbreaker Spotter",cls:"b-coral"}],
+    desc:"Shared core for both Heartbreaker PvE and Kingbreaker Spotter builds. Heartbreaker stacks build by shooting multiple targets quickly (shotgun secondary helps). Need: Mask, Backpack, Chest, Gloves, Holster — Blue Core + Crit Chance/Damage. Kneepads use Fox's Prayer. Kingbreaker variant swaps Chest to Closer brand and runs 4 Heartbreaker pieces. Specialization: Technician.",
+    steps:["Set Targeted Loot → Heartbreaker in Countdown or Summit","Heartbreaker PvE: need 5 pieces (Mask, Backpack, Chest, Gloves, Holster)","Kingbreaker variant: need 4 pieces (Mask, Backpack, Gloves, Holster)","Look for Blue Core + Crit Chance or Crit Damage on each piece"],
+    links:[
+      {label:"Heartbreaker — Wiki",url:"https://thedivision.fandom.com/wiki/Heartbreaker"},
     ]
   },
   {
-    id: 8, name: "Farm Hunter's Fury Set pieces (4 pieces)", activity: 'countdown', priority: 'high',
-    builds: ['smg'],
-    badges: [{label:"SMG Speed Farm",cls:"b-purple"}],
-    desc: "Hunter's Fury provides bonus weapon damage after kills at close range — perfect for SMG speed farming. Need: Mask, Gloves, Holster, Kneepads with Blue Core + Crit Chance/Damage. Chest is Palisade with Intimidate talent. Backpack is Memento. Specialization: Gunner.",
-    steps: ["Set Targeted Loot → Hunter's Fury in Countdown or Summit", "Need exactly 4 pieces (Mask, Gloves, Holster, Kneepads)", "Blue Core + Crit stats on each piece", "Farm separately: Memento (Backpack) and Palisade chest (Intimidate talent)"],
-    links: [
-      {label:"Hunter's Fury — Wiki", url:"https://thedivision.fandom.com/wiki/Hunter%27s_Fury"},
+    id:8, name:"Farm Hunter's Fury Set pieces (4 pieces)", activity:'countdown', priority:'high',
+    builds:['smg'],
+    badges:[{label:"SMG Speed Farm",cls:"b-purple"}],
+    desc:"Hunter's Fury provides bonus weapon damage and armor on kills at close range — perfectly suited to Chatterbox SMG speed farming. Need exactly 4 pieces: Mask, Gloves, Holster, Kneepads (Blue Core + Crit). The Backpack slot is Memento, the Chest is Palisade (Intimidate). Note: this is NOT the Striker Set — Hunter's Fury rewards fast kills at close range, which is how Chatterbox plays. Specialization: Gunner.",
+    steps:["Set Targeted Loot → Hunter's Fury in Countdown or Summit","Need: Mask, Gloves, Holster, Kneepads (Blue Core + Crit stats)","Farm Memento (Backpack) and Palisade chest (Intimidate) separately","Do NOT use Striker Set for this build — Hunter's Fury is the correct set"],
+    links:[
+      {label:"Hunter's Fury — Wiki",url:"https://thedivision.fandom.com/wiki/Hunter%27s_Fury"},
     ]
   },
   {
-    id: 9, name: "Farm Negotiator's Dilemma Set (4 pieces)", activity: 'countdown', priority: 'med',
-    builds: ['pestilence'],
-    badges: [{label:"Pestilence LMG",cls:"b-amber"}],
-    desc: "Negotiator's Dilemma marks enemies on hit; killing marked enemies detonates nearby marked enemies for bonus damage. Pairs excellently with Pestilence plague spreading. Need: Mask, Gloves, Holster, Kneepads with Red Core + Crit Chance/Damage. Chest: Ceska/Grupo with Obliterate. Backpack: Ceska/Grupo with Composure/Vigilance.",
-    steps: ["Set Targeted Loot → Negotiator's Dilemma in Countdown or Summit", "Need 4 pieces: Mask, Gloves, Holster, Kneepads (Red Core)", "Aim for 60% Crit Chance across all pieces", "Farm Ceska/Grupo chest (Obliterate) and backpack (Vigilance) separately"],
-    links: [
-      {label:"Negotiator's Dilemma — Wiki", url:"https://thedivision.fandom.com/wiki/Negotiator%27s_Dilemma"},
+    id:9, name:"Farm Negotiator's Dilemma Set (4 pieces)", activity:'countdown', priority:'high',
+    builds:['neg_pest'],
+    badges:[{label:"Nego. Pestilence",cls:"b-amber"}],
+    desc:"Negotiator's Dilemma marks enemies on hit; killing a marked enemy detonates all nearby marked enemies for bonus damage. Combined with Pestilence's plague spreading, this creates chain explosions across entire enemy groups — best on Legendary where enemies cluster. Need: Mask, Gloves, Holster, Kneepads (Red Core + Crit). Chest and Backpack: Ceska or Grupo brand.",
+    steps:["Set Targeted Loot → Negotiator's Dilemma in Countdown or Summit","Need 4 pieces: Mask, Gloves, Holster, Kneepads (Red Core + Crit)","Aim for 60% Crit Chance across all pieces","Farm Ceska/Grupo chest (Obliterate) and backpack (Composure/Vigilance) separately"],
+    links:[
+      {label:"Negotiator's Dilemma — Wiki",url:"https://thedivision.fandom.com/wiki/Negotiator%27s_Dilemma"},
     ]
   },
   {
-    id: 10, name: "Farm Overdogs gloves (exotic)", activity: 'countdown', priority: 'med',
-    builds: ['striker'],
-    badges: [{label:"Striker DPS",cls:"b-blue"}],
-    desc: "Exotic gloves used in the Striker Overdogs + Equalizer build variant. Set targeted loot → Gloves in Countdown or Summit. Also available from Exotic Caches.",
-    steps: ["Set Targeted Loot → Gloves in Countdown or Summit (Heroic+)", "Also try farming Countdown Requisition → buy Exotic Caches"],
-    links: [
-      {label:"Overdogs — Wiki", url:"https://thedivision.fandom.com/wiki/Overdogs"},
+    id:10, name:"Farm Overdogs gloves (exotic)", activity:'countdown', priority:'med',
+    builds:['striker'],
+    badges:[{label:"Striker DPS",cls:"b-blue"}],
+    desc:"Exotic gloves used in the Striker Overdogs + Equalizer variant (build #1). Synergises with Striker stacks for amplified damage. Set targeted loot → Gloves in Countdown or Summit, or purchase from Exotic Caches.",
+    steps:["Set Targeted Loot → Gloves in Countdown or Summit (Heroic+)","Alt: farm Countdown Requisition → buy Exotic Caches"],
+    links:[
+      {label:"Overdogs — Wiki",url:"https://thedivision.fandom.com/wiki/Overdogs"},
     ]
   },
   {
-    id: 11, name: "Farm Equalizer chest (brand, Red Core + Crit)", activity: 'countdown', priority: 'med',
-    builds: ['striker'],
-    badges: [{label:"Striker DPS",cls:"b-blue"}],
-    desc: "Used in the Striker Overdogs + Equalizer build variant instead of a 5th Striker piece. Need Red Core + Crit Chance & Crit Damage. Set targeted loot → Chest.",
-    steps: ["Set Targeted Loot → Chest in Countdown or Summit", "Look for Red Core with both Crit Chance and Crit Damage as secondary stats", "Recalibrate one stat at Tinkering Station if needed"],
-    links: [
-      {label:"Equalizer — Wiki", url:"https://thedivision.fandom.com/wiki/Equalizer_(brand)"},
+    id:11, name:"Farm Equalizer chest (Red Core + Crit)", activity:'countdown', priority:'med',
+    builds:['striker'],
+    badges:[{label:"Striker DPS",cls:"b-blue"}],
+    desc:"Used in the Striker Overdogs + Equalizer variant (build #1) as the non-set chest piece. Need Red Core + Crit Chance & Crit Damage. Set targeted loot → Chest.",
+    steps:["Set Targeted Loot → Chest in Countdown or Summit","Look for Equalizer brand, Red Core + both Crit stats","Recalibrate one stat at Tinkering Station if needed"],
+    links:[
+      {label:"Equalizer — Wiki",url:"https://thedivision.fandom.com/wiki/Equalizer_(brand)"},
     ]
   },
   {
-    id: 12, name: "Farm Ceska/Grupo/Fenris chest (Obliterate talent)", activity: 'countdown', priority: 'high',
-    builds: ['striker','ar','pestilence'],
-    badges: [{label:"Striker DPS",cls:"b-blue"},{label:"AR DPS",cls:"b-blue"},{label:"Pestilence LMG",cls:"b-amber"}],
-    desc: "Red Core chest from any of these three brand sets with the Obliterate talent (which improves critical hit damage), plus Crit Chance and Crit Damage stats. Used in the St Elmo's Striker Legendary build and AR/Pestilence DPS builds. Very high value piece shared across three builds.",
-    steps: ["Set Targeted Loot → Chest in Countdown or Summit", "Filter drops for Ceska Manufacturing, Grupo Sombra, or Fenris brand", "Need: Red Core + Obliterate talent + Crit Chance + Crit Damage", "Recalibrate at Tinkering Station to fix wrong stat"],
-    links: [
-      {label:"Ceska Manufacturing — Wiki", url:"https://thedivision.fandom.com/wiki/Ceska_Manufacturing"},
-      {label:"Grupo Sombra — Wiki", url:"https://thedivision.fandom.com/wiki/Grupo_Sombra_SA"},
-      {label:"Obliterate talent — Wiki", url:"https://thedivision.fandom.com/wiki/Obliterate"},
+    id:12, name:"Farm Ceska/Grupo/Fenris chest (Obliterate talent)", activity:'countdown', priority:'high',
+    builds:['striker','ar','pestilence','neg_pest'],
+    badges:[{label:"Striker DPS",cls:"b-blue"},{label:"AR DPS",cls:"b-blue"},{label:"Pestilence LMG",cls:"b-amber"},{label:"Nego. Pestilence",cls:"b-amber"}],
+    desc:"Red Core chest from any of these three brand sets with Obliterate talent (improves critical hit damage), Crit Chance, and Crit Damage. Used in St Elmo's Striker Legendary (build #2), AR DPS (build #4), Pestilence LMG (build #6), and Negotiator's Pestilence (build #7). Very high value — shared across four builds.",
+    steps:["Set Targeted Loot → Chest in Countdown or Summit","Filter drops for Ceska Manufacturing, Grupo Sombra, or Fenris brand","Need: Red Core + Obliterate talent + Crit Chance + Crit Damage","Recalibrate at Tinkering Station to fix one wrong stat"],
+    links:[
+      {label:"Ceska Manufacturing — Wiki",url:"https://thedivision.fandom.com/wiki/Ceska_Manufacturing"},
+      {label:"Grupo Sombra — Wiki",url:"https://thedivision.fandom.com/wiki/Grupo_Sombra_SA"},
+      {label:"Obliterate talent — Wiki",url:"https://thedivision.fandom.com/wiki/Obliterate"},
     ]
   },
   {
-    id: 13, name: "Farm Contractor's Gloves (Blue Core + Crit)", activity: 'summit', priority: 'high',
-    builds: ['ar','heartbreaker','pestilence'],
-    badges: [{label:"AR DPS",cls:"b-blue"},{label:"Heartbreaker DPS",cls:"b-coral"},{label:"Pestilence LMG",cls:"b-amber"}],
-    desc: "Blue Core gloves from Contractor's brand set with Crit Chance or Crit Damage secondary stats. Shared across AR DPS, Heartbreaker, and Pestilence builds. Targeted loot → Gloves in Summit or Countdown.",
-    steps: ["Set Targeted Loot → Gloves in Countdown or Summit", "Look for Contractor's brand with Blue Core + Crit stats", "Recalibrate one stat at Tinkering Station if needed"],
-    links: [
-      {label:"Contractor's Gloves — Wiki", url:"https://thedivision.fandom.com/wiki/Contractor%27s_Gloves"},
+    id:13, name:"Farm Contractor's Gloves (Blue Core + Crit)", activity:'summit', priority:'high',
+    builds:['ar','heartbreaker','pestilence'],
+    badges:[{label:"AR DPS",cls:"b-blue"},{label:"Heartbreaker DPS",cls:"b-coral"},{label:"Pestilence LMG",cls:"b-amber"}],
+    desc:"Blue Core gloves from Contractor's brand with Crit Chance or Crit Damage secondary stats. Shared across AR DPS (build #4), Heartbreaker PvE (build #3), and Pestilence LMG (build #6). One farm session covers three builds.",
+    steps:["Set Targeted Loot → Gloves in Countdown or Summit","Look for Contractor's brand + Blue Core + Crit stats","Recalibrate one stat at Tinkering Station if needed"],
+    links:[
+      {label:"Contractor's Gloves — Wiki",url:"https://thedivision.fandom.com/wiki/Contractor%27s_Gloves"},
     ]
   },
   {
-    id: 14, name: "Farm Fox's Prayer kneepads (Blue Core + Crit)", activity: 'summit', priority: 'high',
-    builds: ['ar','heartbreaker','pestilence'],
-    badges: [{label:"AR DPS",cls:"b-blue"},{label:"Heartbreaker DPS",cls:"b-coral"},{label:"Pestilence LMG",cls:"b-amber"}],
-    desc: "Blue Core kneepads from Fox's Prayer brand with Crit Chance or Crit Damage. Shared across AR, Heartbreaker, and Pestilence builds. Targeted loot → Kneepads.",
-    steps: ["Set Targeted Loot → Kneepads in Countdown or Summit", "Look for Fox's Prayer brand with Blue Core + Crit stat", "Recalibrate at Tinkering Station to fix wrong stat"],
-    links: [
-      {label:"Fox's Prayer — Wiki", url:"https://thedivision.fandom.com/wiki/Fox%27s_Prayer"},
+    id:14, name:"Farm Fox's Prayer kneepads (Blue Core + Crit)", activity:'summit', priority:'high',
+    builds:['ar','heartbreaker','kingbreaker','pestilence'],
+    badges:[{label:"AR DPS",cls:"b-blue"},{label:"Heartbreaker DPS",cls:"b-coral"},{label:"Kingbreaker Spotter",cls:"b-coral"},{label:"Pestilence LMG",cls:"b-amber"}],
+    desc:"Blue Core kneepads from Fox's Prayer brand with Crit Chance or Crit Damage. Shared across AR DPS, Heartbreaker PvE, Kingbreaker Spotter, and Pestilence LMG builds — one farm session covers four builds.",
+    steps:["Set Targeted Loot → Kneepads in Countdown or Summit","Look for Fox's Prayer brand + Blue Core + Crit stat","Recalibrate at Tinkering Station to fix wrong stat"],
+    links:[
+      {label:"Fox's Prayer — Wiki",url:"https://thedivision.fandom.com/wiki/Fox%27s_Prayer"},
     ]
   },
   {
-    id: 15, name: "Farm Palisade chest (Intimidate talent)", activity: 'summit', priority: 'med',
-    builds: ['smg','ar'],
-    badges: [{label:"SMG Speed Farm",cls:"b-purple"},{label:"AR DPS",cls:"b-blue"}],
-    desc: "Blue Core Palisade chest with Intimidate talent (killing enemies increases your weapon damage). Also used as a holster option in AR/Pestilence builds. Targeted loot → Chest.",
-    steps: ["Set Targeted Loot → Chest in Countdown or Summit", "Look for Palisade brand with Blue Core + Intimidate talent", "Secondary stats: Crit Chance and Crit Damage"],
-    links: [
-      {label:"Palisade — Wiki", url:"https://thedivision.fandom.com/wiki/Palisade_Defense_Corp"},
-      {label:"Intimidate talent — Wiki", url:"https://thedivision.fandom.com/wiki/Intimidate"},
+    id:15, name:"Farm Palisade chest (Intimidate talent)", activity:'summit', priority:'med',
+    builds:['smg','ar'],
+    badges:[{label:"SMG Speed Farm",cls:"b-purple"},{label:"AR DPS",cls:"b-blue"}],
+    desc:"Blue Core Palisade chest with Intimidate talent (killing enemies increases weapon damage) + Crit Chance/Damage. Primary chest slot for SMG Speed Farm build. Also used as holster alternative in AR/Pestilence builds.",
+    steps:["Set Targeted Loot → Chest in Countdown or Summit","Look for Palisade brand + Blue Core + Intimidate talent","Secondary stats: Crit Chance and Crit Damage"],
+    links:[
+      {label:"Palisade — Wiki",url:"https://thedivision.fandom.com/wiki/Palisade_Defense_Corp"},
+      {label:"Intimidate talent — Wiki",url:"https://thedivision.fandom.com/wiki/Intimidate"},
     ]
   },
   {
-    id: 16, name: "Craft Chatterbox (exotic SMG)", activity: 'exotic_quest', priority: 'high',
-    builds: ['smg'],
-    badges: [{label:"SMG Speed Farm",cls:"b-purple"}],
-    desc: "The Chatterbox has Incessant Chatter (each shot lands = +1% rate of fire up to 60%) and an effectively infinite ammo loop if you kill fast enough. Must be crafted on first acquisition — three components each locked to specific DC regions, blueprint from Bank HQ mission vault. After crafting it joins the normal exotic pool (SMG targeted loot / Exotic Caches).",
-    steps: [
+    id:16, name:"Farm Closer chest (Blue Core + Crit)", activity:'summit', priority:'med',
+    builds:['kingbreaker'],
+    badges:[{label:"Kingbreaker Spotter",cls:"b-coral"}],
+    desc:"Blue Core chest from Closer brand with Crit Chance & Crit Damage. Replaces the Heartbreaker chest in the Kingbreaker Spotter variant (build #5), enabling 4-piece Heartbreaker set bonus while using Closer for extra crit stats.",
+    steps:["Set Targeted Loot → Chest in Countdown or Summit","Look for Closer brand + Blue Core + Crit Chance & Crit Damage"],
+    links:[
+      {label:"Closer brand — Wiki",url:"https://thedivision.fandom.com/wiki/Closer"},
+    ]
+  },
+  {
+    id:17, name:"Farm Ceska/Grupo backpack (Vigilance/Composure talent)", activity:'summit', priority:'med',
+    builds:['ar','pestilence','neg_pest'],
+    badges:[{label:"AR DPS",cls:"b-blue"},{label:"Pestilence LMG",cls:"b-amber"},{label:"Nego. Pestilence",cls:"b-amber"}],
+    desc:"Red Core backpack from Ceska or Grupo brand with Vigilance or Composure talent + Crit Chance & Crit Damage. Backpack slot for AR DPS (build #4), Pestilence LMG (build #6), and Negotiator's Pestilence (build #7).",
+    steps:["Set Targeted Loot → Backpack in Countdown or Summit","Look for Ceska or Grupo brand + Red Core + Vigilance or Composure talent","Secondary stats: Crit Chance and Crit Damage"],
+    links:[
+      {label:"Vigilance talent — Wiki",url:"https://thedivision.fandom.com/wiki/Vigilance"},
+      {label:"Ceska Manufacturing — Wiki",url:"https://thedivision.fandom.com/wiki/Ceska_Manufacturing"},
+    ]
+  },
+  {
+    id:18, name:"Craft Chatterbox (exotic SMG)", activity:'exotic_quest', priority:'high',
+    builds:['smg'],
+    badges:[{label:"SMG Speed Farm",cls:"b-purple"}],
+    desc:"Incessant Chatter: every shot = +1% fire rate (up to 60%) + ammo refund on reload after kills — effectively infinite ammo from the 3rd kill onward. Must be crafted on first acquisition via three region-locked components and a blueprint from Bank HQ mission vault. After crafting it joins the normal exotic pool (SMG targeted loot / Exotic Caches).",
+    steps:[
       "Farm Hyena Keys: complete Hyena bounties on map, or loot wall-mounted key boxes in underground areas (max 50 keys)",
-      "Farm Loaded Canister: open Hyena caches in Downtown East (Grand Washington Hotel mission has 2 per run — bathroom near hallway fight, roof stairs area)",
-      "Farm Creative Magazine & Modified Mods: open Hyena caches in other DC regions (Judiciary Square, Federal Triangle, etc.)",
-      "Get Blueprint: run Bank Headquarters mission; enter vault, open golden gate on left with RFID card found in same mission",
-      "Craft Chatterbox at crafting station in the White House or Haven",
+      "Farm Loaded Canister: Hyena caches in Downtown East — Grand Washington Hotel mission has 2 caches per run",
+      "Farm Creative Magazine & Modified Mods: Hyena caches in other DC regions (Judiciary Square, Federal Triangle, etc.)",
+      "Get Blueprint: run Bank Headquarters mission; in the vault, open the golden gate on the left with the RFID card found earlier in the mission",
+      "Craft Chatterbox at the crafting station in White House or Haven",
       "After crafting: re-farm via SMG targeted loot in Countdown/Summit or Exotic Caches"
     ],
-    links: [
-      {label:"Chatterbox — Wiki", url:"https://thedivision.fandom.com/wiki/The_Chatterbox"},
-      {label:"Grand Washington Hotel — Wiki", url:"https://thedivision.fandom.com/wiki/Grand_Washington_Hotel"},
-      {label:"Bank Headquarters — Wiki", url:"https://thedivision.fandom.com/wiki/Bank_Headquarters"},
-      {label:"Hyena Keys — Wiki", url:"https://thedivision.fandom.com/wiki/Hyena_Key"},
+    links:[
+      {label:"Chatterbox — Wiki",url:"https://thedivision.fandom.com/wiki/The_Chatterbox"},
+      {label:"Grand Washington Hotel — Wiki",url:"https://thedivision.fandom.com/wiki/Grand_Washington_Hotel"},
+      {label:"Bank Headquarters — Wiki",url:"https://thedivision.fandom.com/wiki/Bank_Headquarters"},
+      {label:"Hyena Keys — Wiki",url:"https://thedivision.fandom.com/wiki/Hyena_Key"},
     ]
   },
   {
-    id: 17, name: "Farm Shield Splinterer (named SMG)", activity: 'open_world', priority: 'med',
-    builds: ['smg'],
-    badges: [{label:"SMG Speed Farm",cls:"b-purple"}],
-    desc: "Secondary weapon for the SMG speed farm build. Targeted loot → SMG in open world, Summit, or Countdown.",
-    steps: ["Set Targeted Loot → SMG in Countdown or Summit", "Also drops from open world activities with SMG as zone targeted loot"],
-    links: [
-      {label:"SMGs — Wiki", url:"https://thedivision.fandom.com/wiki/Submachine_Gun"},
+    id:19, name:"Farm Shield Splinterer (named SMG)", activity:'open_world', priority:'med',
+    builds:['smg'],
+    badges:[{label:"SMG Speed Farm",cls:"b-purple"}],
+    desc:"Secondary weapon for the SMG Speed Farm build. Targeted loot → SMG in open world, Summit, or Countdown.",
+    steps:["Set Targeted Loot → SMG in Countdown or Summit","Also drops from open world activities with SMG as zone targeted loot"],
+    links:[{label:"SMGs — Wiki",url:"https://thedivision.fandom.com/wiki/Submachine_Gun"}]
+  },
+  {
+    id:20, name:"Farm Kingbreaker (exotic AR, Spotter talent)", activity:'open_world', priority:'high',
+    builds:['kingbreaker'],
+    badges:[{label:"Kingbreaker Spotter",cls:"b-coral"}],
+    desc:"Kingbreaker's Spotter talent synergises with the Heartbreaker set and Flatline for massive damage. Available from AR targeted loot in open world, Summit, and Countdown, plus Exotic Caches.",
+    steps:["Set Targeted Loot → Assault Rifle in Countdown or Summit","Also drops from open world missions with AR as zone loot","Alt: buy Exotic Caches with Countdown Requisition"],
+    links:[
+      {label:"Kingbreaker — Wiki",url:"https://thedivision.fandom.com/wiki/Kingbreaker"},
+      {label:"Spotter talent — Wiki",url:"https://thedivision.fandom.com/wiki/Spotter"},
     ]
   },
   {
-    id: 18, name: "Farm Kingbreaker (exotic AR, Spotter talent)", activity: 'open_world', priority: 'med',
-    builds: ['heartbreaker'],
-    badges: [{label:"Heartbreaker DPS",cls:"b-coral"}],
-    desc: "Kingbreaker has the Spotter talent which synergizes with the Heartbreaker set for massive damage. Pairs with ACS-12 (Flatline) as secondary. Available from AR targeted loot in open world, Summit, and Countdown, plus Exotic Caches.",
-    steps: ["Set Targeted Loot → Assault Rifle in Countdown or Summit", "Also drops from open world missions with AR as zone loot", "Alternative: buy Exotic Caches with Countdown Requisition"],
-    links: [
-      {label:"Kingbreaker — Wiki", url:"https://thedivision.fandom.com/wiki/Kingbreaker"},
-      {label:"Spotter talent — Wiki", url:"https://thedivision.fandom.com/wiki/Spotter"},
+    id:21, name:"Farm ACS-12 shotgun (Flatline talent)", activity:'open_world', priority:'high',
+    builds:['heartbreaker','kingbreaker'],
+    badges:[{label:"Heartbreaker DPS",cls:"b-coral"},{label:"Kingbreaker Spotter",cls:"b-coral"}],
+    desc:"Shotgun secondary for both Heartbreaker builds. Flatline talent procs on kills and triggers Heartbreaker stack generation. Rock n' Roll Shotgun is a good alternative. Targeted loot → Shotgun in open world, Summit, or Countdown.",
+    steps:["Set Targeted Loot → Shotgun in Countdown or Summit","Look for ACS-12 (or Rock n' Roll) with Flatline talent","Recalibrate talent at Tinkering Station if wrong one drops"],
+    links:[
+      {label:"ACS-12 — Wiki",url:"https://thedivision.fandom.com/wiki/ACS-12"},
+      {label:"Flatline talent — Wiki",url:"https://thedivision.fandom.com/wiki/Flatline"},
     ]
   },
   {
-    id: 19, name: "Farm ACS-12 with Flatline talent", activity: 'open_world', priority: 'med',
-    builds: ['heartbreaker'],
-    badges: [{label:"Heartbreaker DPS",cls:"b-coral"}],
-    desc: "Shotgun secondary for Heartbreaker builds. Flatline talent procs on kills, triggering Heartbreaker stack generation. Rock n' Roll Shotgun is a good alternative. Targeted loot → Shotgun in open world, Summit, or Countdown.",
-    steps: ["Set Targeted Loot → Shotgun in Countdown or Summit", "Look for ACS-12 (or Rock n' Roll) with Flatline talent", "If wrong talent drops, recalibrate at Tinkering Station"],
-    links: [
-      {label:"ACS-12 — Wiki", url:"https://thedivision.fandom.com/wiki/ACS-12"},
-      {label:"Flatline talent — Wiki", url:"https://thedivision.fandom.com/wiki/Flatline"},
+    id:22, name:"Farm GR9 LMG (Frenzy or Fast Hands talent)", activity:'countdown', priority:'med',
+    builds:['striker'],
+    badges:[{label:"Striker DPS",cls:"b-blue"}],
+    desc:"Secondary weapon for the St Elmo's Striker Legendary build (build #2). Used on Heroic/Legendary missions where sustaining Striker stacks is straightforward. Frenzy or Fast Hands talent preferred. Targeted loot → LMG.",
+    steps:["Set Targeted Loot → Light Machine Gun in Countdown or Summit","Look for GR9 with Frenzy or Fast Hands talent","Recalibrate talent at Tinkering Station if needed"],
+    links:[{label:"LMGs — Wiki",url:"https://thedivision.fandom.com/wiki/Light_Machine_Gun"}]
+  },
+  {
+    id:23, name:"Farm Capacitor (exotic AR, skill builds)", activity:'summit', priority:'high',
+    builds:['skill'],
+    badges:[{label:"Skill Build",cls:"b-pink"}],
+    desc:"Primary weapon for all Skill Build (Refactor) variants. Capacitor's In Sync talent provides weapon damage buffs that scale with skill tiers — perfect synergy with the Refactor set. Farm via AR targeted loot in Countdown or Summit, or Exotic Caches.",
+    steps:["Set Targeted Loot → Assault Rifle in Countdown or The Summit","Capacitor drops as AR exotic loot","Alt: buy Exotic Caches with Countdown Requisition"],
+    links:[
+      {label:"Capacitor — Wiki",url:"https://thedivision.fandom.com/wiki/Capacitor"},
+      {label:"In Sync talent — Wiki",url:"https://thedivision.fandom.com/wiki/In_Sync"},
     ]
   },
   {
-    id: 20, name: "Farm GR9 LMG (Frenzy or Fast Hands talent)", activity: 'countdown', priority: 'med',
-    builds: ['striker'],
-    badges: [{label:"Striker DPS",cls:"b-blue"}],
-    desc: "Secondary weapon for the St Elmo's Striker Legendary build — used on longer Heroic/Legendary missions where maintaining Striker stacks is easier. Frenzy or Fast Hands talent preferred. Targeted loot → LMG.",
-    steps: ["Set Targeted Loot → Light Machine Gun in Countdown or Summit", "Look for GR9 with Frenzy or Fast Hands talent", "Recalibrate talent at Tinkering Station if needed"],
-    links: [
-      {label:"LMGs — Wiki", url:"https://thedivision.fandom.com/wiki/Light_Machine_Gun"},
+    id:24, name:"Farm Refactor Set pieces (4 pieces)", activity:'countdown', priority:'high',
+    builds:['skill'],
+    badges:[{label:"Skill Build",cls:"b-pink"}],
+    desc:"Core gear set for all Skill Build variants (builds #9a/#9b/#9c). Need: Mask (Red Core + Skill Damage), Gloves (Yellow Core + Skill Damage), Holster (Yellow Core + Skill Damage), Kneepads (Yellow Core + Skill Damage). The Red Core mask enables the Technician specialization trick of having 6 skill tiers while retaining a weapon damage core.",
+    steps:["Set Targeted Loot → Refactor in Countdown or Summit","Need 4 pieces: Mask (Red Core), Gloves/Holster/Kneepads (Yellow Core)","Secondary stat priority: Skill Damage on all pieces","Gear Mods: Skill Haste in all mod slots"],
+    links:[
+      {label:"Refactor — Wiki",url:"https://thedivision.fandom.com/wiki/Refactor"},
     ]
   },
   {
-    id: 21, name: "Farm Ceska/Grupo backpack (Vigilance talent)", activity: 'summit', priority: 'med',
-    builds: ['ar','pestilence'],
-    badges: [{label:"AR DPS",cls:"b-blue"},{label:"Pestilence LMG",cls:"b-amber"}],
-    desc: "Red Core backpack from Ceska or Grupo brand with Vigilance or Composure talent, plus Crit Chance and Crit Damage stats. Used in AR DPS and Pestilence LMG builds as the backpack slot. Targeted loot → Backpack.",
-    steps: ["Set Targeted Loot → Backpack in Countdown or Summit", "Look for Ceska or Grupo brand, Red Core, Vigilance talent", "Secondary stats: Crit Chance and Crit Damage"],
-    links: [
-      {label:"Vigilance talent — Wiki", url:"https://thedivision.fandom.com/wiki/Vigilance"},
-      {label:"Ceska Manufacturing — Wiki", url:"https://thedivision.fandom.com/wiki/Ceska_Manufacturing"},
+    id:25, name:"Farm Force Multiplier / Hana-U pieces (Skill Build chest/backpack)", activity:'summit', priority:'high',
+    builds:['skill'],
+    badges:[{label:"Skill Build",cls:"b-pink"}],
+    desc:"Chest and Backpack slot options for Skill Build variants. Force Multiplier variant: Yellow Core Force Multiplier backpack (Skill Damage + Skill Haste) + Hana-U chest (Glass Cannon or Kinetic Momentum talent). Tech Support variant: Hana-U backpack (Tech Support talent) + Hana-U chest. All need Skill Damage and Skill Haste stats.",
+    steps:["Set Targeted Loot → Backpack or Chest in Countdown or Summit","Force Multiplier variant: Force Multiplier backpack (Yellow Core + Skill Damage + Skill Haste)","All variants: Hana-U chest (Yellow Core + Glass Cannon or Kinetic Momentum talent + Skill stats)","Tech Support variant: Hana-U backpack (Tech Support talent)"],
+    links:[
+      {label:"Hana-U — Wiki",url:"https://thedivision.fandom.com/wiki/Hana-U"},
+      {label:"Glass Cannon talent — Wiki",url:"https://thedivision.fandom.com/wiki/Glass_Cannon"},
     ]
   },
   {
-    id: 22, name: "Farm Closer chest (Blue Core + Crit)", activity: 'summit', priority: 'med',
-    builds: ['heartbreaker'],
-    badges: [{label:"Heartbreaker DPS",cls:"b-coral"}],
-    desc: "Blue Core chest from the Closer brand with Crit Chance and Crit Damage stats. Used specifically in the Kingbreaker Spotter build variant within the Heartbreaker framework. Targeted loot → Chest.",
-    steps: ["Set Targeted Loot → Chest in Countdown or Summit", "Look for Closer brand with Blue Core + Crit stats"],
-    links: [
-      {label:"Closer brand — Wiki", url:"https://thedivision.fandom.com/wiki/Closer"},
+    id:26, name:"Farm NinjaBike Messenger Bag (Skill Build Ninja variant)", activity:'countdown', priority:'med',
+    builds:['skill'],
+    badges:[{label:"Skill Build",cls:"b-pink"}],
+    desc:"Required for the Refactor Ninja Build variant (build #9c). Best-in-slot backpack for hybrid skill builds — drops specifically from Countdown with Backpack targeted loot. Also useful for Empress hybrid variant.",
+    steps:["Set Targeted Loot → Backpack in Countdown specifically","NinjaBike reliably drops from Countdown more than other activities"],
+    links:[{label:"NinjaBike Messenger Bag — Wiki",url:"https://thedivision.fandom.com/wiki/NinjaBike_Messenger_Bag"}]
+  },
+  {
+    id:27, name:"Farm Empress International pieces (Skill Build hybrid variant)", activity:'summit', priority:'med',
+    builds:['skill'],
+    badges:[{label:"Skill Build",cls:"b-pink"}],
+    desc:"Used in the Hybrid Empress Skill Build variant (build #9d). Need: Mask, Chest, Gloves (Yellow Core + Skill Damage + Crit Chance/Damage). Also used in Yellow Empress variant: Mask, Chest, Kneepads (Yellow Core + Skill Damage + Skill Haste).",
+    steps:["Set Targeted Loot → Empress International in Countdown or Summit","Hybrid variant: Mask, Chest, Gloves (Yellow Core + Skill Damage + Crit stats)","Yellow variant: Mask, Chest, Kneepads (Yellow Core + Skill Damage + Skill Haste)"],
+    links:[
+      {label:"Empress International — Wiki",url:"https://thedivision.fandom.com/wiki/Empress_International"},
     ]
   },
   {
-    id: 23, name: "Farm Model 700 / Hotshot marksman rifle", activity: 'summit', priority: 'high',
-    builds: ['shd'],
-    badges: [{label:"SHD/XP Build",cls:"b-teal"}],
-    desc: "Core weapon for the Hotshot XP farm build. Needs the Headhunter talent (or Determined on a White Death variant). The synergy between Determined (every kill refunds ammo, 3rd kill onward = free) and Perfect Headhunter (headshot kills buff next shot) lets you one-shot most enemies and chain kills endlessly with zero ammo cost.",
-    steps: ["Set Targeted Loot → Marksman Rifle in Countdown or Summit", "Look for Model 700 with Headhunter talent, or White Death with Determined + DTTOC attribute", "Alternatively: White Death + Determined = free infinite ammo loop from 3rd kill onward"],
-    links: [
-      {label:"Model 700 — Wiki", url:"https://thedivision.fandom.com/wiki/Model_700"},
-      {label:"White Death — Wiki", url:"https://thedivision.fandom.com/wiki/White_Death"},
-      {label:"Headhunter talent — Wiki", url:"https://thedivision.fandom.com/wiki/Headhunter"},
-      {label:"Determined talent — Wiki", url:"https://thedivision.fandom.com/wiki/Determined"},
+    id:28, name:"Farm Model 700 / White Death marksman rifle", activity:'summit', priority:'high',
+    builds:['shd'],
+    badges:[{label:"SHD/XP Build",cls:"b-teal"}],
+    desc:"Core weapon for the Hotshot SHD farm build. White Death with Determined + DTTOC attribute: every kill refunds ammo, and from the 3rd kill onward ammo cost is zero — chain-clear entire Control Points instantly. Alt: Model 700 with Headhunter (headshot kills buff next shot). Either approach one-shots most enemies on Heroic.",
+    steps:["Set Targeted Loot → Marksman Rifle in Countdown or Summit","White Death: look for Determined talent + DTTOC (Damage To Target Out Of Cover) attribute","Model 700: look for Headhunter talent","Recalibrate one stat at Tinkering Station if needed"],
+    links:[
+      {label:"White Death — Wiki",url:"https://thedivision.fandom.com/wiki/White_Death"},
+      {label:"Model 700 — Wiki",url:"https://thedivision.fandom.com/wiki/Model_700"},
+      {label:"Determined talent — Wiki",url:"https://thedivision.fandom.com/wiki/Determined"},
+      {label:"Headhunter talent — Wiki",url:"https://thedivision.fandom.com/wiki/Headhunter"},
     ]
   },
   {
-    id: 24, name: "Farm Hotshot brand pieces (4 slots)", activity: 'summit', priority: 'high',
-    builds: ['shd'],
-    badges: [{label:"SHD/XP Build",cls:"b-teal"}],
-    desc: "Hotshot brand provides headshot damage bonuses that stack perfectly with the Headhunter/Determined sniper playstyle. Need: Mask, Gloves, Holster, Kneepads with Weapon Damage core + Headshot Damage attribute. Every piece should have as much headshot damage as possible.",
-    steps: ["Set Targeted Loot → Mask / Gloves / Holster / Kneepads (one slot per session) in Countdown or Summit", "Look for Hotshot brand pieces with Weapon Damage core", "Secondary stat priority: Headshot Damage above all else", "Recalibrate at Tinkering Station to fix wrong stats"],
-    links: [
-      {label:"Hotshot — Wiki", url:"https://thedivision.fandom.com/wiki/Hotshot"},
+    id:29, name:"Farm Hotshot brand pieces (Mask, Gloves, Holster, Kneepads)", activity:'summit', priority:'high',
+    builds:['shd'],
+    badges:[{label:"SHD/XP Build",cls:"b-teal"}],
+    desc:"Hotshot brand provides headshot damage bonuses that stack with Headhunter/Determined playstyle. Need 4 pieces: Mask, Gloves, Holster, Kneepads — Weapon Damage core + Headshot Damage secondary attribute on every piece.",
+    steps:["Set Targeted Loot → Mask / Gloves / Holster / Kneepads (one slot per session) in Countdown or Summit","Look for Hotshot brand + Weapon Damage core + Headshot Damage stat","Farm each slot separately using targeted loot","Recalibrate at Tinkering Station to fix wrong stat"],
+    links:[{label:"Hotshot — Wiki",url:"https://thedivision.fandom.com/wiki/Hotshot"}]
+  },
+  {
+    id:30, name:"Farm Chainkiller chest (Perfect Headhunter talent)", activity:'summit', priority:'high',
+    builds:['shd'],
+    badges:[{label:"SHD/XP Build",cls:"b-teal"}],
+    desc:"Named Walker & Harris chest with Perfect Headhunter talent — an improved Headhunter that buffs your next shot after a headshot kill. Weapon Damage core + Headshot Damage attribute. The lynchpin of the Hotshot SHD farm build.",
+    steps:["Set Targeted Loot → Chest in Countdown or Summit","Look specifically for Chainkiller (named Walker & Harris) with Perfect Headhunter talent","Need: Weapon Damage core + Headshot Damage secondary stat"],
+    links:[
+      {label:"Perfect Headhunter — Wiki",url:"https://thedivision.fandom.com/wiki/Headhunter#Perfect_Headhunter"},
+      {label:"Walker & Harris — Wiki",url:"https://thedivision.fandom.com/wiki/Walker_%26_Harris"},
     ]
   },
   {
-    id: 25, name: "Farm Chainkiller chest (Perfect Headhunter talent)", activity: 'summit', priority: 'high',
-    builds: ['shd'],
-    badges: [{label:"SHD/XP Build",cls:"b-teal"}],
-    desc: "The Chainkiller is a named Walker & Harris chest piece with the Perfect Headhunter talent — an improved version of Headhunter that buffs your next shot significantly after a headshot kill. Weapon Damage core + Headshot Damage attribute. This is the lynchpin of the Hotshot SHD farm build.",
-    steps: ["Set Targeted Loot → Chest in Countdown or Summit", "Look specifically for Chainkiller (named Walker & Harris) with Perfect Headhunter talent", "Need: Weapon Damage core + Headshot Damage secondary stat"],
-    links: [
-      {label:"Perfect Headhunter — Wiki", url:"https://thedivision.fandom.com/wiki/Headhunter#Perfect_Headhunter"},
-      {label:"Walker & Harris — Wiki", url:"https://thedivision.fandom.com/wiki/Walker_%26_Harris"},
+    id:31, name:"Farm Airaldi backpack (Vigilance/Bloodsucker + Headshot Damage)", activity:'summit', priority:'med',
+    builds:['shd'],
+    badges:[{label:"SHD/XP Build",cls:"b-teal"}],
+    desc:"Weapon Damage core backpack from Airaldi brand with Vigilance or Bloodsucker talent and Headshot Damage attribute. Completes the Hotshot SHD farm build.",
+    steps:["Set Targeted Loot → Backpack in Countdown or Summit","Look for Airaldi brand + Weapon Damage core + Vigilance or Bloodsucker talent","Secondary stat: Headshot Damage"],
+    links:[
+      {label:"Airaldi Holdings — Wiki",url:"https://thedivision.fandom.com/wiki/Airaldi_Holdings"},
+      {label:"Bloodsucker talent — Wiki",url:"https://thedivision.fandom.com/wiki/Bloodsucker"},
     ]
   },
   {
-    id: 26, name: "Farm Airaldi backpack (Vigilance/Bloodsucker + Headshot)", activity: 'summit', priority: 'med',
-    builds: ['shd'],
-    badges: [{label:"SHD/XP Build",cls:"b-teal"}],
-    desc: "Weapon Damage core backpack from Airaldi brand with Vigilance or Bloodsucker talent and Headshot Damage attribute. Completes the Hotshot SHD farm build. Targeted loot → Backpack in Countdown or Summit.",
-    steps: ["Set Targeted Loot → Backpack in Countdown or Summit", "Look for Airaldi brand, Weapon Damage core, Vigilance or Bloodsucker talent", "Secondary stat: Headshot Damage"],
-    links: [
-      {label:"Airaldi Holdings — Wiki", url:"https://thedivision.fandom.com/wiki/Airaldi_Holdings"},
-      {label:"Bloodsucker talent — Wiki", url:"https://thedivision.fandom.com/wiki/Bloodsucker"},
+    id:32, name:"Unlock Sharpshooter specialization", activity:'open_world', priority:'high',
+    builds:['heartbreaker','kingbreaker','shd'],
+    badges:[{label:"Heartbreaker DPS",cls:"b-coral"},{label:"Kingbreaker Spotter",cls:"b-coral"},{label:"SHD/XP Build",cls:"b-teal"}],
+    desc:"Required for the Linked Laser Pointer weapon mod (used in Heartbreaker PvE and Kingbreaker Spotter builds for headshot damage bonus) and for the SHD/XP sniper farm build. Unlock at Base of Operations and earn XP while equipped to progress the skill tree.",
+    steps:["Unlock Sharpshooter at the Base of Operations specialization menu","Equip Sharpshooter and earn XP to progress its skill tree","Unlock Linked Laser Pointer weapon mod from the Sharpshooter skill tree"],
+    links:[
+      {label:"Sharpshooter — Wiki",url:"https://thedivision.fandom.com/wiki/Sharpshooter"},
+      {label:"Specializations — Wiki",url:"https://thedivision.fandom.com/wiki/Specialization"},
     ]
   },
   {
-    id: 27, name: "Unlock Sharpshooter specialization", activity: 'open_world', priority: 'high',
-    builds: ['heartbreaker','shd'],
-    badges: [{label:"Heartbreaker DPS",cls:"b-coral"},{label:"SHD/XP Build",cls:"b-teal"}],
-    desc: "Sharpshooter is required for the Linked Laser Pointer weapon mod (used in Heartbreaker and Kingbreaker Spotter builds to boost headshot damage) and for the SHD/XP sniper farm build. Progress by earning XP while Sharpshooter is active. Unlock specialization signature weapon via SHD Watch milestones.",
-    steps: ["Unlock Sharpshooter from the specialization menu at Base of Operations", "Equip Sharpshooter and earn XP to progress its skill tree", "Unlock the Linked Laser Pointer from the Sharpshooter skill tree"],
-    links: [
-      {label:"Sharpshooter — Wiki", url:"https://thedivision.fandom.com/wiki/Sharpshooter"},
-      {label:"Specializations — Wiki", url:"https://thedivision.fandom.com/wiki/Specialization"},
+    id:33, name:"Unlock Gunner specialization", activity:'open_world', priority:'high',
+    builds:['striker','ar','pestilence','neg_pest','smg'],
+    badges:[{label:"Striker DPS",cls:"b-blue"},{label:"AR DPS",cls:"b-blue"},{label:"Pestilence LMG",cls:"b-amber"},{label:"Nego. Pestilence",cls:"b-amber"},{label:"SMG Speed",cls:"b-purple"}],
+    desc:"Gunner is the specialization for most meta DPS builds — required for Striker, AR DPS, Pestilence LMG, Negotiator's Pestilence, and SMG Speed Farm. Minigun signature weapon. Prioritise damage nodes in the skill tree.",
+    steps:["Unlock Gunner at the Base of Operations specialization menu","Equip Gunner and earn XP to progress its skill tree","Max weapon damage nodes first"],
+    links:[
+      {label:"Gunner — Wiki",url:"https://thedivision.fandom.com/wiki/Gunner"},
+      {label:"Specializations — Wiki",url:"https://thedivision.fandom.com/wiki/Specialization"},
     ]
   },
   {
-    id: 28, name: "Unlock Gunner specialization", activity: 'open_world', priority: 'high',
-    builds: ['striker','ar','pestilence','smg'],
-    badges: [{label:"Striker DPS",cls:"b-blue"},{label:"AR DPS",cls:"b-blue"},{label:"Pestilence LMG",cls:"b-amber"},{label:"SMG Speed Farm",cls:"b-purple"}],
-    desc: "Gunner is the specialization for most of the meta DPS builds. It provides bonus damage and the Minigun signature weapon. Required for Striker, AR DPS, Pestilence, and SMG builds.",
-    steps: ["Unlock Gunner from the specialization menu at Base of Operations", "Equip Gunner and farm XP to unlock specialization bonuses", "Max out weapon damage nodes in the Gunner skill tree first"],
-    links: [
-      {label:"Gunner — Wiki", url:"https://thedivision.fandom.com/wiki/Gunner"},
-      {label:"Specializations — Wiki", url:"https://thedivision.fandom.com/wiki/Specialization"},
+    id:34, name:"Unlock Technician specialization", activity:'open_world', priority:'high',
+    builds:['heartbreaker','kingbreaker','skill'],
+    badges:[{label:"Heartbreaker DPS",cls:"b-coral"},{label:"Kingbreaker Spotter",cls:"b-coral"},{label:"Skill Build",cls:"b-pink"}],
+    desc:"Technician is required for the Linked Laser Pointer (Heartbreaker/Kingbreaker builds) and is the core specialization for Skill Builds — its passive allows you to use a Red Core item while still maintaining 6 skill tiers, which is the key trick that makes Refactor builds so powerful.",
+    steps:["Unlock Technician at the Base of Operations specialization menu","Equip Technician and earn XP to progress its skill tree","Unlock Linked Laser Pointer from the Technician skill tree (for Heartbreaker/Kingbreaker)"],
+    links:[
+      {label:"Technician — Wiki",url:"https://thedivision.fandom.com/wiki/Technician"},
+      {label:"Specializations — Wiki",url:"https://thedivision.fandom.com/wiki/Specialization"},
     ]
   },
   {
-    id: 29, name: "Complete Season Pass & Manhunt objectives", activity: 'season', priority: 'high',
-    builds: ['shd'],
-    badges: [{label:"SHD/XP Build",cls:"b-teal"}],
-    desc: "Season Journey Missions unlock seasonal modifiers and rewards. Completing Scout and Manhunt objectives unlocks the Climax Mission. Some exotic weapons are locked behind season reward tracks and can't be obtained any other way until they rotate into the general loot pool.",
-    steps: ["Complete Season Journey Missions (8 missions total)", "Complete Manhunt Scout objectives to locate the Manhunt target", "Kill the Manhunt target to unlock the Climax Mission", "Farm Climax Mission on Master difficulty for exclusive exotic rewards"],
-    links: [
-      {label:"Season — Wiki", url:"https://thedivision.fandom.com/wiki/Season_(The_Division_2)"},
-      {label:"Manhunt — Wiki", url:"https://thedivision.fandom.com/wiki/Manhunt_(game_mode)"},
+    id:35, name:"Complete Season Pass & Manhunt objectives", activity:'season', priority:'high',
+    builds:['shd'],
+    badges:[{label:"SHD/XP Build",cls:"b-teal"}],
+    desc:"Season Journey Missions unlock seasonal modifiers and rewards. Manhunt Scout objectives locate the season target. Killing the target unlocks the Climax Mission. Some exotics are locked behind season reward tracks and can't be obtained any other way until they rotate into the general loot pool.",
+    steps:["Complete Season Journey Missions (8 total) for seasonal modifier unlocks","Complete Manhunt Scout objectives to locate the season target","Kill the Manhunt target to unlock the Climax Mission","Farm Climax Mission on Master difficulty for exclusive exotic rewards"],
+    links:[
+      {label:"Season — Wiki",url:"https://thedivision.fandom.com/wiki/Season_(The_Division_2)"},
+      {label:"Manhunt — Wiki",url:"https://thedivision.fandom.com/wiki/Manhunt_(game_mode)"},
     ]
   },
   {
-    id: 30, name: "Run weekly Operation Dark Hours (Eagle Bearer chase)", activity: 'raid', priority: 'high',
-    builds: ['striker'],
-    badges: [{label:"Striker DPS",cls:"b-blue"}],
-    desc: "Operation Dark Hours is an 8-player raid. The final reward chest resets every week. This is the primary and most reliable source of the Eagle Bearer. Also drops Regulus (pistol). Best time to run is right after Tuesday weekly reset when LFG groups are most active.",
-    steps: ["Find a group via the in-game LFG system, Reddit r/TheDivision, or Division 2 Discord", "Complete all raid encounters leading to final boss", "Open the final chest (guaranteed weekly loot including chance at Eagle Bearer)", "Eagle Bearer drop is not 100% — repeat weekly until obtained"],
-    links: [
-      {label:"Operation Dark Hours — Wiki", url:"https://thedivision.fandom.com/wiki/Operation_Dark_Hours"},
-      {label:"Eagle Bearer — Wiki", url:"https://thedivision.fandom.com/wiki/Eagle_Bearer"},
+    id:36, name:"Run weekly Operation Dark Hours (Eagle Bearer chase)", activity:'raid', priority:'high',
+    builds:['striker'],
+    badges:[{label:"Striker DPS",cls:"b-blue"}],
+    desc:"8-player Operation Dark Hours raid. Final chest resets every Tuesday — primary and most reliable Eagle Bearer source. Also drops Regulus (pistol). Best time to find full groups is right after the weekly reset.",
+    steps:["Find a group via in-game LFG, Reddit r/TheDivision, or Division 2 Discord","Complete all raid encounters to reach the final boss","Open the final chest (weekly guaranteed loot, chance at Eagle Bearer)","Eagle Bearer is not a 100% drop — repeat weekly until obtained"],
+    links:[
+      {label:"Operation Dark Hours — Wiki",url:"https://thedivision.fandom.com/wiki/Operation_Dark_Hours"},
+      {label:"Eagle Bearer — Wiki",url:"https://thedivision.fandom.com/wiki/Eagle_Bearer"},
     ]
   },
   {
-    id: 31, name: "Run Heroic Control Points with 4–5 directives (SHD XP)", activity: 'open_world', priority: 'high',
-    builds: ['shd'],
-    badges: [{label:"SHD/XP Build",cls:"b-teal"}],
-    desc: "The primary open-world SHD Watch XP grind. Each directive adds +25% XP bonus. Fog of War and No Hope are the easiest directives to manage. Running 4–5 directives can grant nearly a full SHD level for every 2–3 small activities completed. Set Global Difficulty to Heroic before starting.",
-    steps: ["Open the Map and set Global Difficulty → Heroic", "Activate 4–5 Directives (recommended: Fog of War, No Hope + 2 others you can manage)", "Capture Control Points on the map — each grants substantial XP", "Chain Control Points and side activities for maximum efficiency"],
-    links: [
-      {label:"Control Points — Wiki", url:"https://thedivision.fandom.com/wiki/Control_Point"},
-      {label:"Directives — Wiki", url:"https://thedivision.fandom.com/wiki/Directive"},
-      {label:"SHD Watch — Wiki", url:"https://thedivision.fandom.com/wiki/SHD_Watch"},
+    id:37, name:"Run Heroic Control Points with 4–5 directives (SHD XP)", activity:'open_world', priority:'high',
+    builds:['shd'],
+    badges:[{label:"SHD/XP Build",cls:"b-teal"}],
+    desc:"Primary open-world SHD Watch XP grind. Each directive adds +25% XP. Fog of War and No Hope are the easiest directives to manage. 4–5 directives can yield nearly a full SHD level per 2–3 activities. Set Global Difficulty to Heroic before starting.",
+    steps:["Open Map → set Global Difficulty → Heroic","Activate 4–5 Directives (recommended: Fog of War, No Hope + 2–3 others you can handle)","Capture Control Points — each grants substantial XP","Chain Control Points and side activities for maximum efficiency"],
+    links:[
+      {label:"Control Points — Wiki",url:"https://thedivision.fandom.com/wiki/Control_Point"},
+      {label:"Directives — Wiki",url:"https://thedivision.fandom.com/wiki/Directive"},
+      {label:"SHD Watch — Wiki",url:"https://thedivision.fandom.com/wiki/SHD_Watch"},
     ]
   },
   {
-    id: 32, name: "Run Countdown (Heroic, targeted loot + directives)", activity: 'countdown', priority: 'high',
-    builds: ['striker','heartbreaker','ar','pestilence','smg','shd'],
-    badges: [{label:"Striker DPS",cls:"b-blue"},{label:"Heartbreaker",cls:"b-coral"},{label:"AR DPS",cls:"b-blue"},{label:"Pestilence LMG",cls:"b-amber"},{label:"SMG Speed",cls:"b-purple"},{label:"SHD/XP Farm",cls:"b-teal"}],
-    desc: "Countdown is the single most efficient activity in the game — it is both the primary gear farm AND a great XP source. Switch targeted loot slot each time you get the item you're chasing. Completing missions earns Countdown Requisition → spend on Exotic Caches. Stack directives for bonus XP alongside the loot farm.",
-    steps: ["Open Countdown matchmaking menu", "Set Targeted Loot → your current target slot or brand set", "Set Heroic difficulty (Legendary if your build can handle it)", "Play with a full group of 4 and enable loot sharing for extra drop chances", "After completing: spend Countdown Requisition on Exotic Caches at the vendor"],
-    links: [
-      {label:"Countdown — Wiki", url:"https://thedivision.fandom.com/wiki/Countdown"},
-      {label:"Targeted Loot — Wiki", url:"https://thedivision.fandom.com/wiki/Targeted_Loot"},
+    id:38, name:"Run Countdown (Heroic, targeted loot + directives)", activity:'countdown', priority:'high',
+    builds:['striker','heartbreaker','kingbreaker','ar','pestilence','neg_pest','smg','skill','shd'],
+    badges:[{label:"All builds",cls:"b-teal"}],
+    desc:"Countdown is the single most efficient activity — primary gear farm AND great XP source. Switch targeted loot slot after each item you're chasing. Completing runs earns Countdown Requisition → spend on Exotic Caches. Stack directives for bonus XP alongside the loot farm.",
+    steps:["Open Countdown matchmaking menu","Set Targeted Loot → your current target slot or brand/gear set","Set Heroic difficulty (Legendary if your build can handle it)","Run with a full group of 4 with loot sharing for extra drop chances","After completing: spend Countdown Requisition on Exotic Caches at the vendor"],
+    links:[
+      {label:"Countdown — Wiki",url:"https://thedivision.fandom.com/wiki/Countdown"},
+      {label:"Targeted Loot — Wiki",url:"https://thedivision.fandom.com/wiki/Targeted_Loot"},
     ]
   },
   {
-    id: 33, name: "Farm Summit boss floors (Legendary) for exotic drops", activity: 'summit', priority: 'med',
-    builds: ['striker','heartbreaker','ar'],
-    badges: [{label:"Striker DPS",cls:"b-blue"},{label:"Heartbreaker DPS",cls:"b-coral"},{label:"AR DPS",cls:"b-blue"}],
-    desc: "Boss floors in The Summit on Legendary difficulty have higher exotic drop rates. Use this as an alternative to Countdown if you prefer a different playstyle or want variety. Set targeted loot to the desired slot before entering. Full group with loot sharing maximizes drops.",
-    steps: ["Enter The Summit from the Base of Operations", "Set Targeted Loot → desired gear slot before starting", "Select Legendary difficulty", "Rush to boss floors (floors ending in 0 or 5) for higher exotic drop chance", "Run with full 4-player group and loot sharing enabled"],
-    links: [
-      {label:"The Summit — Wiki", url:"https://thedivision.fandom.com/wiki/The_Summit"},
+    id:39, name:"Farm Summit boss floors (Legendary) for exotic drops", activity:'summit', priority:'med',
+    builds:['striker','heartbreaker','kingbreaker','ar'],
+    badges:[{label:"Striker DPS",cls:"b-blue"},{label:"Heartbreaker DPS",cls:"b-coral"},{label:"Kingbreaker Spotter",cls:"b-coral"},{label:"AR DPS",cls:"b-blue"}],
+    desc:"Boss floors in The Summit on Legendary difficulty have higher exotic drop rates. Good alternative to Countdown for variety. Set targeted loot to the desired slot before entering and run with full 4-player group and loot sharing.",
+    steps:["Enter The Summit from the Base of Operations","Set Targeted Loot → desired gear slot before starting","Select Legendary difficulty","Rush to boss floors (floors ending in 0 or 5) for higher exotic drop chance","Full 4-player group + loot sharing for maximum drops"],
+    links:[{label:"The Summit — Wiki",url:"https://thedivision.fandom.com/wiki/The_Summit"}]
+  },
+  {
+    id:40, name:"Loop Classified Assignments during XP events", activity:'open_world', priority:'med',
+    builds:['shd'],
+    badges:[{label:"SHD/XP Build",cls:"b-teal"}],
+    desc:"During 5× XP events, looping Classified Assignments is the fastest SHD leveling method — up to 100–130 SHD levels per hour. Outside XP events, these still give solid XP. Check the in-game seasonal calendar for upcoming events.",
+    steps:["Check the in-game seasonal calendar or community resources for 5× XP event dates","During the event: equip your Hotshot SHD farm build","Launch a Classified Assignment and complete it as fast as possible","Repeat for the duration of the event window"],
+    links:[
+      {label:"Classified Assignments — Wiki",url:"https://thedivision.fandom.com/wiki/Classified_Assignment"},
+      {label:"SHD Watch — Wiki",url:"https://thedivision.fandom.com/wiki/SHD_Watch"},
     ]
   },
   {
-    id: 34, name: "Loop Classified Assignment missions during XP events", activity: 'open_world', priority: 'med',
-    builds: ['shd'],
-    badges: [{label:"SHD/XP Build",cls:"b-teal"}],
-    desc: "During 5× XP events, looping Classified Assignment missions is the single fastest SHD leveling method — up to 100–130 SHD levels per hour. Outside of XP events, these missions still give good XP but at a normal rate. Check the in-game seasonal calendar for upcoming XP event dates.",
-    steps: ["Check the in-game seasonal calendar or community resources for upcoming 5× XP events", "During the event: equip your SHD/Hotshot farm build", "Launch a Classified Assignment mission and complete it as fast as possible", "Repeat (missions can be re-run during the event window)"],
-    links: [
-      {label:"Classified Assignments — Wiki", url:"https://thedivision.fandom.com/wiki/Classified_Assignment"},
-      {label:"SHD Watch — Wiki", url:"https://thedivision.fandom.com/wiki/SHD_Watch"},
+    id:41, name:"Recalibrate & Optimize gear at Tinkering Station", activity:'open_world', priority:'high',
+    builds:['striker','heartbreaker','kingbreaker','ar','pestilence','neg_pest','smg','skill'],
+    badges:[{label:"All DPS builds",cls:"b-blue"}],
+    desc:"Do this after farming each piece. Recalibrate swaps one attribute or talent for a better one. Optimize raises the item's attribute values to the maximum possible roll. Then raise Proficiency and Expertise levels for additional stat gains. Press M anywhere on the map to open the Tinkering Station — you no longer need to go to the Base of Operations.",
+    steps:["Press M anywhere (or visit Base of Operations) to open Tinkering Station","Recalibrate: select item → choose attribute/talent to replace → pick source piece","Optimize: raise item level cap to maximum (costs SHD Tech)","Proficiency: equip optimized item and use it to raise its Proficiency level","Expertise: use items across all your loadouts to raise their Expertise level over time"],
+    links:[
+      {label:"Tinkering Station — Wiki",url:"https://thedivision.fandom.com/wiki/Tinkering_Station"},
+      {label:"Recalibration — Wiki",url:"https://thedivision.fandom.com/wiki/Recalibration"},
+      {label:"Optimization — Wiki",url:"https://thedivision.fandom.com/wiki/Optimization"},
     ]
   },
   {
-    id: 35, name: "Recalibrate & Optimize gear at Tinkering Station", activity: 'open_world', priority: 'high',
-    builds: ['striker','heartbreaker','ar','pestilence','smg'],
-    badges: [{label:"Striker DPS",cls:"b-blue"},{label:"Heartbreaker",cls:"b-coral"},{label:"AR DPS",cls:"b-blue"},{label:"Pestilence LMG",cls:"b-amber"},{label:"SMG Speed",cls:"b-purple"}],
-    desc: "Min-maxing step — do this after farming each piece. Recalibrate swaps one attribute or talent for a better one (costs materials). Optimize raises the item's max attribute values to the highest possible roll. After optimization, raise Proficiency and Expertise levels for additional stat gains. Press M anywhere on the map to open Tinkering Station.",
-    steps: ["Press M anywhere (or visit Base of Operations) to open Tinkering Station", "Recalibrate: select an item, choose the attribute/talent to replace, pick the source", "Optimize: increase item level cap to maximum (costs SHD Tech)", "After optimizing: raise Proficiency level for additional attribute scaling", "Expertise: use items in your other loadouts to raise their Expertise level over time"],
-    links: [
-      {label:"Tinkering Station — Wiki", url:"https://thedivision.fandom.com/wiki/Tinkering_Station"},
-      {label:"Recalibration — Wiki", url:"https://thedivision.fandom.com/wiki/Recalibration"},
-      {label:"Optimization — Wiki", url:"https://thedivision.fandom.com/wiki/Optimization"},
+    id:42, name:"Buy Exotic Caches with Countdown Requisition", activity:'countdown', priority:'med',
+    builds:['striker','ar','pestilence','skill'],
+    badges:[{label:"Striker DPS",cls:"b-blue"},{label:"AR DPS",cls:"b-blue"},{label:"Pestilence LMG",cls:"b-amber"},{label:"Skill Build",cls:"b-pink"}],
+    desc:"Random exotic drop — great for filling gaps without targeting a specific slot. Earn Countdown Requisition from completing Countdown runs and spend it at the vendor. Best used when you've already got most of a build and just need one or two exotics.",
+    steps:["Complete Countdown runs on Heroic+ to earn Countdown Requisition","Visit the Countdown vendor (accessible from the activity menu)","Purchase Exotic Caches with your Requisition","Open caches — random exotic weapon or armor"],
+    links:[
+      {label:"Exotic Cache — Wiki",url:"https://thedivision.fandom.com/wiki/Exotic_Cache"},
+      {label:"Countdown — Wiki",url:"https://thedivision.fandom.com/wiki/Countdown"},
     ]
   },
   {
-    id: 36, name: "Buy Exotic Caches with Countdown Requisition", activity: 'countdown', priority: 'med',
-    builds: ['striker','ar','pestilence'],
-    badges: [{label:"Striker DPS",cls:"b-blue"},{label:"AR DPS",cls:"b-blue"},{label:"Pestilence LMG",cls:"b-amber"}],
-    desc: "Exotic Caches are a random exotic drop — great for filling gaps in your collection without targeting a specific slot. Earned by completing Countdown runs and spending the Countdown Requisition currency at the vendor. Accumulate several before opening to maximize value.",
-    steps: ["Complete Countdown runs on Heroic+ to earn Countdown Requisition", "Visit the Countdown vendor (accessible from the activity menu)", "Purchase Exotic Caches with your Requisition", "Open caches — random exotic weapon or armor"],
-    links: [
-      {label:"Exotic Cache — Wiki", url:"https://thedivision.fandom.com/wiki/Exotic_Cache"},
-      {label:"Countdown — Wiki", url:"https://thedivision.fandom.com/wiki/Countdown"},
-    ]
-  },
-  {
-    id: 37, name: "Farm NinjaBike Messenger Bag (exotic backpack)", activity: 'countdown', priority: 'low',
-    builds: ['shd'],
-    badges: [{label:"SHD/XP Build",cls:"b-teal"}],
-    desc: "Best-in-slot backpack for hybrid skill/weapon builds. Requires Countdown specifically with Backpack targeted loot — it's not as widely available as Memento. Good for SHD build variants that mix skill tiers.",
-    steps: ["Set Targeted Loot → Backpack in Countdown specifically", "Run Heroic Countdown — NinjaBike appears to drop more reliably from Countdown vs other activities"],
-    links: [
-      {label:"NinjaBike Messenger Bag — Wiki", url:"https://thedivision.fandom.com/wiki/NinjaBike_Messenger_Bag"},
-    ]
-  },
-  {
-    id: 38, name: "Complete Projects & open-world activities for bonus XP", activity: 'open_world', priority: 'med',
-    builds: ['shd'],
-    badges: [{label:"SHD/XP Build",cls:"b-teal"}],
-    desc: "Projects at settlements award XP and resources on completion — often a 2-for-1 with other farm activities since project objectives overlap with normal play. Check daily and weekly projects at White House, Theater, Campus, and haven settlements. Side activities (resource convoys, bounties, public executions) also grant solid XP.",
-    steps: ["Visit settlements (White House, Campus, Theater, Haven) to pick up projects", "Complete project objectives naturally while doing other farm runs", "Return to claim XP reward when objectives are done", "Complete daily bounties for additional XP and materials"],
-    links: [
-      {label:"Projects — Wiki", url:"https://thedivision.fandom.com/wiki/Project"},
-      {label:"Settlements — Wiki", url:"https://thedivision.fandom.com/wiki/Settlement"},
+    id:43, name:"Complete Projects & open-world activities for bonus XP", activity:'open_world', priority:'med',
+    builds:['shd'],
+    badges:[{label:"SHD/XP Build",cls:"b-teal"}],
+    desc:"Projects at settlements award XP and resources on completion — often a 2-for-1 as their objectives overlap with normal farm activities. Daily bounties and side activities (convoys, public executions) also grant solid XP. Check White House, Theater, Campus, and Haven settlements daily.",
+    steps:["Visit settlements (White House, Campus, Theater, Haven) to pick up projects","Complete project objectives naturally while doing other farm runs","Return to claim XP reward when objectives are done","Complete daily bounties for additional XP and materials"],
+    links:[
+      {label:"Projects — Wiki",url:"https://thedivision.fandom.com/wiki/Project"},
+      {label:"Settlements — Wiki",url:"https://thedivision.fandom.com/wiki/Settlement"},
     ]
   },
 ];
 
-let stateActivity = 'all';
-let stateBuild = 'all';
-let stateStatus = 'all';
-let checked = {};
-let expanded = {};
+let stateAct = 'all', stateBuild = 'all', stateStatus = 'all';
+let checked = {}, expanded = {};
 
 function loadState() {
-  try {
-    const s = JSON.parse(localStorage.getItem('div2_v2') || '{}');
-    checked = s.checked || {};
-    expanded = s.expanded || {};
-  } catch(e) {}
+  try { const s = JSON.parse(localStorage.getItem('div2_v3')||'{}'); checked = s.checked||{}; expanded = s.expanded||{}; } catch(e) {}
 }
-
 function saveState() {
-  try {
-    localStorage.setItem('div2_v2', JSON.stringify({ checked, expanded }));
-  } catch(e) {}
+  try { localStorage.setItem('div2_v3', JSON.stringify({checked, expanded})); } catch(e) {}
 }
-
-function setActivity(val, el) {
-  stateActivity = val;
-  document.querySelectorAll('[data-act]').forEach(b => b.classList.toggle('active', b.dataset.act === val));
-  render();
+function setAct(v,el) { stateAct=v; document.querySelectorAll('[data-act]').forEach(b=>b.classList.toggle('active',b.dataset.act===v)); render(); }
+function setBuild(v,el) { stateBuild=v; document.querySelectorAll('[data-build]').forEach(b=>b.classList.toggle('active',b.dataset.build===v)); render(); }
+function setStatus(v,el) { stateStatus=v; document.querySelectorAll('[data-status]').forEach(b=>b.classList.toggle('active',b.dataset.status===v)); render(); }
+function toggleSection(id, arrowId) {
+  const el = document.getElementById(id);
+  const ar = document.getElementById(arrowId);
+  const hidden = el.style.display === 'none';
+  el.style.display = hidden ? '' : 'none';
+  ar.classList.toggle('open', hidden);
 }
-
-function setBuild(val, el) {
-  stateBuild = val;
-  document.querySelectorAll('[data-build]').forEach(b => b.classList.toggle('active', b.dataset.build === val));
-  render();
-}
-
-function setStatus(val, el) {
-  stateStatus = val;
-  document.querySelectorAll('[data-status]').forEach(b => b.classList.toggle('active', b.dataset.status === val));
-  render();
-}
-
-function toggleCheck(id, evt) {
-  evt.stopPropagation();
-  checked[id] = !checked[id];
-  saveState();
-  render();
-}
-
-function toggleExpand(id) {
-  expanded[id] = !expanded[id];
-  saveState();
-  render();
-}
-
-function resetAll() {
-  if (confirm('Reset all task progress?')) {
-    checked = {};
-    expanded = {};
-    saveState();
-    render();
-  }
-}
+function toggleCheck(id, evt) { evt.stopPropagation(); checked[id]=!checked[id]; saveState(); render(); }
+function toggleExpand(id) { expanded[id]=!expanded[id]; saveState(); render(); }
+function resetAll() { if(confirm('Reset all task progress?')) { checked={}; expanded={}; saveState(); render(); } }
 
 function getFiltered() {
-  const q = (document.getElementById('search-input')?.value || '').toLowerCase();
+  const q = (document.getElementById('search-input')?.value||'').toLowerCase();
   return TASKS.filter(t => {
-    if (stateActivity !== 'all' && t.activity !== stateActivity) return false;
+    if (stateAct !== 'all' && t.activity !== stateAct) return false;
     if (stateBuild !== 'all' && !t.builds.includes(stateBuild)) return false;
     if (stateStatus === 'todo' && checked[t.id]) return false;
     if (stateStatus === 'done' && !checked[t.id]) return false;
-    if (q && !t.name.toLowerCase().includes(q) && !t.desc.toLowerCase().includes(q)) return false;
+    if (q && !t.name.toLowerCase().includes(q) && !(t.desc||'').toLowerCase().includes(q)) return false;
     return true;
   });
 }
@@ -732,35 +882,24 @@ function getFiltered() {
 function taskHTML(t) {
   const isDone = !!checked[t.id];
   const isOpen = !!expanded[t.id];
-  const dotCls = t.priority === 'high' ? 'p-high' : t.priority === 'med' ? 'p-med' : 'p-low';
-  const badgesHTML = t.badges.map(b => `<span class="badge ${b.cls}">${b.label}</span>`).join('');
-  const linksHTML = t.links.map(l => `<a class="wiki-link" href="${l.url}" target="_blank" rel="noopener">${l.label}</a>`).join('');
-  const stepsHTML = t.steps.map(s => `<li>${s}</li>`).join('');
-
-  return `
-  <div class="task-card ${isDone ? 'done' : ''}" id="task-${t.id}">
+  const dotCls = t.priority==='high'?'p-high':t.priority==='med'?'p-med':'p-low';
+  const badges = t.badges.map(b=>`<span class="badge ${b.cls}">${b.label}</span>`).join('');
+  const links = t.links.map(l=>`<a class="wiki-link" href="${l.url}" target="_blank" rel="noopener">${l.label}</a>`).join('');
+  const steps = t.steps.map(s=>`<li>${s}</li>`).join('');
+  return `<div class="task-card${isDone?' done':''}">
     <div class="task-summary" onclick="toggleExpand(${t.id})">
       <div class="priority-dot ${dotCls}"></div>
-      <div class="task-checkbox ${isDone ? 'checked' : ''}" onclick="toggleCheck(${t.id}, event)" title="${isDone ? 'Mark incomplete' : 'Mark complete'}"></div>
+      <div class="task-checkbox${isDone?' checked':''}" onclick="toggleCheck(${t.id},event)" title="${isDone?'Mark incomplete':'Mark complete'}"></div>
       <div class="task-main">
         <div class="task-name">${t.name}</div>
-        <div class="task-badges">${badgesHTML}</div>
+        <div class="task-badges">${badges}</div>
       </div>
-      <button class="task-expand-btn ${isOpen ? 'open' : ''}" onclick="toggleExpand(${t.id}); event.stopPropagation();" title="${isOpen ? 'Collapse' : 'Expand'}">&#8964;</button>
+      <button class="task-expand-btn${isOpen?' open':''}" onclick="toggleExpand(${t.id});event.stopPropagation();" title="${isOpen?'Collapse':'Expand'}">&#8964;</button>
     </div>
-    <div class="task-detail ${isOpen ? 'open' : ''}">
-      <div class="detail-section">
-        <div class="detail-label">What you need to know</div>
-        <p>${t.desc}</p>
-      </div>
-      <div class="detail-section">
-        <div class="detail-label">Steps</div>
-        <ol class="steps">${stepsHTML}</ol>
-      </div>
-      <div class="detail-section">
-        <div class="detail-label">Wiki links</div>
-        <div class="links">${linksHTML}</div>
-      </div>
+    <div class="task-detail${isOpen?' open':''}">
+      <div class="detail-section"><div class="detail-label">What you need to know</div><p>${t.desc}</p></div>
+      <div class="detail-section"><div class="detail-label">Steps</div><ol class="steps">${steps}</ol></div>
+      <div class="detail-section"><div class="detail-label">Wiki links</div><div class="links">${links}</div></div>
     </div>
   </div>`;
 }
@@ -768,29 +907,21 @@ function taskHTML(t) {
 function render() {
   const filtered = getFiltered();
   const total = TASKS.length;
-  const done = TASKS.filter(t => checked[t.id]).length;
-
+  const done = TASKS.filter(t=>checked[t.id]).length;
   document.getElementById('done-count').textContent = done;
   document.getElementById('total-count').textContent = total;
-  const pct = total ? Math.round(done / total * 100) : 0;
-  document.getElementById('progress-fill').style.width = pct + '%';
-  document.getElementById('progress-pct').textContent = pct + '% complete';
+  const pct = total ? Math.round(done/total*100) : 0;
+  document.getElementById('progress-fill').style.width = pct+'%';
+  document.getElementById('progress-pct').textContent = pct+'% complete';
 
-  const byActivity = {};
-  for (const t of filtered) {
-    if (!byActivity[t.activity]) byActivity[t.activity] = [];
-    byActivity[t.activity].push(t);
-  }
-
+  const byAct = {};
+  for (const t of filtered) { if(!byAct[t.activity]) byAct[t.activity]=[]; byAct[t.activity].push(t); }
   let html = '';
-  for (const act of ACTIVITY_ORDER) {
-    const items = byActivity[act];
-    if (!items || items.length === 0) continue;
-    html += `<div class="section"><div class="section-title">${ACTIVITY_LABELS[act]}</div>`;
-    html += items.map(taskHTML).join('');
-    html += '</div>';
+  for (const act of ACT_ORDER) {
+    const items = byAct[act];
+    if (!items||!items.length) continue;
+    html += `<div class="section"><div class="section-title">${ACT_LABELS[act]}</div>${items.map(taskHTML).join('')}</div>`;
   }
-
   if (!html) html = '<div class="empty">No tasks match the current filters.</div>';
   document.getElementById('content').innerHTML = html;
 }
