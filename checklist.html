@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Division 2 — Endgame Checklist</title>
+<style>
+  :root {
+    --bg: #0e0e10;
+    --bg2: #16161a;
+    --bg3: #1e1e24;
+    --bg4: #26262e;
+    --border: rgba(255,255,255,0.08);
+    --border2: rgba(255,255,255,0.14);
+    --text: #e8e8ee;
+    --text2: #9090a0;
+    --text3: #5a5a6a;
+    --accent: #f4a942;
+    --blue: #4a9edd;
+    --blue-bg: rgba(74,158,221,0.12);
+    --coral: #e07055;
+    --coral-bg: rgba(224,112,85,0.12);
+    --amber: #e8a030;
+    --amber-bg: rgba(232,160,48,0.12);
+    --purple: #9070dd;
+    --purple-bg: rgba(144,112,221,0.12);
+    --teal: #3dbf90;
+    --teal-bg: rgba(61,191,144,0.12);
+    --green: #5aaa30;
+    --green-bg: rgba(90,170,48,0.10);
+    --radius: 8px;
+    --radius-lg: 12px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; font-size: 15px; line-height: 1.6; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .page { max-width: 860px; margin: 0 auto; padding: 2rem 1rem 4rem; }
+
+  /* Top nav */
+  .site-nav { display: flex; gap: 6px; align-items: center; padding: 0.6rem 0 0.875rem; margin-bottom: 1.25rem; border-bottom: 0.5px solid var(--border2); font-size: 13px; }
+  .site-nav a { color: var(--text2); padding: 3px 10px; border-radius: 99px; border: 0.5px solid transparent; transition: all 0.1s; }
+  .site-nav a:hover { color: var(--text); background: var(--bg3); text-decoration: none; border-color: var(--border); }
+  .site-nav .nav-active { color: var(--accent); font-weight: 600; padding: 3px 10px; }
+  .site-nav .nav-sep { color: var(--text3); padding: 0 2px; }
+
+  /* Header */
+  .site-header { padding-bottom: 1.25rem; margin-bottom: 1.5rem; border-bottom: 0.5px solid var(--border); }
+  .site-header h1 { font-size: 22px; font-weight: 600; color: var(--text); letter-spacing: -0.3px; }
+  .site-header h1 span { color: var(--accent); }
+  .site-header p { font-size: 13px; color: var(--text2); margin-top: 4px; }
+
+  /* Info banner */
+  .info-banner { background: rgba(74,158,221,0.08); border: 0.5px solid rgba(74,158,221,0.25); border-radius: var(--radius-lg); padding: 0.875rem 1.125rem; margin-bottom: 1.5rem; font-size: 13px; color: var(--text2); line-height: 1.6; }
+  .info-banner strong { color: var(--blue); }
+
+  /* Stats bar */
+  .stats-bar { display: flex; gap: 16px; align-items: center; margin-bottom: 1.5rem; flex-wrap: wrap; }
+  .stat-chip { font-size: 12px; color: var(--text2); }
+  .stat-chip strong { color: var(--text); font-weight: 600; }
+  .progress-wrap { flex: 1; min-width: 120px; }
+  .progress-track { height: 5px; background: var(--bg4); border-radius: 99px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--teal); border-radius: 99px; transition: width 0.3s ease; }
+  .progress-pct { font-size: 12px; color: var(--text3); margin-top: 4px; }
+  .reset-btn { font-size: 12px; padding: 4px 12px; background: transparent; border: 0.5px solid var(--border2); border-radius: 99px; color: var(--text3); cursor: pointer; }
+  .reset-btn:hover { color: var(--text2); background: var(--bg3); }
+
+  /* Phase section */
+  .phase { margin-bottom: 1.25rem; background: var(--bg2); border: 0.5px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
+  .phase-header { display: flex; align-items: center; gap: 10px; padding: 0.875rem 1rem; cursor: pointer; user-select: none; transition: background 0.1s; }
+  .phase-header:hover { background: var(--bg3); }
+  .phase-icon { width: 28px; height: 28px; border-radius: 7px; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; font-weight: 700; }
+  .phase-title-wrap { flex: 1; min-width: 0; }
+  .phase-title { font-size: 14px; font-weight: 600; color: var(--text); }
+  .phase-meta { font-size: 12px; color: var(--text3); margin-top: 1px; }
+  .phase-progress-chip { font-size: 11px; padding: 2px 9px; border-radius: 99px; font-weight: 600; white-space: nowrap; flex-shrink: 0; }
+  .phase-toggle { font-size: 18px; color: var(--text3); transition: transform 0.15s; flex-shrink: 0; }
+  .phase-toggle.open { transform: rotate(180deg); }
+
+  /* Phase colour variants */
+  .ph-blue  .phase-icon { background: var(--blue-bg);   color: var(--blue);   }
+  .ph-coral .phase-icon { background: var(--coral-bg);  color: var(--coral);  }
+  .ph-amber .phase-icon { background: var(--amber-bg);  color: var(--amber);  }
+  .ph-purple .phase-icon { background: var(--purple-bg); color: var(--purple); }
+  .ph-teal  .phase-icon { background: var(--teal-bg);   color: var(--teal);   }
+  .ph-green .phase-icon { background: var(--green-bg);  color: var(--green);  }
+  .ph-accent .phase-icon { background: rgba(244,169,66,0.12); color: var(--accent); }
+
+  .ph-blue  .phase-progress-chip { background: var(--blue-bg);   color: var(--blue);   }
+  .ph-coral .phase-progress-chip { background: var(--coral-bg);  color: var(--coral);  }
+  .ph-amber .phase-progress-chip { background: var(--amber-bg);  color: var(--amber);  }
+  .ph-purple .phase-progress-chip { background: var(--purple-bg); color: var(--purple); }
+  .ph-teal  .phase-progress-chip { background: var(--teal-bg);   color: var(--teal);   }
+  .ph-green .phase-progress-chip { background: var(--green-bg);  color: var(--green);  }
+  .ph-accent .phase-progress-chip { background: rgba(244,169,66,0.12); color: var(--accent); }
+
+  .phase-complete .phase-icon { background: rgba(61,191,144,0.15); color: var(--teal); }
+  .phase-complete .phase-title { color: var(--text2); }
+  .phase-complete .phase-progress-chip { background: rgba(61,191,144,0.15); color: var(--teal); }
+
+  /* Phase body */
+  .phase-body { display: none; border-top: 0.5px solid var(--border); }
+  .phase-body.open { display: block; }
+  .phase-desc { font-size: 13px; color: var(--text2); padding: 0.75rem 1rem 0.5rem; line-height: 1.6; border-bottom: 0.5px solid var(--border); }
+
+  /* Checklist items */
+  .checklist { list-style: none; padding: 0.5rem 0; }
+  .cl-item { display: flex; align-items: flex-start; gap: 10px; padding: 0.55rem 1rem; transition: background 0.08s; cursor: pointer; }
+  .cl-item:hover { background: var(--bg3); }
+  .cl-item.done { opacity: 0.4; }
+  .cl-item.done .cl-text { text-decoration: line-through; color: var(--text3); }
+  .cl-checkbox { width: 17px; height: 17px; border-radius: 4px; border: 0.5px solid var(--border2); flex-shrink: 0; margin-top: 2px; display: flex; align-items: center; justify-content: center; transition: all 0.1s; }
+  .cl-checkbox.checked { background: var(--teal); border-color: var(--teal); }
+  .cl-checkbox.checked::after { content: ''; display: block; width: 9px; height: 5px; border-left: 2px solid #000; border-bottom: 2px solid #000; transform: rotate(-45deg) translateY(-1px); }
+  .cl-text { font-size: 13px; color: var(--text); line-height: 1.5; flex: 1; }
+  .cl-badge { font-size: 11px; padding: 1px 7px; border-radius: 99px; white-space: nowrap; font-weight: 500; flex-shrink: 0; margin-top: 2px; }
+  .cb-req  { background: var(--coral-bg);  color: var(--coral);  }
+  .cb-season { background: var(--amber-bg); color: var(--amber);  }
+  .cb-weekly { background: var(--purple-bg); color: var(--purple); }
+  .cb-tip { background: var(--teal-bg); color: var(--teal); }
+  .cb-dlc { background: rgba(144,112,221,0.18); color: var(--purple); }
+
+  /* Section divider inside phase */
+  .cl-group-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.09em; color: var(--text3); padding: 0.6rem 1rem 0.25rem; }
+
+  @media (max-width: 600px) {
+    .stats-bar { flex-direction: column; align-items: flex-start; gap: 8px; }
+    .cl-badge { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <nav class="site-nav">
+    <a href="index.html">← Farm List</a>
+    <span class="nav-sep">·</span>
+    <span class="nav-active">Endgame Checklist</span>
+  </nav>
+
+  <header class="site-header">
+    <h1>Division 2 — <span>Endgame Checklist</span></h1>
+    <p>Season walkthrough · Complete these steps before starting the end-game build farm</p>
+  </header>
+
+  <div class="info-banner">
+    <strong>How to use this checklist:</strong> Work through each phase in order. Complete all phases before switching to the
+    <a href="index.html">Farm List</a> for end-game gear farming. All progress is saved locally in your browser.
+  </div>
+
+  <div class="stats-bar">
+    <div class="stat-chip"><strong id="done-count">0</strong> / <strong id="total-count">0</strong> steps complete</div>
+    <div class="progress-wrap">
+      <div class="progress-track"><div class="progress-fill" id="progress-fill" style="width:0%"></div></div>
+      <div class="progress-pct" id="progress-pct">0% complete</div>
+    </div>
+    <button class="reset-btn" onclick="resetAll()">Reset progress</button>
+  </div>
+
+  <div id="phases-wrap"></div>
+
+</div>
+<script>
+const PHASES = [
+  {
+    id: 'p1', num: '1', color: 'ph-blue',
+    title: 'Main Story & World Tiers',
+    desc: 'Clear the campaign in all 7 starting zones, then defeat all 4 Strongholds to reach World Tier 5 — the prerequisite for every endgame activity.',
+    items: [
+      { id: 'p1_start', text: 'Complete the tutorial and reach the White House Base of Operations' },
+      { type: 'label', text: '7 Starting Zones' },
+      { id: 'p1_z1', text: 'Downtown West — clear zone missions · Grand Washington Hotel', badge: 'cb-tip', blabel: 'Grand Washington Hotel' },
+      { id: 'p1_z2', text: 'West Mall — clear zone missions · Jefferson Trade Center', badge: 'cb-tip', blabel: 'Chatterbox intel' },
+      { id: 'p1_z3', text: 'East Mall — clear zone missions · ViewPoint Museum + American History Museum' },
+      { id: 'p1_z4', text: 'Federal Triangle — clear zone missions · Bank Headquarters', badge: 'cb-tip', blabel: 'Chatterbox blueprint' },
+      { id: 'p1_z5', text: 'Judiciary Square — clear all zone story missions' },
+      { id: 'p1_z6', text: 'Southwest — clear all zone story missions' },
+      { id: 'p1_z7', text: 'Downtown East — clear all zone story missions' },
+      { type: 'label', text: 'Strongholds' },
+      { id: 'p1_s1', text: 'Defeat District Union Arena Stronghold → unlock World Tier 2', badge: 'cb-req', blabel: 'Required' },
+      { id: 'p1_s2', text: 'Defeat Potomac Event Center Stronghold → unlock World Tier 3', badge: 'cb-req', blabel: 'Required' },
+      { id: 'p1_s3', text: 'Defeat DCD Headquarters Stronghold → unlock World Tier 4', badge: 'cb-req', blabel: 'Required' },
+      { type: 'label', text: 'World Tier 5 Unlock' },
+      { id: 'p1_w1', text: 'Reach level 30 (completes naturally while clearing zones)' },
+      { id: 'p1_w2', text: 'Unlock access to Tidal Basin Stronghold (requires all 3 WT4 Strongholds + level 30)' },
+      { id: 'p1_w3', text: 'Defeat Tidal Basin Stronghold → unlock World Tier 5 / Endgame', badge: 'cb-req', blabel: 'Required' },
+      { id: 'p1_w4', text: 'Reach SHD Level 1 (first SHD Watch unlock after hitting WT5)' },
+    ]
+  },
+  {
+    id: 'p2', num: '2', color: 'ph-coral',
+    title: 'Zone Unlocks & Base of Operations',
+    desc: 'Liberate all Control Points across every zone and upgrade the Base of Operations to unlock full resource income and project rewards.',
+    items: [
+      { type: 'label', text: 'Control Point Liberation' },
+      { id: 'p2_cp1', text: 'Liberate all Control Points — Downtown West' },
+      { id: 'p2_cp2', text: 'Liberate all Control Points — West Mall' },
+      { id: 'p2_cp3', text: 'Liberate all Control Points — East Mall' },
+      { id: 'p2_cp4', text: 'Liberate all Control Points — Federal Triangle' },
+      { id: 'p2_cp5', text: 'Liberate all Control Points — Judiciary Square' },
+      { id: 'p2_cp6', text: 'Liberate all Control Points — Southwest' },
+      { id: 'p2_cp7', text: 'Liberate all Control Points — Downtown East' },
+      { type: 'label', text: 'Settlements' },
+      { id: 'p2_s1', text: 'Unlock Theater Settlement — reach Friendly reputation' },
+      { id: 'p2_s2', text: 'Unlock Campus Settlement — reach Friendly reputation' },
+      { id: 'p2_s3', text: 'Unlock Haven Settlement — reach Friendly reputation' },
+      { type: 'label', text: 'Base of Operations Wings' },
+      { id: 'p2_w1', text: 'Upgrade Security Wing to maximum level', badge: 'cb-req', blabel: 'Required' },
+      { id: 'p2_w2', text: 'Upgrade Medical Wing to maximum level', badge: 'cb-req', blabel: 'Required' },
+      { id: 'p2_w3', text: 'Upgrade Tech Wing to maximum level', badge: 'cb-req', blabel: 'Required' },
+      { id: 'p2_p1', text: 'Complete Base of Operations projects (ongoing — check settlement boards daily)', badge: 'cb-tip', blabel: 'Ongoing' },
+    ]
+  },
+  {
+    id: 'p3', num: '3', color: 'ph-amber',
+    title: 'Specializations',
+    desc: 'Unlock all Specializations and progress the key skill trees required for meta builds.',
+    items: [
+      { type: 'label', text: 'Unlock All Specializations' },
+      { id: 'p3_1', text: 'Unlock Demolitionist (auto-unlocked at WT5)' },
+      { id: 'p3_2', text: 'Unlock Survivalist (auto-unlocked at WT5)' },
+      { id: 'p3_3', text: 'Unlock Sharpshooter (auto-unlocked at WT5)' },
+      { id: 'p3_4', text: 'Complete the Gunner Specialization unlock mission', badge: 'cb-req', blabel: 'Required' },
+      { id: 'p3_5', text: 'Unlock Technician (unlocks via normal play after WT5)' },
+      { type: 'label', text: 'Progress Priority Skill Trees' },
+      { id: 'p3_6', text: 'Equip Gunner — earn XP to max all weapon damage nodes', badge: 'cb-req', blabel: 'Meta builds' },
+      { id: 'p3_7', text: 'Equip Technician — unlock Linked Laser Pointer weapon mod from skill tree', badge: 'cb-req', blabel: 'Meta builds' },
+      { id: 'p3_8', text: 'Equip Sharpshooter — unlock Linked Laser Pointer weapon mod from skill tree', badge: 'cb-req', blabel: 'Meta builds' },
+    ]
+  },
+  {
+    id: 'p4', num: '4', color: 'ph-purple',
+    title: 'Endgame Activity Unlocks',
+    desc: 'All major endgame activities gate behind World Tier 5. Unlock and verify each one before starting the gear farm.',
+    items: [
+      { type: 'label', text: 'Core Farm Activities' },
+      { id: 'p4_1', text: 'Set Global Difficulty → Heroic from the map (unlocks at WT5)', badge: 'cb-req', blabel: 'Required' },
+      { id: 'p4_2', text: 'Access The Summit — enter the elevator at the Base of Operations', badge: 'cb-req', blabel: 'Required' },
+      { id: 'p4_3', text: 'Access Countdown — find it in the Activities menu', badge: 'cb-req', blabel: 'Required' },
+      { type: 'label', text: 'Dark Zone' },
+      { id: 'p4_dz1', text: 'Unlock Dark Zone South' },
+      { id: 'p4_dz2', text: 'Unlock Dark Zone East' },
+      { id: 'p4_dz3', text: 'Unlock Dark Zone West' },
+      { type: 'label', text: 'Additional Activities' },
+      { id: 'p4_4', text: 'Unlock Legendary difficulty (requires SHD level milestone + Heroic clears)' },
+      { id: 'p4_5', text: 'Unlock Operation Dark Hours raid (WT5 + find an 8-player group via LFG)', badge: 'cb-weekly', blabel: 'Weekly reset' },
+      { id: 'p4_6', text: 'Unlock Classified Assignments — complete Season intro objectives', badge: 'cb-season', blabel: 'Season' },
+    ]
+  },
+  {
+    id: 'p5', num: '5', color: 'ph-teal',
+    title: 'Season Journey (Stages I – VIII)',
+    desc: 'The Season Journey awards modifiers, rewards, and unlock tokens. Complete all 8 stages before diving into the gear farm for maximum bonuses.',
+    items: [
+      { id: 'p5_0',  text: 'Enter the current Season — complete the Season intro / first objective', badge: 'cb-season', blabel: 'Season' },
+      { id: 'p5_1',  text: 'Complete Journey Stage I', badge: 'cb-season', blabel: 'Season' },
+      { id: 'p5_2',  text: 'Complete Journey Stage II', badge: 'cb-season', blabel: 'Season' },
+      { id: 'p5_3',  text: 'Complete Journey Stage III', badge: 'cb-season', blabel: 'Season' },
+      { id: 'p5_4',  text: 'Complete Journey Stage IV', badge: 'cb-season', blabel: 'Season' },
+      { id: 'p5_5',  text: 'Complete Journey Stage V', badge: 'cb-season', blabel: 'Season' },
+      { id: 'p5_6',  text: 'Complete Journey Stage VI', badge: 'cb-season', blabel: 'Season' },
+      { id: 'p5_7',  text: 'Complete Journey Stage VII', badge: 'cb-season', blabel: 'Season' },
+      { id: 'p5_8',  text: 'Complete Journey Stage VIII', badge: 'cb-season', blabel: 'Season' },
+      { id: 'p5_9',  text: 'Claim all seasonal modifier bonuses from Journey stage rewards', badge: 'cb-req', blabel: 'Required' },
+    ]
+  },
+  {
+    id: 'p6', num: '6', color: 'ph-accent',
+    title: 'Manhunt Chain',
+    desc: 'Track the season target through 4 Scout Leads, kill them, then run the Climax Mission for exclusive seasonal rewards.',
+    items: [
+      { id: 'p6_0', text: 'Accept the Manhunt — appears on the map after entering the Season', badge: 'cb-season', blabel: 'Season' },
+      { type: 'label', text: 'Scout Leads' },
+      { id: 'p6_1', text: 'Complete Scout Lead 1' },
+      { id: 'p6_2', text: 'Complete Scout Lead 2' },
+      { id: 'p6_3', text: 'Complete Scout Lead 3' },
+      { id: 'p6_4', text: 'Complete Scout Lead 4 — target location revealed' },
+      { type: 'label', text: 'Target & Climax Mission' },
+      { id: 'p6_5', text: 'Track down and kill the Manhunt Target boss', badge: 'cb-req', blabel: 'Required' },
+      { id: 'p6_6', text: 'Complete the Climax Mission on Heroic or higher', badge: 'cb-req', blabel: 'Required' },
+      { id: 'p6_7', text: 'Run Climax Mission on Master difficulty for the exclusive exotic reward', badge: 'cb-tip', blabel: 'Exotic' },
+      { id: 'p6_8', text: 'Collect all seasonal exclusive rewards from the Season reward track' },
+    ]
+  },
+  {
+    id: 'p7', num: '7', color: 'ph-green',
+    title: 'Pre-farm Setup',
+    desc: 'Final checks before switching to the gear farm. Make sure your tools, resources, and starter gear are ready.',
+    items: [
+      { type: 'label', text: 'Tinkering Station' },
+      { id: 'p7_1', text: 'Unlock Recalibration — press M anywhere on the map to open Tinkering Station', badge: 'cb-tip', blabel: 'Tip' },
+      { id: 'p7_2', text: 'Unlock Optimization — raises item attribute caps (costs SHD Tech)' },
+      { id: 'p7_3', text: 'Stockpile SHD Tech for optimization costs (farm from Allied Control Points and open-world caches)' },
+      { type: 'label', text: 'Gear & Readiness' },
+      { id: 'p7_4', text: 'Build a WT5 starter set: 6 pieces with correct core type (red/blue) and usable talents' },
+      { id: 'p7_5', text: 'Set Global Difficulty to Heroic and confirm you can complete Heroic missions', badge: 'cb-req', blabel: 'Required' },
+      { id: 'p7_6', text: 'Set your first Targeted Loot priority in Countdown or The Summit menu', badge: 'cb-req', blabel: 'Required' },
+      { id: 'p7_7', text: 'Join an LFG community (Reddit r/TheDivision, Division 2 Discord) for group Countdown runs', badge: 'cb-tip', blabel: 'Tip' },
+      { id: 'p7_8', text: "Open the Farm List and choose your first target build — you're ready to farm!", badge: 'cb-tip', blabel: 'Go farm!' },
+    ]
+  },
+];
+
+let checked = {};
+
+function loadState() {
+  try { const s = JSON.parse(localStorage.getItem('div2_cl_v1') || '{}'); checked = s.checked || {}; } catch(e) {}
+}
+function saveState() {
+  try { localStorage.setItem('div2_cl_v1', JSON.stringify({ checked })); } catch(e) {}
+}
+
+function toggleItem(id) {
+  checked[id] = !checked[id];
+  saveState();
+  render();
+}
+
+function resetAll() {
+  if (confirm('Reset all checklist progress?')) {
+    checked = {};
+    saveState();
+    render();
+  }
+}
+
+function allItems() {
+  return PHASES.flatMap(p => p.items).filter(i => i.type !== 'label');
+}
+
+function phaseProgress(phase) {
+  const checkable = phase.items.filter(i => i.type !== 'label');
+  const done = checkable.filter(i => checked[i.id]).length;
+  return { done, total: checkable.length };
+}
+
+function render() {
+  const all = allItems();
+  const totalItems = all.length;
+  const doneItems = all.filter(i => checked[i.id]).length;
+  document.getElementById('done-count').textContent = doneItems;
+  document.getElementById('total-count').textContent = totalItems;
+  const pct = totalItems ? Math.round(doneItems / totalItems * 100) : 0;
+  document.getElementById('progress-fill').style.width = pct + '%';
+  document.getElementById('progress-pct').textContent = pct + '% complete';
+
+  let html = '';
+  for (const phase of PHASES) {
+    const { done, total } = phaseProgress(phase);
+    const isComplete = done === total;
+    const isOpen = !!(window._phaseOpen && window._phaseOpen[phase.id]);
+    const colorClass = isComplete ? 'phase-complete' : phase.color;
+
+    const itemsHTML = phase.items.map(item => {
+      if (item.type === 'label') {
+        return `<li class="cl-group-label">${item.text}</li>`;
+      }
+      const isDone = !!checked[item.id];
+      const badgeHTML = item.badge ? `<span class="cl-badge ${item.badge}">${item.blabel}</span>` : '';
+      return `<li class="cl-item${isDone ? ' done' : ''}" onclick="toggleItem('${item.id}')">
+        <div class="cl-checkbox${isDone ? ' checked' : ''}"></div>
+        <span class="cl-text">${item.text}</span>
+        ${badgeHTML}
+      </li>`;
+    }).join('');
+
+    html += `<div class="phase ${colorClass}" id="phase-${phase.id}">
+      <div class="phase-header" onclick="togglePhase('${phase.id}')">
+        <div class="phase-icon">${isComplete ? '✓' : phase.num}</div>
+        <div class="phase-title-wrap">
+          <div class="phase-title">Phase ${phase.num} — ${phase.title}</div>
+          <div class="phase-meta">${done} of ${total} steps completed</div>
+        </div>
+        <span class="phase-progress-chip">${done}/${total}</span>
+        <span class="phase-toggle${isOpen ? ' open' : ''}">&#8964;</span>
+      </div>
+      <div class="phase-body${isOpen ? ' open' : ''}">
+        <div class="phase-desc">${phase.desc}</div>
+        <ul class="checklist">${itemsHTML}</ul>
+      </div>
+    </div>`;
+  }
+
+  document.getElementById('phases-wrap').innerHTML = html;
+}
+
+function togglePhase(id) {
+  if (!window._phaseOpen) window._phaseOpen = {};
+  window._phaseOpen[id] = !window._phaseOpen[id];
+  render();
+}
+
+function autoOpenFirst() {
+  if (!window._phaseOpen) window._phaseOpen = {};
+  for (const phase of PHASES) {
+    const { done, total } = phaseProgress(phase);
+    if (done < total) {
+      window._phaseOpen[phase.id] = true;
+      break;
+    }
+  }
+}
+
+loadState();
+autoOpenFirst();
+render();
+</script>
+</body>
+</html>
