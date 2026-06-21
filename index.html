@@ -67,6 +67,8 @@
   .build-card-sw .sw-str, .build-card-sw .sw-wk { color: var(--text3); }
   .build-card-gear { display: flex; flex-wrap: wrap; gap: 4px; margin-top: 7px; }
   .gear-pill { font-size: 11px; padding: 1px 7px; border-radius: 99px; background: var(--bg4); color: var(--text3); border: 0.5px solid var(--border); }
+  .builds-section-title { grid-column: 1 / -1; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text3); padding: 0.5rem 0 0.25rem; border-bottom: 0.5px solid var(--border); margin-top: 0.5rem; }
+  .builds-section-title:first-child { margin-top: 0; }
 
   /* Important notes */
   .notes-box { background: rgba(244,169,66,0.08); border: 0.5px solid rgba(244,169,66,0.3); border-radius: var(--radius-lg); padding: 1rem 1.25rem; margin-bottom: 1.75rem; }
@@ -179,17 +181,19 @@
 
   <header class="site-header">
     <h1>Division 2 — <span>Farm Task List</span></h1>
-    <p>Best PvE DPS builds · SHD Watch &amp; seasonal leveling · 2026 meta · Organized by activity &amp; build</p>
+    <p>PvE DPS &amp; XP farming builds · SHD Watch &amp; seasonal leveling · 2026 meta · Organized by activity &amp; build</p>
   </header>
 
   <!-- Build reference panel -->
   <div class="builds-panel">
     <div class="builds-panel-toggle" onclick="toggleSection('builds-grid-wrap','builds-arrow')">
-      <h2>Build reference — best PvE DPS builds 2026</h2>
+      <h2>Build reference — PvE &amp; XP farm builds 2026</h2>
       <span class="toggle-arrow open" id="builds-arrow">&#8964;</span>
     </div>
     <div id="builds-grid-wrap">
       <div class="builds-grid">
+
+        <div class="builds-section-title">PVE Builds</div>
 
         <div class="build-card">
           <div class="build-card-header">
@@ -277,7 +281,7 @@
 
         <div class="build-card">
           <div class="build-card-header">
-            <span class="badge b-purple build-card-name">8. SMG Speed Farm</span>
+            <span class="badge b-purple build-card-name">8. SMG Build for PvE</span>
             <span class="build-card-num">Gunner</span>
           </div>
           <div class="build-card-desc">The fastest clear-speed build — Hunter's Fury rewards rapid close-range kills while Chatterbox provides near-infinite ammo. Best speed farm for Heroic Control Points, Missions, and Summit.</div>
@@ -289,25 +293,75 @@
 
         <div class="build-card">
           <div class="build-card-header">
-            <span class="badge b-pink build-card-name">+ Skill Build (Refactor)</span>
+            <span class="badge b-pink build-card-name">9. Headhunter Regulus Pistol</span>
             <span class="build-card-num">Technician</span>
           </div>
-          <div class="build-card-desc">Arguably the strongest Legendary build — skills do the damage while you stay safe in cover. Technician's passive allows a Red Core slot while keeping 6 skill tiers. Multiple variants: Force Multiplier, Tech Support, and Ninja.</div>
+          <div class="build-card-desc">The one-shot pistol build — Regulus exotic pistol with Perfect Headhunter creates devastating headshot chains. Memento stacks amplify damage further. Clears even Legendary content in the right hands.</div>
           <div class="build-card-sw">
-            <span class="sw-str"><span class="sw-label">Strength:</span> Safest Legendary build — cover-based, skills do the work</span>
-            <span class="sw-wk"><span class="sw-label">Weakness:</span> Weak personal gun DPS, relies entirely on skill uptime</span>
+            <span class="sw-str"><span class="sw-label">Strength:</span> One-shot headshot kills, massive burst damage with Headhunter</span>
+            <span class="sw-wk"><span class="sw-label">Weakness:</span> Regulus is raid-exclusive (Iron Horse) — hardest exotic to obtain</span>
+          </div>
+        </div>
+
+        <div class="builds-section-title">XP / SHD Farming Builds</div>
+
+        <div class="build-card">
+          <div class="build-card-header">
+            <span class="badge b-teal build-card-name">+ Hotshot Red (XP Farm)</span>
+            <span class="build-card-num">Sharpshooter</span>
+          </div>
+          <div class="build-card-desc">The all-red XP grinder — one-shots enemies from any range with maximum headshot damage. From the 3rd kill onward, Determined makes ammo free. Best for Heroic CPs during XP events.</div>
+          <div class="build-card-sw">
+            <span class="sw-str"><span class="sw-label">Strength:</span> Maximum headshot damage — fastest one-shot kills in the game</span>
+            <span class="sw-wk"><span class="sw-label">Weakness:</span> Pure glass cannon — zero survivability, miss and you're dead</span>
           </div>
         </div>
 
         <div class="build-card">
           <div class="build-card-header">
-            <span class="badge b-teal build-card-name">+ SHD/XP Farm (Hotshot)</span>
+            <span class="badge b-teal build-card-name">+ Hotshot Hybrid (XP Farm)</span>
+            <span class="build-card-num">Gunner / Sharpshooter</span>
+          </div>
+          <div class="build-card-desc">The tanky XP variant — trades some headshot damage for blue cores and Bloodsucker survivability. Still one-shots most Heroic enemies while being much harder to kill.</div>
+          <div class="build-card-sw">
+            <span class="sw-str"><span class="sw-label">Strength:</span> Headshot one-shots + blue core survivability, safer than Red</span>
+            <span class="sw-wk"><span class="sw-label">Weakness:</span> Lower headshot damage ceiling than the all-red variant</span>
+          </div>
+        </div>
+
+        <div class="build-card">
+          <div class="build-card-header">
+            <span class="badge b-teal build-card-name">+ HF Determined (XP Farm)</span>
             <span class="build-card-num">Sharpshooter</span>
           </div>
-          <div class="build-card-desc">The XP grinder — one-shots enemies from any range and from the 3rd kill onward ammo is free. Clears entire Heroic Control Points in seconds for massive SHD Watch leveling, especially during XP events.</div>
+          <div class="build-card-desc">Close-range headshot XP build — Hunter's Fury rewards rapid kills while Determined refunds ammo. Memento stacks make each successive kill hit harder. Aggressive CQC playstyle for fast clears.</div>
           <div class="build-card-sw">
-            <span class="sw-str"><span class="sw-label">Strength:</span> One-shot kills + free ammo = fastest SHD leveling in the game</span>
-            <span class="sw-wk"><span class="sw-label">Weakness:</span> Headshot-reliant, low survivability — miss and you're exposed</span>
+            <span class="sw-str"><span class="sw-label">Strength:</span> Close-range headshot machine — Memento snowball + free ammo</span>
+            <span class="sw-wk"><span class="sw-label">Weakness:</span> Must land headshots at close range — high skill floor</span>
+          </div>
+        </div>
+
+        <div class="build-card">
+          <div class="build-card-header">
+            <span class="badge b-teal build-card-name">+ Eclipse Status (XP Farm)</span>
+            <span class="build-card-num">Firewall</span>
+          </div>
+          <div class="build-card-desc">The status effect XP build — Eclipse Protocol spreads fire and status effects across entire enemy groups. Vile Mask adds tick damage. Cover-based, safe, and great for clearing Heroic CPs with directives.</div>
+          <div class="build-card-sw">
+            <span class="sw-str"><span class="sw-label">Strength:</span> Chain status effects wipe groups — very safe cover-based playstyle</span>
+            <span class="sw-wk"><span class="sw-label">Weakness:</span> Slow single-target DPS, weak against status-immune enemies</span>
+          </div>
+        </div>
+
+        <div class="build-card">
+          <div class="build-card-header">
+            <span class="badge b-teal build-card-name">+ 1886 Determined (XP Farm)</span>
+            <span class="build-card-num">Sharpshooter</span>
+          </div>
+          <div class="build-card-desc">The balanced headhunter — 1886 rifle with Determined and Memento for sustained headshot kills. Habsburg/Palisade blue cores and PFE mods provide excellent survivability during extended XP sessions.</div>
+          <div class="build-card-sw">
+            <span class="sw-str"><span class="sw-label">Strength:</span> Best balance of damage + survivability for extended XP farming</span>
+            <span class="sw-wk"><span class="sw-label">Weakness:</span> Slower kill speed than pure headshot builds, needs rare pieces</span>
           </div>
         </div>
 
@@ -325,9 +379,11 @@
       <ul class="notes-list">
         <li><strong>Targeted loot is king.</strong> Set it to the desired gear slot in Countdown (Heroic+) or The Summit — named enemies all drop that slot type. Switch targets freely after each drop.</li>
         <li><strong>Eagle Bearer is raid-locked.</strong> It only drops from the Operation Dark Hours final chest (weekly reset) or rare DZ extracts. Targeted loot does NOT work for it.</li>
+        <li><strong>Regulus is raid-locked.</strong> It only drops from the Operation Iron Horse final boss (weekly reset). No targeted loot. Essential for the Headhunter Pistol build.</li>
         <li><strong>Pestilence requires the Dark Zone.</strong> It drops from named DZ bosses only. Extract contaminated loot. It enters the general loot pool after your first drop.</li>
         <li><strong>Chatterbox must be crafted first.</strong> Farm Hyena Faction Crates across DC for three components and the blueprint (Bank HQ mission vault). After crafting, it joins the normal exotic pool.</li>
-        <li><strong>St Elmo's Engine is shared</strong> across Striker, AR, and SHD builds — getting a god roll early has outsized value. It's a very common AR-targeted-loot drop in Countdown.</li>
+        <li><strong>St Elmo's Engine is shared</strong> across Striker and AR builds — getting a god roll early has outsized value. It's a very common AR-targeted-loot drop in Countdown.</li>
+        <li><strong>Nemesis must be crafted first.</strong> Farm four components from Invaded Strongholds (Capitol, Roosevelt, District Union Arena, Grand Washington Hotel) plus the blueprint from Tidal Basin. After crafting, it enters the normal exotic pool. Used across all XP farm builds.</li>
         <li><strong>SHD/XP: stack directives.</strong> Each directive adds +25% XP. During 5× XP events, loop Classified Assignments for 100–130 SHD levels/hour. Outside events, Heroic Control Points + 4-5 directives is the meta.</li>
         <li><strong>Tinkering Station is everywhere.</strong> Press M anywhere to open it. Recalibrate talents/attributes, optimize item level, then raise Proficiency/Expertise.</li>
         <li><strong>Exotic Caches.</strong> Completing Countdown earns Countdown Requisition — spend it on Exotic Caches to fill gaps without targeting a specific slot.</li>
@@ -359,17 +415,24 @@
       <button class="chip"        data-act="season"       onclick="setAct('season',this)">Season</button>
     </div>
     <div class="control-row">
-      <span class="control-label">Build</span>
+      <span class="control-label">PVE</span>
       <button class="chip active" data-build="all"           onclick="setBuild('all',this)">All builds</button>
-      <button class="chip"        data-build="striker"       onclick="setBuild('striker',this)">Striker DPS</button>
+      <button class="chip"        data-build="striker"       onclick="setBuild('striker',this)">Striker</button>
       <button class="chip"        data-build="heartbreaker"  onclick="setBuild('heartbreaker',this)">Heartbreaker</button>
       <button class="chip"        data-build="kingbreaker"   onclick="setBuild('kingbreaker',this)">Kingbreaker</button>
       <button class="chip"        data-build="ar"            onclick="setBuild('ar',this)">AR DPS</button>
-      <button class="chip"        data-build="pestilence"    onclick="setBuild('pestilence',this)">Pestilence LMG</button>
-      <button class="chip"        data-build="neg_pest"      onclick="setBuild('neg_pest',this)">Nego. Pestilence</button>
-      <button class="chip"        data-build="smg"           onclick="setBuild('smg',this)">SMG Speed</button>
-      <button class="chip"        data-build="skill"         onclick="setBuild('skill',this)">Skill Build</button>
-      <button class="chip"        data-build="shd"           onclick="setBuild('shd',this)">SHD/XP Farm</button>
+      <button class="chip"        data-build="pestilence"    onclick="setBuild('pestilence',this)">Pestilence</button>
+      <button class="chip"        data-build="neg_pest"      onclick="setBuild('neg_pest',this)">Nego. Pest</button>
+      <button class="chip"        data-build="smg"           onclick="setBuild('smg',this)">SMG PvE</button>
+      <button class="chip"        data-build="pistol"        onclick="setBuild('pistol',this)">Regulus Pistol</button>
+    </div>
+    <div class="control-row">
+      <span class="control-label">XP</span>
+      <button class="chip"        data-build="hotshot_red"   onclick="setBuild('hotshot_red',this)">Hotshot Red</button>
+      <button class="chip"        data-build="hotshot_hybrid" onclick="setBuild('hotshot_hybrid',this)">Hotshot Hybrid</button>
+      <button class="chip"        data-build="hf_determined" onclick="setBuild('hf_determined',this)">HF Determined</button>
+      <button class="chip"        data-build="eclipse"       onclick="setBuild('eclipse',this)">Eclipse</button>
+      <button class="chip"        data-build="1886_memento"  onclick="setBuild('1886_memento',this)">1886 Memento</button>
     </div>
     <div class="control-row">
       <span class="control-label">Status</span>
@@ -409,7 +472,7 @@ const ACT_ORDER = ['countdown','summit','raid','dz','exotic_quest','open_world',
 const TASKS = [
   {
     id:1, name:"Farm St Elmo's Engine (exotic AR)", activity:'countdown', priority:'high',
-    builds:['striker','ar','shd'],
+    builds:['striker','ar'],
     badges:[{label:"Striker DPS",cls:"b-blue"},{label:"AR DPS",cls:"b-blue"},{label:"SHD/XP Build",cls:"b-teal"}],
     desc:"Set targeted loot → Assault Rifle in Countdown or The Summit. One of the most common exotic drops — often multiple copies drop in a single Countdown session. Shared across Striker, AR DPS, and SHD farm builds, so a god roll (Crit Chance + Crit Damage attributes) is worth chasing early.",
     steps:["In Countdown menu, set Targeted Loot → Assault Rifle","Run Heroic difficulty (or higher)","St Elmo's can drop from any named enemy kill","Alt: farm Countdown Requisition → buy Exotic Caches"],
@@ -421,8 +484,8 @@ const TASKS = [
   },
   {
     id:2, name:"Farm Memento (exotic backpack)", activity:'countdown', priority:'high',
-    builds:['striker','smg'],
-    badges:[{label:"Striker DPS",cls:"b-blue"},{label:"SMG Speed Farm",cls:"b-purple"}],
+    builds:['striker','smg','pistol','hf_determined','1886_memento'],
+    badges:[{label:"Striker DPS",cls:"b-blue"},{label:"SMG PvE",cls:"b-purple"},{label:"Regulus Pistol",cls:"b-pink"},{label:"HF Determined",cls:"b-teal"},{label:"1886 Memento",cls:"b-teal"}],
     desc:"Kill Confirmed talent: killing enemies drops trophies. Collecting trophies grants +1% weapon damage, +0.1% armor regen, +1% skill efficiency per trophy for 300 s (up to 30 stacks), plus short-term burst buffs. Used in both Striker Legendary and SMG Speed Farm builds.",
     steps:["Set Targeted Loot → Backpack in Countdown","Run Heroic+ (Legendary boss floors give better odds)","Also farms well from The Summit with Backpack targeted loot","Alt: Exotic Caches with Countdown Requisition"],
     links:[
@@ -475,10 +538,10 @@ const TASKS = [
     ]
   },
   {
-    id:7, name:"Farm Heartbreaker Set pieces (4–5 pieces)", activity:'countdown', priority:'high',
+    id:7, name:"Farm Heartbreaker Set pieces (4 pieces)", activity:'countdown', priority:'high',
     builds:['heartbreaker','kingbreaker'],
     badges:[{label:"Heartbreaker DPS",cls:"b-coral"},{label:"Kingbreaker Spotter",cls:"b-coral"}],
-    desc:"Shared core for both Heartbreaker PvE and Kingbreaker Spotter builds. Heartbreaker stacks build by shooting multiple targets quickly (shotgun secondary helps). Need: Mask, Backpack, Chest, Gloves, Holster — Blue Core + Crit Chance/Damage. Kneepads use Fox's Prayer. Kingbreaker variant swaps Chest to Closer brand and runs 4 Heartbreaker pieces. Specialization: Technician.",
+    desc:"Shared core for both Heartbreaker PvE and Kingbreaker Spotter builds. Need: Mask, Backpack, Chest, Holster — Blue Core + Crit Chance/Damage. Gloves use Contractor's Gloves, Kneepads use Fox's Prayer. Kingbreaker variant swaps Chest to Closer brand and runs 4 Heartbreaker pieces (Mask, Backpack, Gloves, Holster). Specialization: Technician.",
     steps:["Set Targeted Loot → Heartbreaker in Countdown or Summit","Heartbreaker PvE: need 5 pieces (Mask, Backpack, Chest, Gloves, Holster)","Kingbreaker variant: need 4 pieces (Mask, Backpack, Gloves, Holster)","Look for Blue Core + Crit Chance or Crit Damage on each piece"],
     links:[
       {label:"Heartbreaker — Wiki",url:"https://thedivision.fandom.com/wiki/Heartbreaker"},
@@ -486,8 +549,8 @@ const TASKS = [
   },
   {
     id:8, name:"Farm Hunter's Fury Set pieces (4 pieces)", activity:'countdown', priority:'high',
-    builds:['smg'],
-    badges:[{label:"SMG Speed Farm",cls:"b-purple"}],
+    builds:['smg','hf_determined'],
+    badges:[{label:"SMG PvE",cls:"b-purple"},{label:"HF Determined",cls:"b-teal"}],
     desc:"Hunter's Fury provides bonus weapon damage and armor on kills at close range — perfectly suited to Chatterbox SMG speed farming. Need exactly 4 pieces: Mask, Gloves, Holster, Kneepads (Blue Core + Crit). The Backpack slot is Memento, the Chest is Palisade (Intimidate). Note: this is NOT the Striker Set — Hunter's Fury rewards fast kills at close range, which is how Chatterbox plays. Specialization: Gunner.",
     steps:["Set Targeted Loot → Hunter's Fury in Countdown or Summit","Need: Mask, Gloves, Holster, Kneepads (Blue Core + Crit stats)","Farm Memento (Backpack) and Palisade chest (Intimidate) separately","Do NOT use Striker Set for this build — Hunter's Fury is the correct set"],
     links:[
@@ -538,8 +601,8 @@ const TASKS = [
   },
   {
     id:13, name:"Farm Contractor's Gloves (Blue Core + Crit)", activity:'summit', priority:'high',
-    builds:['ar','heartbreaker','pestilence'],
-    badges:[{label:"AR DPS",cls:"b-blue"},{label:"Heartbreaker DPS",cls:"b-coral"},{label:"Pestilence LMG",cls:"b-amber"}],
+    builds:['ar','heartbreaker','pestilence','pistol'],
+    badges:[{label:"AR DPS",cls:"b-blue"},{label:"Heartbreaker DPS",cls:"b-coral"},{label:"Pestilence LMG",cls:"b-amber"},{label:"Regulus Pistol",cls:"b-pink"}],
     desc:"Blue Core gloves from Contractor's brand with Crit Chance or Crit Damage secondary stats. Shared across AR DPS (build #4), Heartbreaker PvE (build #3), and Pestilence LMG (build #6). One farm session covers three builds.",
     steps:["Set Targeted Loot → Gloves in Countdown or Summit","Look for Contractor's brand + Blue Core + Crit stats","Recalibrate one stat at Tinkering Station if needed"],
     links:[
@@ -548,8 +611,8 @@ const TASKS = [
   },
   {
     id:14, name:"Farm Fox's Prayer kneepads (Blue Core + Crit)", activity:'summit', priority:'high',
-    builds:['ar','heartbreaker','kingbreaker','pestilence'],
-    badges:[{label:"AR DPS",cls:"b-blue"},{label:"Heartbreaker DPS",cls:"b-coral"},{label:"Kingbreaker Spotter",cls:"b-coral"},{label:"Pestilence LMG",cls:"b-amber"}],
+    builds:['ar','heartbreaker','kingbreaker','pestilence','pistol'],
+    badges:[{label:"AR DPS",cls:"b-blue"},{label:"Heartbreaker DPS",cls:"b-coral"},{label:"Kingbreaker Spotter",cls:"b-coral"},{label:"Pestilence LMG",cls:"b-amber"},{label:"Regulus Pistol",cls:"b-pink"}],
     desc:"Blue Core kneepads from Fox's Prayer brand with Crit Chance or Crit Damage. Shared across AR DPS, Heartbreaker PvE, Kingbreaker Spotter, and Pestilence LMG builds — one farm session covers four builds.",
     steps:["Set Targeted Loot → Kneepads in Countdown or Summit","Look for Fox's Prayer brand + Blue Core + Crit stat","Recalibrate at Tinkering Station to fix wrong stat"],
     links:[
@@ -558,9 +621,9 @@ const TASKS = [
   },
   {
     id:15, name:"Farm Palisade chest (Intimidate talent)", activity:'summit', priority:'med',
-    builds:['smg','ar'],
-    badges:[{label:"SMG Speed Farm",cls:"b-purple"},{label:"AR DPS",cls:"b-blue"}],
-    desc:"Blue Core Palisade chest with Intimidate talent (killing enemies increases weapon damage) + Crit Chance/Damage. Primary chest slot for SMG Speed Farm build. Also used as holster alternative in AR/Pestilence builds.",
+    builds:['smg'],
+    badges:[{label:"SMG PvE",cls:"b-purple"}],
+    desc:"Blue Core Palisade chest with Intimidate talent + Crit Chance/Damage. Primary chest slot for the SMG Build for PvE.",
     steps:["Set Targeted Loot → Chest in Countdown or Summit","Look for Palisade brand + Blue Core + Intimidate talent","Secondary stats: Crit Chance and Crit Damage"],
     links:[
       {label:"Palisade — Wiki",url:"https://thedivision.fandom.com/wiki/Palisade_Defense_Corp"},
@@ -611,8 +674,8 @@ const TASKS = [
   {
     id:19, name:"Farm Shield Splinterer (named SMG)", activity:'open_world', priority:'med',
     builds:['smg'],
-    badges:[{label:"SMG Speed Farm",cls:"b-purple"}],
-    desc:"Secondary weapon for the SMG Speed Farm build. Targeted loot → SMG in open world, Summit, or Countdown.",
+    badges:[{label:"SMG PvE",cls:"b-purple"}],
+    desc:"Secondary weapon for the SMG Build for PvE. Targeted loot → SMG in open world, Summit, or Countdown.",
     steps:["Set Targeted Loot → SMG in Countdown or Summit","Also drops from open world activities with SMG as zone targeted loot"],
     links:[{label:"SMGs — Wiki",url:"https://thedivision.fandom.com/wiki/Submachine_Gun"}]
   },
@@ -647,59 +710,9 @@ const TASKS = [
     links:[{label:"LMGs — Wiki",url:"https://thedivision.fandom.com/wiki/Light_Machine_Gun"}]
   },
   {
-    id:23, name:"Farm Capacitor (exotic AR, skill builds)", activity:'summit', priority:'high',
-    builds:['skill'],
-    badges:[{label:"Skill Build",cls:"b-pink"}],
-    desc:"Primary weapon for all Skill Build (Refactor) variants. Capacitor's In Sync talent provides weapon damage buffs that scale with skill tiers — perfect synergy with the Refactor set. Farm via AR targeted loot in Countdown or Summit, or Exotic Caches.",
-    steps:["Set Targeted Loot → Assault Rifle in Countdown or The Summit","Capacitor drops as AR exotic loot","Alt: buy Exotic Caches with Countdown Requisition"],
-    links:[
-      {label:"Capacitor — Wiki",url:"https://thedivision.fandom.com/wiki/Capacitor"},
-      {label:"In Sync talent — Wiki",url:"https://thedivision.fandom.com/wiki/In_Sync"},
-    ]
-  },
-  {
-    id:24, name:"Farm Refactor Set pieces (4 pieces)", activity:'countdown', priority:'high',
-    builds:['skill'],
-    badges:[{label:"Skill Build",cls:"b-pink"}],
-    desc:"Core gear set for all Skill Build variants (builds #9a/#9b/#9c). Need: Mask (Red Core + Skill Damage), Gloves (Yellow Core + Skill Damage), Holster (Yellow Core + Skill Damage), Kneepads (Yellow Core + Skill Damage). The Red Core mask enables the Technician specialization trick of having 6 skill tiers while retaining a weapon damage core.",
-    steps:["Set Targeted Loot → Refactor in Countdown or Summit","Need 4 pieces: Mask (Red Core), Gloves/Holster/Kneepads (Yellow Core)","Secondary stat priority: Skill Damage on all pieces","Gear Mods: Skill Haste in all mod slots"],
-    links:[
-      {label:"Refactor — Wiki",url:"https://thedivision.fandom.com/wiki/Refactor"},
-    ]
-  },
-  {
-    id:25, name:"Farm Force Multiplier / Hana-U pieces (Skill Build chest/backpack)", activity:'summit', priority:'high',
-    builds:['skill'],
-    badges:[{label:"Skill Build",cls:"b-pink"}],
-    desc:"Chest and Backpack slot options for Skill Build variants. Force Multiplier variant: Yellow Core Force Multiplier backpack (Skill Damage + Skill Haste) + Hana-U chest (Glass Cannon or Kinetic Momentum talent). Tech Support variant: Hana-U backpack (Tech Support talent) + Hana-U chest. All need Skill Damage and Skill Haste stats.",
-    steps:["Set Targeted Loot → Backpack or Chest in Countdown or Summit","Force Multiplier variant: Force Multiplier backpack (Yellow Core + Skill Damage + Skill Haste)","All variants: Hana-U chest (Yellow Core + Glass Cannon or Kinetic Momentum talent + Skill stats)","Tech Support variant: Hana-U backpack (Tech Support talent)"],
-    links:[
-      {label:"Hana-U — Wiki",url:"https://thedivision.fandom.com/wiki/Hana-U"},
-      {label:"Glass Cannon talent — Wiki",url:"https://thedivision.fandom.com/wiki/Glass_Cannon"},
-    ]
-  },
-  {
-    id:26, name:"Farm NinjaBike Messenger Bag (Skill Build Ninja variant)", activity:'countdown', priority:'med',
-    builds:['skill'],
-    badges:[{label:"Skill Build",cls:"b-pink"}],
-    desc:"Required for the Refactor Ninja Build variant (build #9c). Best-in-slot backpack for hybrid skill builds — drops specifically from Countdown with Backpack targeted loot. Also useful for Empress hybrid variant.",
-    steps:["Set Targeted Loot → Backpack in Countdown specifically","NinjaBike reliably drops from Countdown more than other activities"],
-    links:[{label:"NinjaBike Messenger Bag — Wiki",url:"https://thedivision.fandom.com/wiki/NinjaBike_Messenger_Bag"}]
-  },
-  {
-    id:27, name:"Farm Empress International pieces (Skill Build hybrid variant)", activity:'summit', priority:'med',
-    builds:['skill'],
-    badges:[{label:"Skill Build",cls:"b-pink"}],
-    desc:"Used in the Hybrid Empress Skill Build variant (build #9d). Need: Mask, Chest, Gloves (Yellow Core + Skill Damage + Crit Chance/Damage). Also used in Yellow Empress variant: Mask, Chest, Kneepads (Yellow Core + Skill Damage + Skill Haste).",
-    steps:["Set Targeted Loot → Empress International in Countdown or Summit","Hybrid variant: Mask, Chest, Gloves (Yellow Core + Skill Damage + Crit stats)","Yellow variant: Mask, Chest, Kneepads (Yellow Core + Skill Damage + Skill Haste)"],
-    links:[
-      {label:"Empress International — Wiki",url:"https://thedivision.fandom.com/wiki/Empress_International"},
-    ]
-  },
-  {
-    id:28, name:"Farm Model 700 / White Death marksman rifle", activity:'summit', priority:'high',
-    builds:['shd'],
-    badges:[{label:"SHD/XP Build",cls:"b-teal"}],
+    id:28, name:"Farm Model 700 marksman rifle (Determined talent)", activity:'summit', priority:'high',
+    builds:['hotshot_red','hotshot_hybrid'],
+    badges:[{label:"Hotshot Red",cls:"b-teal"},{label:"Hotshot Hybrid",cls:"b-teal"}],
     desc:"Core weapon for the Hotshot SHD farm build. White Death with Determined + DTTOC attribute: every kill refunds ammo, and from the 3rd kill onward ammo cost is zero — chain-clear entire Control Points instantly. Alt: Model 700 with Headhunter (headshot kills buff next shot). Either approach one-shots most enemies on Heroic.",
     steps:["Set Targeted Loot → Marksman Rifle in Countdown or Summit","White Death: look for Determined talent + DTTOC (Damage To Target Out Of Cover) attribute","Model 700: look for Headhunter talent","Recalibrate one stat at Tinkering Station if needed"],
     links:[
@@ -711,16 +724,16 @@ const TASKS = [
   },
   {
     id:29, name:"Farm Hotshot brand pieces (Mask, Gloves, Holster, Kneepads)", activity:'summit', priority:'high',
-    builds:['shd'],
-    badges:[{label:"SHD/XP Build",cls:"b-teal"}],
+    builds:['hotshot_red','hotshot_hybrid'],
+    badges:[{label:"Hotshot Red",cls:"b-teal"},{label:"Hotshot Hybrid",cls:"b-teal"}],
     desc:"Hotshot brand provides headshot damage bonuses that stack with Headhunter/Determined playstyle. Need 4 pieces: Mask, Gloves, Holster, Kneepads — Weapon Damage core + Headshot Damage secondary attribute on every piece.",
     steps:["Set Targeted Loot → Mask / Gloves / Holster / Kneepads (one slot per session) in Countdown or Summit","Look for Hotshot brand + Weapon Damage core + Headshot Damage stat","Farm each slot separately using targeted loot","Recalibrate at Tinkering Station to fix wrong stat"],
     links:[{label:"Hotshot — Wiki",url:"https://thedivision.fandom.com/wiki/Hotshot"}]
   },
   {
     id:30, name:"Farm Chainkiller chest (Perfect Headhunter talent)", activity:'summit', priority:'high',
-    builds:['shd'],
-    badges:[{label:"SHD/XP Build",cls:"b-teal"}],
+    builds:['hotshot_red','hotshot_hybrid','hf_determined','pistol'],
+    badges:[{label:"Hotshot Red",cls:"b-teal"},{label:"Hotshot Hybrid",cls:"b-teal"},{label:"HF Determined",cls:"b-teal"},{label:"Regulus Pistol",cls:"b-pink"}],
     desc:"Named Walker & Harris chest with Perfect Headhunter talent — an improved Headhunter that buffs your next shot after a headshot kill. Weapon Damage core + Headshot Damage attribute. The lynchpin of the Hotshot SHD farm build.",
     steps:["Set Targeted Loot → Chest in Countdown or Summit","Look specifically for Chainkiller (named Walker & Harris) with Perfect Headhunter talent","Need: Weapon Damage core + Headshot Damage secondary stat"],
     links:[
@@ -729,9 +742,9 @@ const TASKS = [
     ]
   },
   {
-    id:31, name:"Farm Airaldi backpack (Vigilance/Bloodsucker + Headshot Damage)", activity:'summit', priority:'med',
-    builds:['shd'],
-    badges:[{label:"SHD/XP Build",cls:"b-teal"}],
+    id:31, name:"Farm Airaldi backpack (Vigilance + Headshot Damage)", activity:'summit', priority:'med',
+    builds:['hotshot_red'],
+    badges:[{label:"Hotshot Red",cls:"b-teal"}],
     desc:"Weapon Damage core backpack from Airaldi brand with Vigilance or Bloodsucker talent and Headshot Damage attribute. Completes the Hotshot SHD farm build.",
     steps:["Set Targeted Loot → Backpack in Countdown or Summit","Look for Airaldi brand + Weapon Damage core + Vigilance or Bloodsucker talent","Secondary stat: Headshot Damage"],
     links:[
@@ -741,9 +754,9 @@ const TASKS = [
   },
   {
     id:32, name:"Unlock Sharpshooter specialization", activity:'open_world', priority:'high',
-    builds:['heartbreaker','kingbreaker','shd'],
-    badges:[{label:"Heartbreaker DPS",cls:"b-coral"},{label:"Kingbreaker Spotter",cls:"b-coral"},{label:"SHD/XP Build",cls:"b-teal"}],
-    desc:"Required for the Linked Laser Pointer weapon mod (used in Heartbreaker PvE and Kingbreaker Spotter builds for headshot damage bonus) and for the SHD/XP sniper farm build. Unlock at Base of Operations and earn XP while equipped to progress the skill tree.",
+    builds:['hotshot_red','hotshot_hybrid','hf_determined','1886_memento'],
+    badges:[{label:"Hotshot Red",cls:"b-teal"},{label:"Hotshot Hybrid",cls:"b-teal"},{label:"HF Determined",cls:"b-teal"},{label:"1886 Memento",cls:"b-teal"}],
+    desc:"Required for all XP headshot farm builds (Hotshot Red, Hotshot Hybrid, HF Determined, 1886 Memento). Provides Headshot Damage passive and TAC-50 signature weapon. Unlock at Base of Operations and earn XP while equipped to progress the skill tree.",
     steps:["Unlock Sharpshooter at the Base of Operations specialization menu","Equip Sharpshooter and earn XP to progress its skill tree","Unlock Linked Laser Pointer weapon mod from the Sharpshooter skill tree"],
     links:[
       {label:"Sharpshooter — Wiki",url:"https://thedivision.fandom.com/wiki/Sharpshooter"},
@@ -752,9 +765,9 @@ const TASKS = [
   },
   {
     id:33, name:"Unlock Gunner specialization", activity:'open_world', priority:'high',
-    builds:['striker','ar','pestilence','neg_pest','smg'],
-    badges:[{label:"Striker DPS",cls:"b-blue"},{label:"AR DPS",cls:"b-blue"},{label:"Pestilence LMG",cls:"b-amber"},{label:"Nego. Pestilence",cls:"b-amber"},{label:"SMG Speed",cls:"b-purple"}],
-    desc:"Gunner is the specialization for most meta DPS builds — required for Striker, AR DPS, Pestilence LMG, Negotiator's Pestilence, and SMG Speed Farm. Minigun signature weapon. Prioritise damage nodes in the skill tree.",
+    builds:['striker','ar','pestilence','neg_pest','smg','hotshot_hybrid'],
+    badges:[{label:"Striker DPS",cls:"b-blue"},{label:"AR DPS",cls:"b-blue"},{label:"Pestilence LMG",cls:"b-amber"},{label:"Nego. Pestilence",cls:"b-amber"},{label:"SMG PvE",cls:"b-purple"},{label:"Hotshot Hybrid",cls:"b-teal"}],
+    desc:"Gunner is the specialization for most meta DPS builds — required for Striker, AR DPS, Pestilence LMG, Negotiator's Pestilence, SMG PvE, and Hotshot Hybrid. Minigun signature weapon. Prioritise damage nodes in the skill tree.",
     steps:["Unlock Gunner at the Base of Operations specialization menu","Equip Gunner and earn XP to progress its skill tree","Max weapon damage nodes first"],
     links:[
       {label:"Gunner — Wiki",url:"https://thedivision.fandom.com/wiki/Gunner"},
@@ -763,12 +776,155 @@ const TASKS = [
   },
   {
     id:34, name:"Unlock Technician specialization", activity:'open_world', priority:'high',
-    builds:['heartbreaker','kingbreaker','skill'],
-    badges:[{label:"Heartbreaker DPS",cls:"b-coral"},{label:"Kingbreaker Spotter",cls:"b-coral"},{label:"Skill Build",cls:"b-pink"}],
-    desc:"Technician is required for the Linked Laser Pointer (Heartbreaker/Kingbreaker builds) and is the core specialization for Skill Builds — its passive allows you to use a Red Core item while still maintaining 6 skill tiers, which is the key trick that makes Refactor builds so powerful.",
+    builds:['heartbreaker','kingbreaker','pistol'],
+    badges:[{label:"Heartbreaker DPS",cls:"b-coral"},{label:"Kingbreaker Spotter",cls:"b-coral"},{label:"Regulus Pistol",cls:"b-pink"}],
+    desc:"Technician provides the Linked Laser Pointer weapon mod (Heartbreaker/Kingbreaker builds) and the Laser Pointer skill variant for the Regulus Pistol build. Unlock at Base of Operations and earn XP while equipped to progress the skill tree.",
     steps:["Unlock Technician at the Base of Operations specialization menu","Equip Technician and earn XP to progress its skill tree","Unlock Linked Laser Pointer from the Technician skill tree (for Heartbreaker/Kingbreaker)"],
     links:[
       {label:"Technician — Wiki",url:"https://thedivision.fandom.com/wiki/Technician"},
+      {label:"Specializations — Wiki",url:"https://thedivision.fandom.com/wiki/Specialization"},
+    ]
+  },
+  {
+    id:35, name:"Farm Palisade holster (Blue Core + Crit Chance/Damage)", activity:'summit', priority:'med',
+    builds:['ar','pestilence'],
+    badges:[{label:"AR DPS",cls:"b-blue"},{label:"Pestilence LMG",cls:"b-amber"}],
+    desc:"Blue Core Palisade holster with Crit Chance & Crit Damage. Used in AR PvE (build #4) and Pestilence LMG (build #6) builds as the holster slot.",
+    steps:["Set Targeted Loot → Holster in Countdown or Summit","Look for Palisade brand + Blue Core + Crit Chance & Crit Damage"],
+    links:[{label:"Palisade — Wiki",url:"https://thedivision.fandom.com/wiki/Palisade"}]
+  },
+  {
+    id:36, name:"Farm Regulus (exotic pistol — Iron Horse raid)", activity:'raid', priority:'high',
+    builds:['pistol'],
+    badges:[{label:"Regulus Pistol",cls:"b-pink"}],
+    desc:"Exotic pistol with Regulus talent — the hardest-hitting sidearm in the game. Raid-exclusive: only drops from Operation Iron Horse final boss (weekly reset). Cannot be obtained via targeted loot or Exotic Caches until first drop.",
+    steps:["Join an 8-player Operation Iron Horse group (LFG Discord/Reddit)","Complete the raid — final boss drops Regulus (weekly reset)","After first drop: can appear in Exotic Caches"],
+    links:[
+      {label:"Regulus — Wiki",url:"https://thedivision.fandom.com/wiki/Regulus"},
+      {label:"Operation Iron Horse — Wiki",url:"https://thedivision.fandom.com/wiki/Operation_Iron_Horse"},
+    ]
+  },
+  {
+    id:37, name:"Farm Punch Drunk mask (Headshot Damage + Weapon Handling)", activity:'countdown', priority:'med',
+    builds:['pistol'],
+    badges:[{label:"Regulus Pistol",cls:"b-pink"}],
+    desc:"Named mask with Headshot Damage & Weapon Handling. Mask slot for the Headhunter Regulus Pistol build (build #9). Set targeted loot → Mask.",
+    steps:["Set Targeted Loot → Mask in Countdown or Summit","Look for Punch Drunk (named) with Headshot Damage & Weapon Handling"],
+    links:[{label:"Punch Drunk — Wiki",url:"https://thedivision.fandom.com/wiki/Punch_Drunk"}]
+  },
+  {
+    id:38, name:"Farm Providence holster (Red Core + Headshot Damage)", activity:'summit', priority:'med',
+    builds:['pistol'],
+    badges:[{label:"Regulus Pistol",cls:"b-pink"}],
+    desc:"Red Core Providence holster with Headshot Damage & Weapon Handling. Holster slot for the Headhunter Regulus Pistol build.",
+    steps:["Set Targeted Loot → Holster in Countdown or Summit","Look for Providence Defense brand + Red Core + Headshot Damage & Weapon Handling"],
+    links:[{label:"Providence Defense — Wiki",url:"https://thedivision.fandom.com/wiki/Providence_Defense"}]
+  },
+  {
+    id:39, name:"Farm 1886 Rifle with Determined talent", activity:'open_world', priority:'high',
+    builds:['hf_determined','1886_memento'],
+    badges:[{label:"HF Determined",cls:"b-teal"},{label:"1886 Memento",cls:"b-teal"}],
+    desc:"Core weapon for HF Determined and 1886 Memento XP farm builds. 1886 Rifle with Determined talent refunds ammo on headshot kills — from the 3rd kill onward, ammo is free.",
+    steps:["Set Targeted Loot → Rifle in Countdown or Summit","Look for 1886 with Determined talent","Recalibrate talent at Tinkering Station if needed"],
+    links:[
+      {label:"1886 — Wiki",url:"https://thedivision.fandom.com/wiki/Model_1886"},
+      {label:"Determined talent — Wiki",url:"https://thedivision.fandom.com/wiki/Determined"},
+    ]
+  },
+  {
+    id:40, name:"Craft Nemesis (exotic marksman rifle — quest)", activity:'open_world', priority:'high',
+    builds:['hotshot_red','hotshot_hybrid','hf_determined','eclipse','1886_memento'],
+    badges:[{label:"Hotshot Red",cls:"b-teal"},{label:"Hotshot Hybrid",cls:"b-teal"},{label:"HF Determined",cls:"b-teal"},{label:"Eclipse Status",cls:"b-teal"},{label:"1886 Memento",cls:"b-teal"}],
+    desc:"Secondary weapon for all XP farm builds. Nemesis must be crafted first via a 4-part quest: collect components from Invaded Strongholds (Capitol, Roosevelt, District Union Arena, Grand Washington Hotel) plus blueprint from Tidal Basin. After crafting, it enters the normal exotic pool.",
+    steps:["Farm 4 components from Invaded Strongholds (rotate weekly)","Get blueprint from Tidal Basin Invaded Stronghold","Craft Nemesis at crafting station","After crafting: re-farm via Marksman Rifle targeted loot or Exotic Caches"],
+    links:[
+      {label:"Nemesis — Wiki",url:"https://thedivision.fandom.com/wiki/Nemesis"},
+    ]
+  },
+  {
+    id:41, name:"Farm Palisade backpack (Bloodsucker + Headshot Damage)", activity:'summit', priority:'med',
+    builds:['hotshot_hybrid'],
+    badges:[{label:"Hotshot Hybrid",cls:"b-teal"}],
+    desc:"Blue Core Palisade backpack with Headshot Damage, Weapon Handling, and Bloodsucker talent. Backpack slot for the Hotshot Hybrid XP farm build — provides armor-on-kill survivability.",
+    steps:["Set Targeted Loot → Backpack in Countdown or Summit","Look for Palisade brand + Blue Core + Bloodsucker talent + Headshot Damage"],
+    links:[
+      {label:"Palisade — Wiki",url:"https://thedivision.fandom.com/wiki/Palisade"},
+      {label:"Bloodsucker talent — Wiki",url:"https://thedivision.fandom.com/wiki/Bloodsucker"},
+    ]
+  },
+  {
+    id:42, name:"Farm Vile Mask (exotic mask — status builds)", activity:'countdown', priority:'high',
+    builds:['eclipse'],
+    badges:[{label:"Eclipse Status",cls:"b-teal"}],
+    desc:"Exotic mask that applies a damaging debuff when you apply a status effect to an enemy. Core piece for the Eclipse Protocol Status XP build — amplifies all status effect damage.",
+    steps:["Set Targeted Loot → Mask in Countdown or Summit","Also drops from Exotic Caches with Countdown Requisition"],
+    links:[{label:"Vile Mask — Wiki",url:"https://thedivision.fandom.com/wiki/Vile"}]
+  },
+  {
+    id:43, name:"Farm Eclipse Protocol Set (4 pieces)", activity:'countdown', priority:'high',
+    builds:['eclipse'],
+    badges:[{label:"Eclipse Status",cls:"b-teal"}],
+    desc:"Eclipse Protocol spreading effect: when you kill an enemy with a status effect, it spreads to nearby enemies. Need 4 pieces: Backpack, Chest, Gloves, Kneepads — Yellow Core + Status Effects. Mask slot uses Vile exotic mask.",
+    steps:["Set Targeted Loot → Eclipse Protocol in Countdown or Summit","Need 4 pieces: Backpack, Chest, Gloves, Kneepads (Yellow Core + Status Effects)","Mask slot is Vile exotic mask (separate farm)"],
+    links:[{label:"Eclipse Protocol — Wiki",url:"https://thedivision.fandom.com/wiki/Eclipse_Protocol"}]
+  },
+  {
+    id:44, name:"Farm Electrique/Golan holster (Yellow Core + Status Effects)", activity:'summit', priority:'med',
+    builds:['eclipse'],
+    badges:[{label:"Eclipse Status",cls:"b-teal"}],
+    desc:"Yellow Core Electrique or Golan holster with Status Effects & Skill Haste. Holster slot for the Eclipse Protocol Status build.",
+    steps:["Set Targeted Loot → Holster in Countdown or Summit","Look for Electrique or Golan brand + Yellow Core + Status Effects & Skill Haste"],
+    links:[
+      {label:"Electrique — Wiki",url:"https://thedivision.fandom.com/wiki/Electrique"},
+      {label:"Golan Gear — Wiki",url:"https://thedivision.fandom.com/wiki/Golan_Gear"},
+    ]
+  },
+  {
+    id:45, name:"Farm Test Subject AR & Scorpio shotgun (Eclipse weapons)", activity:'open_world', priority:'med',
+    builds:['eclipse'],
+    badges:[{label:"Eclipse Status",cls:"b-teal"}],
+    desc:"Test Subject (named CTAR-21) applies status effects on hit; Scorpio (exotic shotgun) applies Venom, Shock, and Burn — both synergize with Eclipse Protocol spreading. Test Subject from AR targeted loot; Scorpio from Shotgun targeted loot or Exotic Caches.",
+    steps:["Test Subject: Set Targeted Loot → Assault Rifle in Countdown or Summit","Scorpio: Set Targeted Loot → Shotgun in Countdown or Summit","Scorpio alt: buy Exotic Caches with Countdown Requisition"],
+    links:[
+      {label:"Test Subject — Wiki",url:"https://thedivision.fandom.com/wiki/Test_Subject"},
+      {label:"Scorpio — Wiki",url:"https://thedivision.fandom.com/wiki/Scorpio"},
+    ]
+  },
+  {
+    id:46, name:"Farm Zwiadowka chest & kneepads (Headhunter + Headshot Damage)", activity:'summit', priority:'high',
+    builds:['1886_memento'],
+    badges:[{label:"1886 Memento",cls:"b-teal"}],
+    desc:"Red Core Zwiadowka chest with Headshot Damage, Weapon Handling, and Headhunter talent + Zwiadowka kneepads with Headshot Damage & Weapon Handling. Both slots for the 1886 Determined Memento build.",
+    steps:["Set Targeted Loot → Chest or Kneepads in Countdown or Summit","Look for Zwiadowka brand + Red Core + Headshot Damage & Weapon Handling","Chest needs Headhunter talent"],
+    links:[{label:"Zwiadowca — Wiki",url:"https://thedivision.fandom.com/wiki/Zwiadowca"}]
+  },
+  {
+    id:47, name:"Farm Habsburg/Palisade mask & holster (Blue Core + Headshot Damage)", activity:'summit', priority:'med',
+    builds:['1886_memento'],
+    badges:[{label:"1886 Memento",cls:"b-teal"}],
+    desc:"Blue Core Habsburg or Palisade mask and holster with Headshot Damage & Weapon Handling. Both use blue cores for survivability in the 1886 Determined Memento build.",
+    steps:["Set Targeted Loot → Mask or Holster in Countdown or Summit","Look for Habsburg or Palisade brand + Blue Core + Headshot Damage & Weapon Handling"],
+    links:[
+      {label:"Habsburg — Wiki",url:"https://thedivision.fandom.com/wiki/Habsburg"},
+      {label:"Palisade — Wiki",url:"https://thedivision.fandom.com/wiki/Palisade"},
+    ]
+  },
+  {
+    id:48, name:"Farm Eagle's Grasp gloves (Blue Core + Headshot Damage)", activity:'summit', priority:'med',
+    builds:['1886_memento'],
+    badges:[{label:"1886 Memento",cls:"b-teal"}],
+    desc:"Blue Core Eagle's Grasp gloves with Headshot Damage. Named gloves for the 1886 Determined Memento XP build.",
+    steps:["Set Targeted Loot → Gloves in Countdown or Summit","Look for Eagle's Grasp (named) + Blue Core + Headshot Damage"],
+    links:[]
+  },
+  {
+    id:49, name:"Unlock Firewall specialization", activity:'open_world', priority:'high',
+    builds:['eclipse'],
+    badges:[{label:"Eclipse Status",cls:"b-teal"}],
+    desc:"Firewall specialization is required for the Eclipse Protocol Status build. Provides the Flamethrower signature weapon and fire-focused bonuses that synergize with status effects.",
+    steps:["Unlock Firewall at the Base of Operations specialization menu","Equip Firewall and earn XP to progress its skill tree"],
+    links:[
+      {label:"Firewall — Wiki",url:"https://thedivision.fandom.com/wiki/Firewall"},
       {label:"Specializations — Wiki",url:"https://thedivision.fandom.com/wiki/Specialization"},
     ]
   }
@@ -779,10 +935,10 @@ let stateAct = 'all', stateBuild = 'all', stateStatus = 'all';
 let checked = {}, expanded = {};
 
 function loadState() {
-  try { const s = JSON.parse(localStorage.getItem('div2_v3')||'{}'); checked = s.checked||{}; expanded = s.expanded||{}; } catch(e) {}
+  try { const s = JSON.parse(localStorage.getItem('div2_v4')||'{}'); checked = s.checked||{}; expanded = s.expanded||{}; } catch(e) {}
 }
 function saveState() {
-  try { localStorage.setItem('div2_v3', JSON.stringify({checked, expanded})); } catch(e) {}
+  try { localStorage.setItem('div2_v4', JSON.stringify({checked, expanded})); } catch(e) {}
 }
 function setAct(v,el) { stateAct=v; document.querySelectorAll('[data-act]').forEach(b=>b.classList.toggle('active',b.dataset.act===v)); render(); }
 function setBuild(v,el) { stateBuild=v; document.querySelectorAll('[data-build]').forEach(b=>b.classList.toggle('active',b.dataset.build===v)); render(); }
